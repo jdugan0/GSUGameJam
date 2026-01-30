@@ -22,7 +22,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Sceneswitcher="*res://scripts/sceneswitcher/Sceneswitcher.tscn"
-ParticleManager="*res://scripts/ParticleManager/ParticleManager.tscn"
 Audiomanager="*res://audio/Audiomanager.tscn"
 
 [display]
