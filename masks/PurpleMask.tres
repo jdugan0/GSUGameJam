@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Mask" format=3 uid="uid://bql5ruypcdq3m"]
+
+[ext_resource type="Script" uid="uid://b5jhht1r88e4y" path="res://scripts/Mask.cs" id="1_h7gty"]
+
+[resource]
+script = ExtResource("1_h7gty")
+name = "Meow"
+metadata/_custom_type_script = "uid://b5jhht1r88e4y"
