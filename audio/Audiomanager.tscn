@@ -20,6 +20,14 @@
 [ext_resource type="AudioStream" uid="uid://cewndaa2w5ik7" path="res://audio/music/L1 Intro.wav" id="18_1yug6"]
 [ext_resource type="AudioStream" uid="uid://316epuqexedp" path="res://audio/music/Music Frantic.wav" id="19_phtfg"]
 [ext_resource type="AudioStream" uid="uid://b2hvu7iqj1l36" path="res://audio/music/Music Spooky.wav" id="20_18f5x"]
+[ext_resource type="AudioStream" uid="uid://c1hs00wnhssax" path="res://audio/music/About to Lose Mask.wav" id="21_18f5x"]
+[ext_resource type="AudioStream" uid="uid://cxit1c2y2a0ru" path="res://audio/music/About to Die.wav" id="22_eagts"]
+[ext_resource type="AudioStream" uid="uid://d0h61xii554ca" path="res://audio/sfx/Mask Equip and blew your face off.wav" id="23_sacl8"]
+[ext_resource type="AudioStream" uid="uid://cmlmil7hq33a" path="res://audio/sfx/Mask Loss.wav" id="24_jxuaw"]
+[ext_resource type="AudioStream" uid="uid://755d2hm6eikt" path="res://audio/sfx/Scream.wav" id="25_ullj3"]
+[ext_resource type="AudioStream" uid="uid://bhtcfg26rrd6r" path="res://audio/sfx/No idea what to use it for but its here.wav" id="26_dcpl7"]
+[ext_resource type="AudioStream" uid="uid://8mgt67k2pr86" path="res://audio/music/win music maybe.mp3" id="27_wrila"]
+[ext_resource type="AudioStream" uid="uid://byoo35g2bns3d" path="res://audio/music/game over music.mp3" id="28_xohtw"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wmmek"]
 streams_count = 4
@@ -116,6 +124,55 @@ stream = ExtResource("20_18f5x")
 name = "Music Spooky"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
+[sub_resource type="Resource" id="Resource_mlqj7"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("21_18f5x")
+name = "About to Lose Mask"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
+[sub_resource type="Resource" id="Resource_cq6mo"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("22_eagts")
+name = "About to Die"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
+[sub_resource type="Resource" id="Resource_0d11e"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("23_sacl8")
+name = "Mask Get"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
+[sub_resource type="Resource" id="Resource_w2had"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("24_jxuaw")
+name = "Mask Lost"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
+[sub_resource type="Resource" id="Resource_wsuhf"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("25_ullj3")
+name = "Screamin"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
+[sub_resource type="Resource" id="Resource_dnkil"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("26_dcpl7")
+volume = -2.0
+name = "Stunn"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
+[sub_resource type="Resource" id="Resource_aogok"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("27_wrila")
+name = "Game Win"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
+[sub_resource type="Resource" id="Resource_oye0s"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("28_xohtw")
+name = "Game Over"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
 [node name="Audiomanager" type="Node" unique_id=669033915]
 script = ExtResource("1_ulbmk")
-sounds = Array[Object]([SubResource("Resource_wrila"), SubResource("Resource_sbu2l"), SubResource("Resource_c64us"), SubResource("Resource_4etcg"), SubResource("Resource_ajw61"), SubResource("Resource_ev1im"), SubResource("Resource_uus3r"), SubResource("Resource_oxuu2"), SubResource("Resource_n5oxk"), SubResource("Resource_qq4lq"), SubResource("Resource_683wi"), SubResource("Resource_1yug6"), SubResource("Resource_38ysf")])
+sounds = Array[Object]([SubResource("Resource_wrila"), SubResource("Resource_sbu2l"), SubResource("Resource_c64us"), SubResource("Resource_4etcg"), SubResource("Resource_ajw61"), SubResource("Resource_ev1im"), SubResource("Resource_uus3r"), SubResource("Resource_oxuu2"), SubResource("Resource_n5oxk"), SubResource("Resource_qq4lq"), SubResource("Resource_683wi"), SubResource("Resource_1yug6"), SubResource("Resource_38ysf"), SubResource("Resource_mlqj7"), SubResource("Resource_cq6mo"), SubResource("Resource_0d11e"), SubResource("Resource_w2had"), SubResource("Resource_wsuhf"), SubResource("Resource_dnkil"), SubResource("Resource_aogok"), SubResource("Resource_oye0s")])
