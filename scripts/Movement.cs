@@ -18,6 +18,7 @@ public partial class Movement : CharacterBody2D
     public float MaskFriction = 160000f;
 
     [ExportGroup("Dash Settings")]
+
     [Export]
     public float dashAmount = 3500.0f;
     [Export]
@@ -28,6 +29,7 @@ public partial class Movement : CharacterBody2D
     public Mask mask;
     public bool moveEnabled = true;
     [ExportGroup("MISC")]
+
     [Export]
     public TextureProgressBar playerDashCooldownBar;
     [Export]

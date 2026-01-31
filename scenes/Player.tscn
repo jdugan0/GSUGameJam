@@ -11,6 +11,9 @@ size = Vector2(399, 314)
 
 [node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea") groups=["Player"]]
 script = ExtResource("1_p0vlq")
+MaxSpeed = 1200.0
+Acceleration = 7500.0
+dashAmount = 3500.0
 playerDashCooldownBar = NodePath("TextureProgressBar")
 rotationNode = NodePath("RotationNode")
 attackArea = NodePath("RotationNode/MouseDirectionMarker/Area2D")
