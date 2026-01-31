@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dkqwtr4rnmqrm"]
 
-[ext_resource type="PackedScene" path="res://scenes/Camera.tscn" id="1_iho50"]
+[ext_resource type="PackedScene" uid="uid://n0yiebmeq7py" path="res://scenes/Camera.tscn" id="1_iho50"]
 [ext_resource type="PackedScene" uid="uid://dia5urkl26b2f" path="res://scenes/Player.tscn" id="2_3wh16"]
 
 [node name="LevelTest" type="Node2D" unique_id=1652148853]
