@@ -68,16 +68,19 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 [sub_resource type="Resource" id="Resource_ev1im"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("13_eagts")
+name = "tick_3"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
 [sub_resource type="Resource" id="Resource_uus3r"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("14_sacl8")
+name = "tick_1"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
 [sub_resource type="Resource" id="Resource_oxuu2"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("15_jxuaw")
+name = "tick_2"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
 [sub_resource type="Resource" id="Resource_n5oxk"]
