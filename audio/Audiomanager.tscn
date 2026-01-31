@@ -18,11 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://dg2w3edae1ltg" path="res://audio/sfx/woosh_1.wav" id="16_ullj3"]
 [ext_resource type="AudioStream" uid="uid://dm5hnx6llxuyr" path="res://audio/sfx/woosh_2.wav" id="17_dcpl7"]
 [ext_resource type="AudioStream" uid="uid://cewndaa2w5ik7" path="res://audio/music/L1 Intro.wav" id="18_1yug6"]
-[ext_resource type="AudioStream" uid="uid://qi60kee88vn8" path="res://audio/music/L1 Bass.wav" id="19_phtfg"]
-[ext_resource type="AudioStream" uid="uid://dp0nkeh1w03ys" path="res://audio/music/L1 M1.wav" id="20_mlqj7"]
-[ext_resource type="AudioStream" uid="uid://detdoy20sltxr" path="res://audio/music/L1 M2.wav" id="21_qewjm"]
-[ext_resource type="AudioStream" uid="uid://cbhyfng1t6mf0" path="res://audio/music/L1 M3.wav" id="22_w302i"]
-[ext_resource type="AudioStream" uid="uid://csoffcka3vrfs" path="res://audio/music/L1 M4.wav" id="23_b4g0j"]
+[ext_resource type="AudioStream" uid="uid://316epuqexedp" path="res://audio/music/Music Frantic.wav" id="19_phtfg"]
+[ext_resource type="AudioStream" uid="uid://b2hvu7iqj1l36" path="res://audio/music/Music Spooky.wav" id="20_18f5x"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wmmek"]
 streams_count = 4
@@ -101,39 +98,21 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 [sub_resource type="Resource" id="Resource_683wi"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("18_1yug6")
-name = "L1 Intro"
+name = "Music Intro"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
-[sub_resource type="Resource" id="Resource_18f5x"]
+[sub_resource type="Resource" id="Resource_1yug6"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("19_phtfg")
-name = "L1 Bass"
+name = "Music Main"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
-[sub_resource type="Resource" id="Resource_pkykv"]
+[sub_resource type="Resource" id="Resource_38ysf"]
 script = ExtResource("2_wmmek")
-stream = ExtResource("20_mlqj7")
-name = "L1 Mask1"
-metadata/_custom_type_script = "uid://007myadtw53h"
-
-[sub_resource type="Resource" id="Resource_eagts"]
-script = ExtResource("2_wmmek")
-stream = ExtResource("21_qewjm")
-name = "L1 Mask 2"
-metadata/_custom_type_script = "uid://007myadtw53h"
-
-[sub_resource type="Resource" id="Resource_sacl8"]
-script = ExtResource("2_wmmek")
-stream = ExtResource("22_w302i")
-name = "L1 Mask 3"
-metadata/_custom_type_script = "uid://007myadtw53h"
-
-[sub_resource type="Resource" id="Resource_jxuaw"]
-script = ExtResource("2_wmmek")
-stream = ExtResource("23_b4g0j")
-name = "L1 Mask 4"
+stream = ExtResource("20_18f5x")
+name = "Music Spooky"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
 [node name="Audiomanager" type="Node" unique_id=669033915]
 script = ExtResource("1_ulbmk")
-sounds = Array[Object]([SubResource("Resource_wrila"), SubResource("Resource_sbu2l"), SubResource("Resource_c64us"), SubResource("Resource_4etcg"), SubResource("Resource_ajw61"), SubResource("Resource_ev1im"), SubResource("Resource_uus3r"), SubResource("Resource_oxuu2"), SubResource("Resource_n5oxk"), SubResource("Resource_qq4lq"), SubResource("Resource_683wi"), SubResource("Resource_18f5x"), SubResource("Resource_pkykv"), SubResource("Resource_eagts"), SubResource("Resource_sacl8"), SubResource("Resource_jxuaw")])
+sounds = Array[Object]([SubResource("Resource_wrila"), SubResource("Resource_sbu2l"), SubResource("Resource_c64us"), SubResource("Resource_4etcg"), SubResource("Resource_ajw61"), SubResource("Resource_ev1im"), SubResource("Resource_uus3r"), SubResource("Resource_oxuu2"), SubResource("Resource_n5oxk"), SubResource("Resource_qq4lq"), SubResource("Resource_683wi"), SubResource("Resource_1yug6"), SubResource("Resource_38ysf")])
