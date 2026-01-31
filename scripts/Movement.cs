@@ -11,7 +11,13 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     public float Friction = 8000f;
+    [Export]
+    public float dashAmount = 4250.0f;
 
+    [Export]
+    public float dashCooldown = 3.0f;
+    public bool dashAvailable = true;
+    public float dashTimeRemaining = 3.0f;
     public override void _PhysicsProcess(double delta)
     {
         float dt = (float)delta;
@@ -22,6 +28,33 @@ public partial class Movement : CharacterBody2D
         float rate = input == Vector2.Zero ? Friction : Acceleration;
         Velocity = Velocity.MoveToward(targetVelocity, rate * dt);
 
+        if (dashAvailable == false)
+        {
+            dashTimeRemaining -= dt;
+            if (dashTimeRemaining <= 0)
+            {
+                dashAvailable = true;
+            }
+        }
+
+        if (Input.IsActionJustPressed("DASH"))
+        {
+            if (dashAvailable)
+            {
+                Dash();
+                dashAvailable = false;
+                dashTimeRemaining = dashCooldown;
+            }
+        }
+
         MoveAndSlide();
     }
+
+    public void Dash()
+    {
+        Vector2 mousePos = GetGlobalMousePosition();
+        Vector2 dir = (mousePos - Position).Normalized();
+        Velocity = dir * dashAmount;
+    }
+
 }
