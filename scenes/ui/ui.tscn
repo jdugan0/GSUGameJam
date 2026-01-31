@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://djpyrxukbrljb" path="res://scripts/Ui.cs" id="1_f5cxw"]
 [ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="1_u7n8c"]
 
-[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel")]
+[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer")]
 script = ExtResource("1_f5cxw")
 dashCooldownBar = NodePath("TextureProgressBar")
 creatureDialogueLabel = NodePath("MarginContainer/CreatureDialogueLabel")
+timer = NodePath("Timer")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=471527323]
 anchors_preset = 2
@@ -39,3 +40,5 @@ vertical_alignment = 1
 [node name="Timer" type="Label" parent="." unique_id=1579778451]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_font_sizes/font_size = 24
+text = "TIME: 45.0"

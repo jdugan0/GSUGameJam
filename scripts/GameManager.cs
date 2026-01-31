@@ -9,7 +9,7 @@ public partial class GameManager : Node
     [Export]
     public float checkTime = 10;
 
-    public bool countdown = true;
+    public bool countdown = false;
 
     public float currentTime = 0;
 
@@ -33,11 +33,7 @@ public partial class GameManager : Node
         {
             onGround = (GetTree().GetFirstNodeInGroup("Mask") as Node2D).Position;
         }
-        if (currentSafeMask != null)
-        {
-            GD.Print(currentSafeMask.name);
-        }
-        // GD.Print("Meow: ", currentSafeMask == player.mask);
+
         if (countdown)
         {
             currentTime += (float)delta;
@@ -46,6 +42,11 @@ public partial class GameManager : Node
         if (currentTime >= checkTime)
         {
             currentTime = 0;
+            countdown = false;
+            if (currentSafeMask == null || player.mask == null || player.mask != currentSafeMask)
+            {
+                player.Kill();
+            }
         }
     }
 }

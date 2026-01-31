@@ -12,30 +12,35 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     public float Friction = 8000f;
+
     [ExportGroup("Mask Movement")]
     public float MaskMaxSpeed = 600f;
     public float MaskAcceleration = 3000f;
     public float MaskFriction = 160000f;
 
     [ExportGroup("Dash Settings")]
-
     [Export]
     public float dashAmount = 3500.0f;
+
     [Export]
     public float dashCooldown = 3.0f;
     public bool dashAvailable = true;
     public float dashTimeRemaining = 3.0f;
+
     [Export]
     public Mask mask;
     public bool moveEnabled = true;
-    [ExportGroup("MISC")]
 
+    [ExportGroup("MISC")]
     [Export]
     public TextureProgressBar playerDashCooldownBar;
+
     [Export]
     public Node2D rotationNode;
+
     [Export]
     public Area2D attackArea;
+
     [Export]
     public float attackCooldown = 0.3f;
     public float attackDuration = 0.1f;
@@ -45,9 +50,12 @@ public partial class Movement : CharacterBody2D
     public float acceleration;
     public float friction;
 
+    public bool dead = false;
+
     public override void _Ready()
     {
-        attackArea.Monitorable = false; attackArea.Monitoring = false;
+        attackArea.Monitorable = false;
+        attackArea.Monitoring = false;
         attackArea.GetChild<CollisionShape2D>(0).Disabled = true;
         playerDashCooldownBar.MaxValue = dashCooldown;
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
@@ -58,7 +66,7 @@ public partial class Movement : CharacterBody2D
         float dt = (float)delta;
 
         Vector2 input = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
-        
+
         if (mask == null)
         {
             speed = MaxSpeed;
@@ -70,7 +78,6 @@ public partial class Movement : CharacterBody2D
             speed = MaskMaxSpeed;
             acceleration = MaskAcceleration;
             friction = MaskFriction;
-
         }
         Vector2 targetVelocity = input * speed;
 
@@ -106,6 +113,13 @@ public partial class Movement : CharacterBody2D
         }
     }
 
+    public void Kill()
+    {
+        dead = true;
+        Visible = false;
+        ProcessMode = ProcessModeEnum.Disabled;
+    }
+
     public override void _Process(double delta)
     {
         playerDashCooldownBar.Value = (dashCooldown - dashTimeRemaining);
@@ -118,6 +132,7 @@ public partial class Movement : CharacterBody2D
         float angle = dir.Angle();
         rotationNode.Rotation = angle;
     }
+
     public void Dash()
     {
         Vector2 mousePos = GetGlobalMousePosition();
@@ -128,7 +143,8 @@ public partial class Movement : CharacterBody2D
     public void Attack()
     {
         attackReady = false;
-        attackArea.Monitorable = true; attackArea.Monitoring = true;
+        attackArea.Monitorable = true;
+        attackArea.Monitoring = true;
         attackArea.GetChild<CollisionShape2D>(0).Disabled = false;
         //actual attack
         var bodies = attackArea.GetOverlappingBodies();
@@ -141,14 +157,14 @@ public partial class Movement : CharacterBody2D
         //spawn animation
         GetTree().CreateTimer(attackDuration).Timeout += () =>
         {
-            attackArea.Monitorable = false; attackArea.Monitoring = false;
+            attackArea.Monitorable = false;
+            attackArea.Monitoring = false;
             attackArea.GetChild<CollisionShape2D>(0).Disabled = true;
-            
+
             GetTree().CreateTimer(attackCooldown).Timeout += () =>
             {
                 attackReady = true;
             };
         };
     }
-
 }

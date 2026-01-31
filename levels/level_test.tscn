@@ -2,13 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://n0yiebmeq7py" path="res://scenes/Camera.tscn" id="1_iho50"]
 [ext_resource type="PackedScene" uid="uid://dia5urkl26b2f" path="res://scenes/Player.tscn" id="2_3wh16"]
-[ext_resource type="PackedScene" uid="uid://0c4hg8th303t" path="res://scenes/Player.tscn" id="2_3wh16"]
-[ext_resource type="Script" uid="uid://c1d6iyujxbfbr" path="res://scripts/Safezone.cs" id="3_4w0vo"]
-[ext_resource type="Resource" uid="uid://bql5ruypcdq3m" path="res://masks/PurpleMask.tres" id="4_eu8vo"]
+[ext_resource type="PackedScene" uid="uid://btvu1rt5o03a4" path="res://scenes/safezone.tscn" id="3_eu8vo"]
 [ext_resource type="PackedScene" uid="uid://dsvygw0eidd6u" path="res://scenes/GameManager.tscn" id="5_5yd65"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wh16"]
-size = Vector2(180, 180)
 
 [node name="LevelTest" type="Node2D" unique_id=1652148853]
 
@@ -16,16 +11,7 @@ size = Vector2(180, 180)
 
 [node name="Player" parent="." unique_id=897455521 instance=ExtResource("2_3wh16")]
 
-[node name="Safezone" type="Area2D" parent="." unique_id=1488353069]
+[node name="Safezone" parent="." unique_id=1763886929 instance=ExtResource("3_eu8vo")]
 position = Vector2(0, -1)
-script = ExtResource("3_4w0vo")
-maskType = ExtResource("4_eu8vo")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Safezone" unique_id=189786901]
-position = Vector2(419, -262)
-shape = SubResource("RectangleShape2D_3wh16")
 
 [node name="GameManager" parent="." unique_id=191558631 instance=ExtResource("5_5yd65")]
-
-[connection signal="body_entered" from="Safezone" to="Safezone" method="OnEnter"]
-[connection signal="body_exited" from="Safezone" to="Safezone" method="OnExit"]
