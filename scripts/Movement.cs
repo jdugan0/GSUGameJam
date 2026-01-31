@@ -19,6 +19,15 @@ public partial class Movement : CharacterBody2D
     public bool dashAvailable = true;
     public float dashTimeRemaining = 3.0f;
     public Mask mask;
+    public bool moveEnabled = true;
+    [Export]
+    public TextureProgressBar playerDashCooldownBar;
+
+    public override void _Ready()
+    {
+        playerDashCooldownBar.MaxValue = dashCooldown;
+        playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
+    }
 
     public override void _PhysicsProcess(double delta)
     {
@@ -39,7 +48,7 @@ public partial class Movement : CharacterBody2D
             }
         }
 
-        if (Input.IsActionJustPressed("DASH"))
+        if (Input.IsActionJustPressed("DASH") && moveEnabled)
         {
             if (dashAvailable)
             {
@@ -48,9 +57,17 @@ public partial class Movement : CharacterBody2D
                 dashTimeRemaining = dashCooldown;
             }
         }
-
-        MoveAndSlide();
+        if (moveEnabled)
+        {
+            MoveAndSlide();
+        }
     }
+
+    public override void _Process(double delta)
+    {
+        playerDashCooldownBar.Value = (dashCooldown - dashTimeRemaining);
+    }
+
 
     public void Dash()
     {

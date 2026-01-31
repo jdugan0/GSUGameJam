@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://djpyrxukbrljb" path="res://scripts/Ui.cs" id="1_f5cxw"]
 [ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="1_u7n8c"]
 
-[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar")]
+[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel")]
 script = ExtResource("1_f5cxw")
 dashCooldownBar = NodePath("TextureProgressBar")
+creatureDialogueLabel = NodePath("MarginContainer/CreatureDialogueLabel")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=471527323]
 anchors_preset = 2
@@ -16,5 +17,21 @@ offset_right = 128.0
 grow_vertical = 0
 max_value = 5.0
 step = 0.1
+value = 5.0
 fill_mode = 4
 texture_progress = ExtResource("1_u7n8c")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1536595034]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 860
+
+[node name="CreatureDialogueLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1519261451]
+layout_mode = 2
+bbcode_enabled = true
+text = "[font_size=72][wave]\"Evil Creature is Speaking Now\""
+horizontal_alignment = 1
+vertical_alignment = 1
