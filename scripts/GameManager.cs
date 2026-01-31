@@ -13,7 +13,9 @@ public partial class GameManager : Node
 
     public float currentTime = 0;
 
-    private Movement player;
+    public Movement player { get; private set; }
+
+    public Vector2? onGround { get; private set; }
 
     public override void _Ready()
     {
@@ -23,6 +25,14 @@ public partial class GameManager : Node
 
     public override void _Process(double delta)
     {
+        if (GetTree().GetFirstNodeInGroup("Mask") == null)
+        {
+            onGround = null;
+        }
+        else
+        {
+            onGround = (GetTree().GetFirstNodeInGroup("Mask") as Node2D).Position;
+        }
         if (currentSafeMask != null)
         {
             GD.Print(currentSafeMask.name);

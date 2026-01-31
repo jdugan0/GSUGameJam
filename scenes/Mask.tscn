@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b0lwnmk5xg4hs"]
+
+[ext_resource type="Script" uid="uid://d128te5i5d34v" path="res://scripts/MaskObject.cs" id="1_eic0r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28yc7"]
+size = Vector2(180, 180)
+
+[node name="Mask" type="RigidBody2D" unique_id=2035663861 groups=["Mask"]]
+script = ExtResource("1_eic0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=437146178]
+shape = SubResource("RectangleShape2D_28yc7")
+
+[connection signal="body_entered" from="." to="." method="OnCollide"]

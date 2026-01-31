@@ -39,6 +39,8 @@ project/assembly_name="GSUGameJam"
 [global_group]
 
 Player=""
+Enemy=""
+Mask=""
 
 [input]
 

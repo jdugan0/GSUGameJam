@@ -1,13 +1,19 @@
 [gd_scene format=3 uid="uid://dbofuopnrqbih"]
 
+[ext_resource type="Script" uid="uid://7ukpqnq7q76a" path="res://scripts/Enemy.cs" id="1_s2ept"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411]
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D")]
+script = ExtResource("1_s2ept")
+navigationAgent2D = NodePath("NavigationAgent2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 shape = SubResource("CircleShape2D_3hddw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1369785930]
+path_max_distance = 200.0
 avoidance_enabled = true
-radius = 90.0
+radius = 150.0
+debug_enabled = true

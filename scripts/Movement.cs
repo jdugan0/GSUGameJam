@@ -11,6 +11,7 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     public float Friction = 8000f;
+
     [Export]
     public float dashAmount = 4250.0f;
 
@@ -20,6 +21,7 @@ public partial class Movement : CharacterBody2D
     public float dashTimeRemaining = 3.0f;
     public Mask mask;
     public bool moveEnabled = true;
+
     [Export]
     public TextureProgressBar playerDashCooldownBar;
 
@@ -68,12 +70,10 @@ public partial class Movement : CharacterBody2D
         playerDashCooldownBar.Value = (dashCooldown - dashTimeRemaining);
     }
 
-
     public void Dash()
     {
         Vector2 mousePos = GetGlobalMousePosition();
         Vector2 dir = (mousePos - Position).Normalized();
         Velocity = dir * dashAmount;
     }
-
 }
