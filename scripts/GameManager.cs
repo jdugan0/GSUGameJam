@@ -17,13 +17,15 @@ public partial class GameManager : Node
 
     public Vector2? onGround { get; private set; }
 
+    public Enemy toProtect = null;
+
     public override void _Ready()
     {
         instance = this;
         player = GetTree().GetFirstNodeInGroup("Player") as Movement;
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (GetTree().GetFirstNodeInGroup("Mask") == null)
         {

@@ -129,6 +129,7 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_srp4u")
 
 [node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "attackCollisionShape", "playerSprite", "dashParticles") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea") groups=["Player"]]
 collision_mask = 7
 script = ExtResource("1_p0vlq")
 dashCooldown = 0.8
