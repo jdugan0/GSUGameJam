@@ -8,11 +8,11 @@ public partial class MaskObject : RigidBody2D
 
     public void OnCollide(Node2D col)
     {
-        GD.Print("meow");
         if (col is Movement m)
         {
             QueueFree();
             m.mask = masktype;
+            GameManager.instance.countdown = true;
         }
         if (col is Enemy e)
         {

@@ -9,12 +9,17 @@ radius = 90.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
 size = Vector2(399, 314)
 
-[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "attackCollisionShape") groups=["Player"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_v6fml"]
+radius = 90.0
+
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea") groups=["Player"]]
+collision_mask = 3
 script = ExtResource("1_p0vlq")
+dashCooldown = 0.8
 playerDashCooldownBar = NodePath("TextureProgressBar")
 rotationNode = NodePath("RotationNode")
 attackArea = NodePath("RotationNode/MouseDirectionMarker/Area2D")
-attackCollisionShape = NodePath("RotationNode/MouseDirectionMarker/Area2D/CollisionShape2D")
+dashLayer = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")
@@ -43,3 +48,10 @@ shape = SubResource("RectangleShape2D_v6fml")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [connection signal="body_entered" from="RotationNode/MouseDirectionMarker/Area2D" to="." method="ApplyAttack"]
+[node name="Area2D" type="Area2D" parent="." unique_id=1252916493]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1045574049]
+shape = SubResource("CircleShape2D_v6fml")
+
+[connection signal="body_entered" from="Area2D" to="." method="DashThroughEnemy"]

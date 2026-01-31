@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="6_gqfrg"]
 [ext_resource type="PackedScene" uid="uid://dbofuopnrqbih" path="res://scenes/EnemyMain.tscn" id="7_dkril"]
 [ext_resource type="PackedScene" uid="uid://dsvygw0eidd6u" path="res://scenes/GameManager.tscn" id="8_dkril"]
+[ext_resource type="PackedScene" uid="uid://btvu1rt5o03a4" path="res://scenes/safezone.tscn" id="9_lbu4x"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2j4y6"]
 vertices = PackedVector2Array(90, 90, -90, 90, -90, -90, 90, -90)
@@ -58,3 +59,11 @@ position = Vector2(828, -647)
 position = Vector2(-1672, -1790)
 
 [node name="GameManager" parent="." unique_id=191558631 instance=ExtResource("8_dkril")]
+
+[node name="Safezone" parent="." unique_id=1763886929 instance=ExtResource("9_lbu4x")]
+position = Vector2(15, -1265)
+
+[node name="CollisionShape2D" parent="Safezone" index="0" unique_id=1421523590]
+position = Vector2(617, -447.5)
+
+[editable path="Safezone"]

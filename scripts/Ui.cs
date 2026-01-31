@@ -12,6 +12,9 @@ public partial class Ui : CanvasLayer
     public RichTextLabel creatureDialogueLabel;
     public float dialogueFadeDuration = 0.5f;
 
+    [Export]
+    public Label timer;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -24,6 +27,19 @@ public partial class Ui : CanvasLayer
     public override void _Process(double delta)
     {
         dashCooldownBar.Value = (player.dashCooldown - player.dashTimeRemaining);
+        if (GameManager.instance.countdown)
+        {
+            timer.Visible = true;
+            timer.Text =
+                "TIMER: "
+                + Math.Round(
+                    (GameManager.instance.checkTime - GameManager.instance.currentTime) * 10
+                ) / 10;
+        }
+        else
+        {
+            timer.Visible = false;
+        }
     }
 
     public void ShowCreatureDialogue(string dialogue)

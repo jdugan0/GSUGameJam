@@ -12,30 +12,35 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     public float Friction = 8000f;
+
     [ExportGroup("Mask Movement")]
     public float MaskMaxSpeed = 600f;
     public float MaskAcceleration = 3000f;
     public float MaskFriction = 160000f;
 
     [ExportGroup("Dash Settings")]
-
     [Export]
     public float dashAmount = 3500.0f;
+
     [Export]
     public float dashCooldown = 3.0f;
     public bool dashAvailable = true;
     public float dashTimeRemaining = 3.0f;
+
     [Export]
     public Mask mask;
     public bool moveEnabled = true;
-    [ExportGroup("MISC")]
 
+    [ExportGroup("MISC")]
     [Export]
     public TextureProgressBar playerDashCooldownBar;
+
     [Export]
     public Node2D rotationNode;
+
     [Export]
     public Area2D attackArea;
+
     [Export]
     public CollisionShape2D attackCollisionShape;
     [Export]
@@ -51,11 +56,21 @@ public partial class Movement : CharacterBody2D
     public float acceleration;
     public float friction;
 
+    public bool dead = false;
+
+    [Export(PropertyHint.Layers2DPhysics)]
+    public uint dashLayer;
+
+    public uint normalLayer;
+
+    private bool dashing => Velocity.Length() > MaxSpeed * 1.1;
+
     public override void _Ready()
     {
         attackCollisionShape.Disabled = true;
         playerDashCooldownBar.MaxValue = dashCooldown;
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
+        normalLayer = CollisionMask;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -63,7 +78,7 @@ public partial class Movement : CharacterBody2D
         float dt = (float)delta;
 
         Vector2 input = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
-        
+
         if (mask == null)
         {
             speed = MaxSpeed;
@@ -75,7 +90,6 @@ public partial class Movement : CharacterBody2D
             speed = MaskMaxSpeed;
             acceleration = MaskAcceleration;
             friction = MaskFriction;
-
         }
         Vector2 targetVelocity = input * speed;
 
@@ -111,9 +125,26 @@ public partial class Movement : CharacterBody2D
         }
     }
 
+    public void Kill()
+    {
+        dead = true;
+        Visible = false;
+        ProcessMode = ProcessModeEnum.Disabled;
+    }
+
     public override void _Process(double delta)
     {
         playerDashCooldownBar.Value = (dashCooldown - dashTimeRemaining);
+        if (dashing)
+        {
+            CollisionLayer = 0;
+            CollisionMask = dashLayer;
+        }
+        else
+        {
+            CollisionLayer = 1;
+            CollisionMask = normalLayer;
+        }
     }
 
     public void UpdateRotation()
@@ -123,11 +154,19 @@ public partial class Movement : CharacterBody2D
         float angle = dir.Angle();
         rotationNode.Rotation = angle;
     }
+
     public void Dash()
     {
         Vector2 mousePos = GetGlobalMousePosition();
         Vector2 dir = (mousePos - Position).Normalized();
         Velocity = dir * dashAmount;
+        CollisionLayer = 0;
+        CollisionMask = dashLayer;
+    }
+
+    public void DashThroughEnemy(Node2D col)
+    {
+        if (col is Enemy e) { }
     }
 
     public void Attack()

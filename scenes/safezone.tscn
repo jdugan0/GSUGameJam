@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://btvu1rt5o03a4"]
+
+[ext_resource type="Script" uid="uid://c1d6iyujxbfbr" path="res://scripts/Safezone.cs" id="1_ii0ag"]
+[ext_resource type="Resource" uid="uid://bql5ruypcdq3m" path="res://masks/PurpleMask.tres" id="2_cgumt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wh16"]
+size = Vector2(180, 180)
+
+[node name="Safezone" type="Area2D" unique_id=1763886929]
+script = ExtResource("1_ii0ag")
+maskType = ExtResource("2_cgumt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1421523590]
+position = Vector2(419, -262)
+shape = SubResource("RectangleShape2D_3wh16")
+
+[connection signal="body_entered" from="." to="." method="OnEnter"]
+[connection signal="body_exited" from="." to="." method="OnExit"]
