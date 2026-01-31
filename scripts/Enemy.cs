@@ -11,38 +11,127 @@ public partial class Enemy : CharacterBody2D
     [Export]
     public float maxSpeed = 1000;
 
-    public override void _Ready() { }
+    public override void _Ready()
+    {
+        navigationAgent2D.VelocityComputed += OnVelocityComputed;
+        navigationAgent2D.MaxSpeed = maxSpeed;
+    }
+
+    public enum EnemyState
+    {
+        HIDING,
+        CHASE_PLAYER,
+        PROTECT,
+        GET_MASK,
+    }
+
+    public EnemyState enemyState = EnemyState.GET_MASK;
+
+    [Export]
+    public float desiredDistance;
+
+    [Export]
+    public float protectDistance;
+
+    public Vector2 computedV;
+
+    private bool swapped;
+    Vector2 updatedPos;
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Camera.instance.zooming)
+        Rid navMap = navigationAgent2D.GetNavigationMap();
+        float playerDist = GameManager.instance.player.Position.DistanceTo(Position);
+        if (GameManager.instance.onGround == null && GameManager.instance.player.mask == null)
         {
-            navigationAgent2D.TargetPosition = Position;
-            return;
+            if (mask == null)
+            {
+                enemyState = EnemyState.PROTECT;
+                if (playerDist < 600)
+                {
+                    enemyState = EnemyState.CHASE_PLAYER;
+                }
+            }
+            else
+            {
+                enemyState = EnemyState.HIDING;
+            }
         }
-        if (GameManager.instance.onGround != null)
+        else if (GameManager.instance.onGround != null)
         {
-            navigationAgent2D.TargetPosition = GameManager.instance.onGround.Value;
-        }
-        else if (mask == null)
-        {
-            navigationAgent2D.TargetPosition = GameManager.instance.player.Position;
+            enemyState = EnemyState.GET_MASK;
+            if (playerDist < 300)
+            {
+                enemyState = EnemyState.CHASE_PLAYER;
+            }
         }
         else
         {
-            navigationAgent2D.TargetPosition = Position;
+            enemyState = EnemyState.CHASE_PLAYER;
+        }
+        if (mask != null)
+        {
+            GameManager.instance.toProtect = this;
+            if (!swapped)
+            {
+                Vector2 playerPos = GameManager.instance.player.Position;
+                Vector2 dir = (GlobalPosition - playerPos).Normalized();
+                Vector2 rawTarget = playerPos + dir * desiredDistance;
+                Vector2 safeTarget = NavigationServer2D.MapGetClosestPoint(navMap, rawTarget);
+                updatedPos = safeTarget;
+            }
+            swapped = true;
+        }
+        else
+        {
+            swapped = false;
+        }
+        switch (enemyState)
+        {
+            case EnemyState.GET_MASK:
+                if (GameManager.instance.onGround != null)
+                {
+                    navigationAgent2D.TargetPosition = GameManager.instance.onGround.Value;
+                }
+                break;
+            case EnemyState.CHASE_PLAYER:
+                navigationAgent2D.TargetPosition = GameManager.instance.player.Position;
+                break;
+            case EnemyState.HIDING:
+                if (playerDist < 600)
+                {
+                    Vector2 playerPos = GameManager.instance.player.Position;
+                    Vector2 dir = (GlobalPosition - playerPos).Normalized();
+                    Vector2 rawTarget = playerPos + dir * 600;
+                    Vector2 safeTarget = NavigationServer2D.MapGetClosestPoint(navMap, rawTarget);
+                    updatedPos = safeTarget;
+                }
+                navigationAgent2D.TargetPosition = updatedPos;
+                break;
+            case EnemyState.PROTECT:
+                Vector2 protectPos = GameManager.instance.toProtect.Position;
+                Vector2 dirNew = (GlobalPosition - protectPos).Normalized();
+                Vector2 rawTarget1 = protectPos + dirNew * protectDistance;
+                Vector2 safeTarget1 = NavigationServer2D.MapGetClosestPoint(navMap, rawTarget1);
+                navigationAgent2D.TargetPosition = safeTarget1;
+                break;
         }
         if (!navigationAgent2D.IsTargetReached())
         {
             Vector2 next = navigationAgent2D.GetNextPathPosition();
             Vector2 dir = (next - GlobalPosition).Normalized();
-
-            Velocity = dir * maxSpeed;
+            navigationAgent2D.Velocity = dir * maxSpeed;
         }
         else
         {
-            Velocity = Vector2.Zero;
+            navigationAgent2D.Velocity = Vector2.Zero;
         }
+        Velocity = computedV;
         MoveAndSlide();
+    }
+
+    private void OnVelocityComputed(Vector2 safeVelocity)
+    {
+        computedV = safeVelocity;
     }
 }

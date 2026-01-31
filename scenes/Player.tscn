@@ -13,7 +13,7 @@ size = Vector2(399, 314)
 radius = 90.0
 
 [node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea") groups=["Player"]]
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_p0vlq")
 dashCooldown = 0.8
 playerDashCooldownBar = NodePath("TextureProgressBar")
