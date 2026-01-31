@@ -57,6 +57,8 @@ public partial class Movement : CharacterBody2D
 
     public uint normalLayer;
 
+    private bool dashing => Velocity.Length() > MaxSpeed * 1.1;
+
     public override void _Ready()
     {
         attackArea.Monitorable = false;
@@ -129,9 +131,8 @@ public partial class Movement : CharacterBody2D
     public override void _Process(double delta)
     {
         playerDashCooldownBar.Value = (dashCooldown - dashTimeRemaining);
-        if (Velocity.Length() > MaxSpeed * 1.1)
+        if (dashing)
         {
-            GD.Print("bang");
             CollisionLayer = 0;
             CollisionMask = dashLayer;
         }
@@ -157,6 +158,11 @@ public partial class Movement : CharacterBody2D
         Velocity = dir * dashAmount;
         CollisionLayer = 0;
         CollisionMask = dashLayer;
+    }
+
+    public void DashThroughEnemy(Node2D col)
+    {
+        if (col is Enemy e) { }
     }
 
     public void Attack()

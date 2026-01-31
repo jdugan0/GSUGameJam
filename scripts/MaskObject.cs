@@ -8,7 +8,6 @@ public partial class MaskObject : RigidBody2D
 
     public void OnCollide(Node2D col)
     {
-        GD.Print("meowwww");
         if (col is Movement m)
         {
             QueueFree();
@@ -17,7 +16,6 @@ public partial class MaskObject : RigidBody2D
         }
         if (col is Enemy e)
         {
-            GD.Print("meow");
             e.mask = masktype;
             QueueFree();
         }
