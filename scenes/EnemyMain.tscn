@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dbofuopnrqbih"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
+radius = 90.0
+
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
+shape = SubResource("CircleShape2D_3hddw")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1369785930]
+avoidance_enabled = true
+radius = 90.0
