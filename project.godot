@@ -36,6 +36,10 @@ window/size/mode.editor=0
 
 project/assembly_name="GSUGameJam"
 
+[global_group]
+
+Player=""
+
 [input]
 
 UP={
