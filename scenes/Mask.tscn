@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b0lwnmk5xg4hs"]
 
 [ext_resource type="Script" uid="uid://d128te5i5d34v" path="res://scripts/MaskObject.cs" id="1_eic0r"]
+[ext_resource type="Resource" uid="uid://bql5ruypcdq3m" path="res://masks/PurpleMask.tres" id="2_3d20y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28yc7"]
 size = Vector2(180, 180)
@@ -14,6 +15,7 @@ can_sleep = false
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_eic0r")
+masktype = ExtResource("2_3d20y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=437146178]
 shape = SubResource("RectangleShape2D_28yc7")

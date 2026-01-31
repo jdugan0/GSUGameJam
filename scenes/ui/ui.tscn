@@ -35,3 +35,7 @@ bbcode_enabled = true
 text = "[font_size=72][wave]\"Evil Creature is Speaking Now\""
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Label" parent="." unique_id=1579778451]
+offset_right = 40.0
+offset_bottom = 23.0
