@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dkqwtr4rnmqrm"]
 
 [ext_resource type="PackedScene" uid="uid://n0yiebmeq7py" path="res://scenes/Camera.tscn" id="1_iho50"]
+[ext_resource type="PackedScene" uid="uid://dia5urkl26b2f" path="res://scenes/Player.tscn" id="2_3wh16"]
 [ext_resource type="PackedScene" uid="uid://0c4hg8th303t" path="res://scenes/Player.tscn" id="2_3wh16"]
 [ext_resource type="Script" uid="uid://c1d6iyujxbfbr" path="res://scripts/Safezone.cs" id="3_4w0vo"]
 [ext_resource type="Resource" uid="uid://bql5ruypcdq3m" path="res://masks/PurpleMask.tres" id="4_eu8vo"]
