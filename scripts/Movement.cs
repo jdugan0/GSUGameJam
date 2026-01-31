@@ -12,6 +12,9 @@ public partial class Movement : CharacterBody2D
     [Export]
     public float Friction = 8000f;
 
+    [Export]
+    public Mask mask;
+
     public override void _PhysicsProcess(double delta)
     {
         float dt = (float)delta;
