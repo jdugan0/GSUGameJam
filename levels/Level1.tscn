@@ -39,6 +39,7 @@ tile_map_data = PackedByteArray("AADj////AQAAAAAAAADj/wAAAQAAAAAAAADj/wEAAQAAAAE
 tile_set = SubResource("TileSet_ohbkr")
 
 [node name="Player" parent="." unique_id=897455521 instance=ExtResource("2_32mhh")]
+dashLayer = 0
 
 [node name="Camera2D" parent="." unique_id=1045887185 node_paths=PackedStringArray("UI") instance=ExtResource("3_ohbkr")]
 zoom = Vector2(0.5, 0.5)

@@ -51,6 +51,10 @@ public partial class Movement : CharacterBody2D
     public float attackInertia = 1000f;
     public float attackDuration = 0.1f;
     public bool attackReady = true;
+    [Export]
+    public AnimatedSprite2D playerSprite;
+    [Export]
+    public GpuParticles2D dashParticles;
 
     public float speed;
     public float acceleration;
@@ -78,7 +82,15 @@ public partial class Movement : CharacterBody2D
         float dt = (float)delta;
 
         Vector2 input = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
-
+        if (input != Vector2.Zero)
+        {
+            playerSprite.Play();
+        }
+        else
+        {
+            playerSprite.Stop();
+            
+        }
         if (mask == null)
         {
             speed = MaxSpeed;
@@ -123,6 +135,14 @@ public partial class Movement : CharacterBody2D
             MoveAndSlide();
             UpdateRotation();
         }
+        if (dashing)
+        {
+            dashParticles.Emitting = true;
+        }
+        else
+        {
+            dashParticles.Emitting = false;
+        }
     }
 
     public void Kill()
@@ -152,7 +172,79 @@ public partial class Movement : CharacterBody2D
         Vector2 mousePos = GetGlobalMousePosition();
         Vector2 dir = (mousePos - Position).Normalized();
         float angle = dir.Angle();
+        const float pi = (float)Math.PI;
+        if (Velocity.Length() < 10f)
+        {
+            if (angle < pi/8 && angle > -pi/8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < 3*pi/8 && angle > pi/8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < 5*pi/8 && angle > 3*pi/8)
+            {
+                playerSprite.Animation = "frontStand";
+            }
+            else if (angle < 7*pi/8 && angle > 5*pi/8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < -7*pi/8 && angle > -pi)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < -5*pi/8 && angle > -7*pi/8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < -3*pi/8 && angle > -5*pi/8)
+            {
+                playerSprite.Animation = "backStand";
+            }
+            else if (angle < -pi/8 && angle > -3*pi/8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+        }
+        else
+        {
+            if (angle < pi/8 && angle > -pi/8)
+            {
+                playerSprite.Animation = "side";
+            }
+            else if (angle < 3*pi/8 && angle > pi/8)
+            {
+                playerSprite.Animation = "frontDiag";
+            }
+            else if (angle < 5*pi/8 && angle > 3*pi/8)
+            {
+                playerSprite.Animation = "front";
+            }
+            else if (angle < 7*pi/8 && angle > 5*pi/8)
+            {
+                playerSprite.Animation = "frontDiag";
+            }
+            else if (angle < -7*pi/8 && angle > -pi)
+            {
+                playerSprite.Animation = "side";
+            }
+            else if (angle < -5*pi/8 && angle > -7*pi/8)
+            {
+                playerSprite.Animation = "backDiag";
+            }
+            else if (angle < -3*pi/8 && angle > -5*pi/8)
+            {
+                playerSprite.Animation = "back";
+            }
+            else if (angle < -pi/8 && angle > -3*pi/8)
+            {
+                playerSprite.Animation = "backDiag";
+            } 
+        }
         rotationNode.Rotation = angle;
+        UpdateSpriteDirection();
     }
 
     public void Dash()
@@ -166,7 +258,10 @@ public partial class Movement : CharacterBody2D
 
     public void DashThroughEnemy(Node2D col)
     {
-        if (col is Enemy e) { }
+        if (col is Enemy e)
+        {
+            e.BeAttacked(this);
+        }
     }
 
     public void Attack()
@@ -196,6 +291,18 @@ public partial class Movement : CharacterBody2D
             enemy.BeAttacked(this);
             Velocity -= (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
             Velocity += (Position - enemy.Position).Normalized() * attackKnockback;
+        }
+    }
+
+    public void UpdateSpriteDirection()
+    {
+        if (GetGlobalMousePosition().X < Position.X)
+        {
+            playerSprite.FlipH = true;
+        }
+        else
+        {
+            playerSprite.FlipH = false;
         }
     }
 

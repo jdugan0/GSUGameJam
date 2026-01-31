@@ -2,6 +2,20 @@
 
 [ext_resource type="Script" uid="uid://eo00q03200w3" path="res://scripts/Movement.cs" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="2_v6fml"]
+[ext_resource type="Texture2D" uid="uid://bjs6hvmtrd2gi" path="res://resources/sprites/player/protagback1.png" id="3_6eyey"]
+[ext_resource type="Texture2D" uid="uid://orxjm2fh0ccq" path="res://resources/sprites/player/protagback2.png" id="4_d3wef"]
+[ext_resource type="Texture2D" uid="uid://b54pkdkmn5nbf" path="res://resources/sprites/player/protagbackdiag1.png" id="5_o4126"]
+[ext_resource type="Texture2D" uid="uid://bxcujp2jdkuti" path="res://resources/sprites/player/protagbackdiag2.png" id="6_lkdrv"]
+[ext_resource type="Texture2D" uid="uid://dwph0t7ajmvls" path="res://resources/sprites/player/protagbackstand.png" id="7_0rnld"]
+[ext_resource type="Texture2D" uid="uid://v1vhu6w4mb8p" path="res://resources/sprites/player/protagforward1.png" id="7_p7iby"]
+[ext_resource type="Texture2D" uid="uid://dte0tt6wfvdcq" path="res://resources/sprites/player/protagforward2.png" id="8_0rnld"]
+[ext_resource type="Texture2D" uid="uid://bo75d2kus6383" path="res://resources/sprites/player/protagfrontdiag1.png" id="9_o4126"]
+[ext_resource type="Texture2D" uid="uid://cy28mclu6k2vv" path="res://resources/sprites/player/protagside1.png" id="9_srp4u"]
+[ext_resource type="Texture2D" uid="uid://dhdp0w67h20cc" path="res://resources/sprites/player/protagside2.png" id="10_jfpux"]
+[ext_resource type="Texture2D" uid="uid://55huu02ydw1f" path="res://resources/sprites/player/protagfrontdiag2.png" id="10_lkdrv"]
+[ext_resource type="Texture2D" uid="uid://b37ssu5ad58f2" path="res://resources/sprites/player/protagsidestand.png" id="12_lkdrv"]
+[ext_resource type="Texture2D" uid="uid://d1k56dw52384s" path="res://resources/sprites/player/protagforwardstand.png" id="12_srp4u"]
+[ext_resource type="Texture2D" uid="uid://4crlan41hqm5" path="res://resources/sprites/player/dashParticle.png" id="16_srp4u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 90.0
@@ -12,13 +26,118 @@ size = Vector2(399, 314)
 [sub_resource type="CircleShape2D" id="CircleShape2D_v6fml"]
 radius = 90.0
 
-[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea") groups=["Player"]]
+[sub_resource type="SpriteFrames" id="SpriteFrames_v6fml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6eyey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d3wef")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_o4126")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lkdrv")
+}],
+"loop": true,
+"name": &"backDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0rnld")
+}],
+"loop": true,
+"name": &"backStand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_p7iby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0rnld")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_o4126")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lkdrv")
+}],
+"loop": true,
+"name": &"frontDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_srp4u")
+}],
+"loop": true,
+"name": &"frontStand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_jfpux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lkdrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_srp4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lkdrv")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_lkdrv")
+}],
+"loop": true,
+"name": &"sideStand",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve" id="Curve_srp4u"]
+_data = [Vector2(0.004504502, 1), 0.0, 0.0, 0, 0, Vector2(0.8063063, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_srp4u"]
+curve = SubResource("Curve_srp4u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jfpux"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 95.99
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_srp4u")
+
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "attackCollisionShape", "playerSprite", "dashParticles") groups=["Player"]]
 collision_mask = 3
 script = ExtResource("1_p0vlq")
 dashCooldown = 0.8
 playerDashCooldownBar = NodePath("TextureProgressBar")
 rotationNode = NodePath("RotationNode")
 attackArea = NodePath("RotationNode/MouseDirectionMarker/Area2D")
+attackCollisionShape = NodePath("RotationNode/MouseDirectionMarker/Area2D/CollisionShape2D")
+playerSprite = NodePath("AnimatedSprite2D")
+dashParticles = NodePath("DashParticles")
 dashLayer = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
@@ -45,13 +164,26 @@ position = Vector2(200, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RotationNode/MouseDirectionMarker/Area2D" unique_id=1132444857]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_v6fml")
+disabled = true
 debug_color = Color(1, 0, 0, 0.41960785)
 
-[connection signal="body_entered" from="RotationNode/MouseDirectionMarker/Area2D" to="." method="ApplyAttack"]
 [node name="Area2D" type="Area2D" parent="." unique_id=1252916493]
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1045574049]
 shape = SubResource("CircleShape2D_v6fml")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=695385033]
+sprite_frames = SubResource("SpriteFrames_v6fml")
+animation = &"back"
+
+[node name="DashParticles" type="GPUParticles2D" parent="." unique_id=1462767036]
+emitting = false
+amount = 45
+texture = ExtResource("16_srp4u")
+lifetime = 0.5
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_jfpux")
+
+[connection signal="body_entered" from="RotationNode/MouseDirectionMarker/Area2D" to="." method="ApplyAttack"]
 [connection signal="body_entered" from="Area2D" to="." method="DashThroughEnemy"]
