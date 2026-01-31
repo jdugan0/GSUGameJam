@@ -5,7 +5,6 @@
 
 [sub_resource type="Resource" id="Resource_dare8"]
 script = ExtResource("2_dare8")
-sceneName = ""
 metadata/_custom_type_script = "uid://b75h7i7133wue"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i3um"]

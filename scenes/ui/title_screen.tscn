@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://q5umbrfw6aex"]
+
+[ext_resource type="Texture2D" uid="uid://cpr1crdngb1q0" path="res://resources/sprites/tempBeginButton.png" id="1_aqpy5"]
+[ext_resource type="Script" uid="uid://dfuwfacq2rgii" path="res://scripts/TitleScreen.cs" id="1_w8uqo"]
+[ext_resource type="Texture2D" uid="uid://d340axh4byr7t" path="res://resources/sprites/tempSettingsButton.png" id="2_w8uqo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqpy5"]
+bg_color = Color(0.04685348, 0.04685348, 0.04685348, 1)
+
+[node name="TitleScreen" type="Control" unique_id=452959523 node_paths=PackedStringArray("mainScreen", "configScreen", "startButton", "configButton", "exitButton", "configBackButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w8uqo")
+mainScreen = NodePath("MainScreen")
+configScreen = NodePath("SettingsScreen")
+startButton = NodePath("MainScreen/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/StartButton")
+configButton = NodePath("MainScreen/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ConfigButton")
+exitButton = NodePath("MainScreen/VBoxContainer/CenterContainer/ExitButton")
+configBackButton = NodePath("SettingsScreen/VBoxContainer/OptionsReturnButton")
+
+[node name="Panel" type="Panel" parent="." unique_id=388208682]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aqpy5")
+
+[node name="MainScreen" type="MarginContainer" parent="." unique_id=27184988]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen" unique_id=830017370]
+layout_mode = 2
+theme_override_constants/separation = 250
+
+[node name="MarginContainer" type="MarginContainer" parent="MainScreen/VBoxContainer" unique_id=114780456]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/VBoxContainer/MarginContainer" unique_id=1613537832]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="OccultusLabel" type="RichTextLabel" parent="MainScreen/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1661076013]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave][font_size=196]OCCULTUS"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainScreen/VBoxContainer/MarginContainer/VBoxContainer" unique_id=826386278]
+layout_mode = 2
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="MainScreen/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=313274917]
+layout_mode = 2
+texture_normal = ExtResource("1_aqpy5")
+
+[node name="ConfigButton" type="TextureButton" parent="MainScreen/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1404749187]
+layout_mode = 2
+texture_normal = ExtResource("2_w8uqo")
+
+[node name="CenterContainer" type="CenterContainer" parent="MainScreen/VBoxContainer" unique_id=1493037333]
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="MainScreen/VBoxContainer/CenterContainer" unique_id=906731100]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8745098, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "ESCAPE"
+icon_alignment = 1
+expand_icon = true
+
+[node name="SettingsScreen" type="MarginContainer" parent="." unique_id=1401185518]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsScreen" unique_id=1018935627]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="ConfigLabel" type="RichTextLabel" parent="SettingsScreen/VBoxContainer" unique_id=495192233]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave][font_size=128]CONFIG."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxMusic" type="HSplitContainer" parent="SettingsScreen/VBoxContainer" unique_id=1483053318]
+layout_mode = 2
+split_offsets = PackedInt32Array(200)
+dragging_enabled = false
+split_offset = 200
+
+[node name="MusicLabel" type="Label" parent="SettingsScreen/VBoxContainer/HBoxMusic" unique_id=1155094493]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "MUSIC "
+horizontal_alignment = 1
+
+[node name="SFXScrollBar" type="HScrollBar" parent="SettingsScreen/VBoxContainer/HBoxMusic" unique_id=178382211]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+step = 10.0
+value = 100.0
+
+[node name="HBoxSFX" type="HSplitContainer" parent="SettingsScreen/VBoxContainer" unique_id=106060433]
+layout_mode = 2
+split_offsets = PackedInt32Array(200)
+dragging_enabled = false
+split_offset = 200
+
+[node name="SFXLabel" type="Label" parent="SettingsScreen/VBoxContainer/HBoxSFX" unique_id=1788635319]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SFXScrollBar" type="HScrollBar" parent="SettingsScreen/VBoxContainer/HBoxSFX" unique_id=140445234]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+step = 10.0
+value = 100.0
+
+[node name="OptionsReturnButton" type="Button" parent="SettingsScreen/VBoxContainer" unique_id=1090977026]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "RETURN"
+icon_alignment = 1
+expand_icon = true
