@@ -6,7 +6,7 @@ public partial class MaskObject : RigidBody2D
     [Export]
     Mask masktype;
 
-    public void OnCollide(Node col)
+    public void OnCollide(Node2D col)
     {
         GD.Print("meow");
         if (col is Movement m)

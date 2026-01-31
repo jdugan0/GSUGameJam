@@ -5,10 +5,22 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28yc7"]
 size = Vector2(180, 180)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eic0r"]
+size = Vector2(200, 200)
+
 [node name="Mask" type="RigidBody2D" unique_id=2035663861 groups=["Mask"]]
+gravity_scale = 0.0
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_eic0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=437146178]
 shape = SubResource("RectangleShape2D_28yc7")
 
-[connection signal="body_entered" from="." to="." method="OnCollide"]
+[node name="Area2D" type="Area2D" parent="." unique_id=542773921]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=694752805]
+shape = SubResource("RectangleShape2D_eic0r")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnCollide"]
