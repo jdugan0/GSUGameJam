@@ -18,6 +18,8 @@ public partial class Movement : CharacterBody2D
     public float dashCooldown = 3.0f;
     public bool dashAvailable = true;
     public float dashTimeRemaining = 3.0f;
+    public Mask mask;
+
     public override void _PhysicsProcess(double delta)
     {
         float dt = (float)delta;
