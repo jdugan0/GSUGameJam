@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://0c4hg8th303t"]
+
+[ext_resource type="Script" uid="uid://eo00q03200w3" path="res://scripts/Movement.cs" id="1_p0vlq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
+radius = 180.0
+
+[node name="Player" type="CharacterBody2D" unique_id=897455521 groups=["Player"]]
+script = ExtResource("1_p0vlq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
+shape = SubResource("CircleShape2D_5q5h1")
