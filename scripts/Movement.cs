@@ -52,6 +52,11 @@ public partial class Movement : CharacterBody2D
 
     public bool dead = false;
 
+    [Export(PropertyHint.Layers2DPhysics)]
+    public uint dashLayer;
+
+    public uint normalLayer;
+
     public override void _Ready()
     {
         attackArea.Monitorable = false;
@@ -59,6 +64,7 @@ public partial class Movement : CharacterBody2D
         attackArea.GetChild<CollisionShape2D>(0).Disabled = true;
         playerDashCooldownBar.MaxValue = dashCooldown;
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
+        normalLayer = CollisionMask;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -123,6 +129,17 @@ public partial class Movement : CharacterBody2D
     public override void _Process(double delta)
     {
         playerDashCooldownBar.Value = (dashCooldown - dashTimeRemaining);
+        if (Velocity.Length() > MaxSpeed * 1.1)
+        {
+            GD.Print("bang");
+            CollisionLayer = 0;
+            CollisionMask = dashLayer;
+        }
+        else
+        {
+            CollisionLayer = 1;
+            CollisionMask = normalLayer;
+        }
     }
 
     public void UpdateRotation()
@@ -138,6 +155,8 @@ public partial class Movement : CharacterBody2D
         Vector2 mousePos = GetGlobalMousePosition();
         Vector2 dir = (mousePos - Position).Normalized();
         Velocity = dir * dashAmount;
+        CollisionLayer = 0;
+        CollisionMask = dashLayer;
     }
 
     public void Attack()

@@ -10,13 +10,13 @@ radius = 90.0
 size = Vector2(399, 314)
 
 [node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea") groups=["Player"]]
+collision_mask = 3
 script = ExtResource("1_p0vlq")
-MaxSpeed = 1200.0
-Acceleration = 7500.0
-dashAmount = 3500.0
+dashCooldown = 0.8
 playerDashCooldownBar = NodePath("TextureProgressBar")
 rotationNode = NodePath("RotationNode")
 attackArea = NodePath("RotationNode/MouseDirectionMarker/Area2D")
+dashLayer = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")

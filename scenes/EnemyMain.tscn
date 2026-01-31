@@ -5,7 +5,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D")]
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D") groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_s2ept")
 navigationAgent2D = NodePath("NavigationAgent2D")
 
