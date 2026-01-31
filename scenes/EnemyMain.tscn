@@ -5,9 +5,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2ept"]
+radius = 120.0
+
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "wallDetectArea")]
 script = ExtResource("1_s2ept")
 navigationAgent2D = NodePath("NavigationAgent2D")
+wallDetectArea = NodePath("WallCrushingArea2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 shape = SubResource("CircleShape2D_3hddw")
@@ -17,3 +21,11 @@ path_max_distance = 200.0
 avoidance_enabled = true
 radius = 150.0
 debug_enabled = true
+
+[node name="WallCrushingArea2D" type="Area2D" parent="." unique_id=178302454]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallCrushingArea2D" unique_id=1205400781]
+shape = SubResource("CircleShape2D_s2ept")
+debug_color = Color(0, 0.6156863, 0.5882353, 0.050980393)
+
+[connection signal="body_entered" from="WallCrushingArea2D" to="." method="WallImpact"]

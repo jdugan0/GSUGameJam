@@ -37,7 +37,13 @@ public partial class Movement : CharacterBody2D
     [Export]
     public Area2D attackArea;
     [Export]
+    public CollisionShape2D attackCollisionShape;
+    [Export]
     public float attackCooldown = 0.3f;
+    [Export]
+    public float attackKnockback = 2000f;
+    [Export]
+    public float attackInertia = 1000f;
     public float attackDuration = 0.1f;
     public bool attackReady = true;
 
@@ -47,8 +53,7 @@ public partial class Movement : CharacterBody2D
 
     public override void _Ready()
     {
-        attackArea.Monitorable = false; attackArea.Monitoring = false;
-        attackArea.GetChild<CollisionShape2D>(0).Disabled = true;
+        attackCollisionShape.Disabled = true;
         playerDashCooldownBar.MaxValue = dashCooldown;
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
     }
@@ -128,27 +133,31 @@ public partial class Movement : CharacterBody2D
     public void Attack()
     {
         attackReady = false;
-        attackArea.Monitorable = true; attackArea.Monitoring = true;
-        attackArea.GetChild<CollisionShape2D>(0).Disabled = false;
-        //actual attack
-        var bodies = attackArea.GetOverlappingBodies();
-        GD.Print(bodies);
-        foreach (var body in bodies)
-        {
-            //
-        }
+        attackCollisionShape.Disabled = false;
+
+        
+        Velocity += (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
 
         //spawn animation
         GetTree().CreateTimer(attackDuration).Timeout += () =>
         {
-            attackArea.Monitorable = false; attackArea.Monitoring = false;
-            attackArea.GetChild<CollisionShape2D>(0).Disabled = true;
+            attackCollisionShape.Disabled = true;
             
             GetTree().CreateTimer(attackCooldown).Timeout += () =>
             {
                 attackReady = true;
             };
         };
+    }
+
+    public void ApplyAttack(Node2D col)
+    {
+        if (col is Enemy enemy)
+        {
+            enemy.BeAttacked(this);
+            Velocity -= (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
+            Velocity += (Position - enemy.Position).Normalized() * attackKnockback;
+        }
     }
 
 }
