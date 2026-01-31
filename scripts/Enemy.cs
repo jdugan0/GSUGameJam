@@ -21,22 +21,76 @@ public partial class Enemy : CharacterBody2D
     public Area2D wallDetectArea;
     public float stunnedTimeRemaining = 0f;
 
-    public override void _Ready() {}
+    public override void _Ready()
+    {
+        navigationAgent2D.VelocityComputed += OnVelocityComputed;
+        navigationAgent2D.MaxSpeed = maxSpeed;
+    }
+
+    public enum EnemyState
+    {
+        HIDING,
+        CHASE_PLAYER,
+        PROTECT,
+        GET_MASK,
+    }
+
+    public EnemyState enemyState = EnemyState.GET_MASK;
+
+    [Export]
+    public float desiredDistance;
+
+    [Export]
+    public float protectDistance;
+
+    public Vector2 computedV;
+
+    private bool swapped;
+    Vector2 updatedPos;
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Camera.instance.zooming)
+        Rid navMap = navigationAgent2D.GetNavigationMap();
+        float playerDist = GameManager.instance.player.Position.DistanceTo(Position);
+        if (GameManager.instance.onGround == null && GameManager.instance.player.mask == null)
         {
-            navigationAgent2D.TargetPosition = Position;
-            return;
+            if (mask == null)
+            {
+                enemyState = EnemyState.PROTECT;
+                if (playerDist < 600)
+                {
+                    enemyState = EnemyState.CHASE_PLAYER;
+                }
+            }
+            else
+            {
+                enemyState = EnemyState.HIDING;
+            }
         }
-        if (GameManager.instance.onGround != null)
+        else if (GameManager.instance.onGround != null)
         {
-            navigationAgent2D.TargetPosition = GameManager.instance.onGround.Value;
+            enemyState = EnemyState.GET_MASK;
+            if (playerDist < 300)
+            {
+                enemyState = EnemyState.CHASE_PLAYER;
+            }
         }
-        else if (mask == null)
+        else
         {
-            navigationAgent2D.TargetPosition = GameManager.instance.player.Position;
+            enemyState = EnemyState.CHASE_PLAYER;
+        }
+        if (mask != null)
+        {
+            GameManager.instance.toProtect = this;
+            if (!swapped)
+            {
+                Vector2 playerPos = GameManager.instance.player.Position;
+                Vector2 dir = (GlobalPosition - playerPos).Normalized();
+                Vector2 rawTarget = playerPos + dir * desiredDistance;
+                Vector2 safeTarget = NavigationServer2D.MapGetClosestPoint(navMap, rawTarget);
+                updatedPos = safeTarget;
+            }
+            swapped = true;
         }
         else
         {
@@ -46,12 +100,14 @@ public partial class Enemy : CharacterBody2D
         {
             Vector2 next = navigationAgent2D.GetNextPathPosition();
             Vector2 dir = (next - GlobalPosition).Normalized();
+            navigationAgent2D.Velocity = dir * maxSpeed;
 
-            Velocity = dir * maxSpeed;
+            Velocity = computedV;
         }
         else if (!stunned)
         {
-            Velocity = Vector2.Zero;
+            navigationAgent2D.Velocity = Vector2.Zero;
+            Velocity = computedV;
         }
         else if (stunned)
         {
@@ -66,6 +122,11 @@ public partial class Enemy : CharacterBody2D
             }
         }
         MoveAndSlide();
+    }
+
+    private void OnVelocityComputed(Vector2 safeVelocity)
+    {
+        computedV = safeVelocity;
     }
 
     public void BeAttacked(Movement attacker)

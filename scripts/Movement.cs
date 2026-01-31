@@ -260,7 +260,7 @@ public partial class Movement : CharacterBody2D
     {
         if (col is Enemy e)
         {
-            e.BeAttacked(this);
+            //
         }
     }
 

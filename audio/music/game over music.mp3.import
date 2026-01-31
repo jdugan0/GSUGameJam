@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://byoo35g2bns3d"
+path="res://.godot/imported/game over music.mp3-d5a722c1e9e4cf202a4c1853da7b079a.mp3str"
+
+[deps]
+
+source_file="res://audio/music/game over music.mp3"
+dest_files=["res://.godot/imported/game over music.mp3-d5a722c1e9e4cf202a4c1853da7b079a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
