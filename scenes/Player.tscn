@@ -1,12 +1,25 @@
 [gd_scene format=3 uid="uid://dia5urkl26b2f"]
 
 [ext_resource type="Script" uid="uid://eo00q03200w3" path="res://scripts/Movement.cs" id="1_p0vlq"]
+[ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="2_v6fml"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 90.0
 
-[node name="Player" type="CharacterBody2D" unique_id=897455521 groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar") groups=["Player"]]
 script = ExtResource("1_p0vlq")
+playerDashCooldownBar = NodePath("TextureProgressBar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=452967886]
+offset_left = -207.0
+offset_top = -180.0
+offset_right = -79.0
+offset_bottom = -52.0
+max_value = 5.0
+step = 0.1
+value = 5.0
+fill_mode = 4
+texture_progress = ExtResource("2_v6fml")

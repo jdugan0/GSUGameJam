@@ -1,9 +1,10 @@
-[gd_scene format=4 uid="uid://5dxqa04mbwo6"]
+[gd_scene format=4 uid="uid://b6afgr2mytsjr"]
 
 [ext_resource type="Texture2D" uid="uid://bgwkcm53p8wgj" path="res://resources/sprites/TEMPTILEMAP.png" id="1_b84ys"]
 [ext_resource type="PackedScene" uid="uid://dia5urkl26b2f" path="res://scenes/Player.tscn" id="2_32mhh"]
 [ext_resource type="PackedScene" uid="uid://n0yiebmeq7py" path="res://scenes/Camera.tscn" id="3_ohbkr"]
 [ext_resource type="PackedScene" uid="uid://idkfbf8tuuxo" path="res://scenes/ui/ui.tscn" id="4_2j4y6"]
+[ext_resource type="PackedScene" uid="uid://c5ruedt0xh3dj" path="res://scenes/ui/pause_menu.tscn" id="5_vi6ws"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2j4y6"]
 vertices = PackedVector2Array(90, 90, -90, 90, -90, -90, 90, -90)
@@ -38,8 +39,12 @@ MaxSpeed = 1200.0
 Acceleration = 7500.0
 dashAmount = 3500.0
 
-[node name="Camera2D" parent="." unique_id=1045887185 instance=ExtResource("3_ohbkr")]
+[node name="Camera2D" parent="." unique_id=1045887185 node_paths=PackedStringArray("UI") instance=ExtResource("3_ohbkr")]
 zoom = Vector2(0.5, 0.5)
 playerWeight = 15
+UI = NodePath("../GameUI")
 
 [node name="GameUI" parent="." unique_id=1920844850 instance=ExtResource("4_2j4y6")]
+
+[node name="PauseMenu" parent="." unique_id=1814995960 instance=ExtResource("5_vi6ws")]
+visible = false
