@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cmpg0wseyww2d"]
 
-[ext_resource type="Script" uid="uid://b1vafheoyuvi4" path="res://scripts/SceneSwitcher/SceneSwitcher.cs" id="1_388wc"]
-[ext_resource type="Script" uid="uid://b75h7i7133wue" path="res://scripts/SceneSwitcher/SceneResource.cs" id="2_dare8"]
+[ext_resource type="Script" uid="uid://b1vafheoyuvi4" path="res://scripts/sceneswitcher/SceneSwitcher.cs" id="1_388wc"]
+[ext_resource type="Script" uid="uid://b75h7i7133wue" path="res://scripts/sceneswitcher/SceneResource.cs" id="2_dare8"]
 [ext_resource type="PackedScene" uid="uid://q5umbrfw6aex" path="res://scenes/ui/title_screen.tscn" id="2_yjr5b"]
 [ext_resource type="PackedScene" uid="uid://b6afgr2mytsjr" path="res://levels/Level1.tscn" id="4_80c7e"]
-[ext_resource type="PackedScene" uid="uid://bnddhd427qm3g" path="res://levels/Level0.tscn" id="5_mu64o"]
+[ext_resource type="PackedScene" uid="uid://ot7yukainen0" path="res://levels/Level1_Real.tscn" id="5_yqkd8"]
 [ext_resource type="PackedScene" uid="uid://bkeh8425rvo2x" path="res://scenes/ui/win_screen.tscn" id="6_sg0go"]
 [ext_resource type="PackedScene" uid="uid://cl5r1rongfq08" path="res://scenes/ui/lose_screen.tscn" id="7_rtqo1"]
 
@@ -23,7 +23,7 @@ metadata/_custom_type_script = "uid://b75h7i7133wue"
 [sub_resource type="Resource" id="Resource_3l4qv"]
 script = ExtResource("2_dare8")
 sceneName = "Level0"
-scene = ExtResource("5_mu64o")
+scene = ExtResource("5_yqkd8")
 metadata/_custom_type_script = "uid://b75h7i7133wue"
 
 [sub_resource type="Resource" id="Resource_rtqo1"]
