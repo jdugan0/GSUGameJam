@@ -80,12 +80,16 @@ public partial class Enemy : CharacterBody2D
     [Export]
     float attackTime;
     float attackTimer = 0;
+
     [Export]
     public AnimatedSprite2D maskSprite;
+
     [Export]
     public GpuParticles2D maskParticles;
+
     [Export]
     public GpuParticles2D stunImpactParticles;
+
     [Export]
     public GpuParticles2D stunnedParticles;
 
@@ -155,7 +159,7 @@ public partial class Enemy : CharacterBody2D
         if (mask != null)
         {
             maskSprite.Visible = true;
-        maskParticles.Emitting = true;
+            maskParticles.Emitting = true;
             GameManager.instance.toProtect = this;
             if (!swapped)
             {

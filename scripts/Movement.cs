@@ -95,6 +95,7 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     float protectionTimer;
+
     [Export]
     public AnimatedSprite2D maskSprite;
 
@@ -133,7 +134,6 @@ public partial class Movement : CharacterBody2D
             }
             if (maskHealth == 0)
             {
-                
                 AudioManager.instance.PlaySFX("mask_lose");
                 MaskObject m = maskScene.Instantiate<MaskObject>();
                 m.LinearVelocity =
@@ -169,10 +169,10 @@ public partial class Movement : CharacterBody2D
         protectionTimer -= (float)delta;
 
         Vector2 input = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
-        if (protectionTimer > 0)
-        {
-            input = Vector2.Zero;
-        }
+        // if (protectionTimer > 0)
+        // {
+        //     input = Vector2.Zero;
+        // }
         if (input != Vector2.Zero)
         {
             playerSprite.Play();
@@ -236,7 +236,7 @@ public partial class Movement : CharacterBody2D
             {
                 attackReady = true;
             }
-        } 
+        }
         if (attackTimer > 0)
         {
             attackTimer -= dt;
