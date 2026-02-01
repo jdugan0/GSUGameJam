@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="7_gnwoi"]
 [ext_resource type="PackedScene" uid="uid://dbofuopnrqbih" path="res://scenes/EnemyMain.tscn" id="8_ohbpv"]
 [ext_resource type="PackedScene" uid="uid://btvu1rt5o03a4" path="res://scenes/safezone.tscn" id="9_skuna"]
-[ext_resource type="PackedScene" path="res://scenes/point_light_2d.tscn" id="10_yrrca"]
+[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="10_yrrca"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5h8y2"]
 vertices = PackedVector2Array(-12.859375, 30.007813, -11.1484375, 90, -90, 90, -90, -90, 90, -90, 90, 30.007813)
@@ -227,9 +227,6 @@ safePos = NodePath("../Safezone")
 zoom = Vector2(0.74, 0.74)
 playerWeight = 15
 UI = NodePath("../GameUI")
-zoomSpeed = 0.1
-zoomDuration = 0.1
-zoomAmount = 0.2
 
 [node name="GameUI" parent="." unique_id=1920844850 instance=ExtResource("5_p1d1a")]
 

@@ -23,7 +23,7 @@ public partial class Camera : Camera2D
     float zoomDuration = 4.0f;
 
     [Export]
-    float zoomAmount = 0.1f;
+    float zoomAmount = 2.5f;
 
     public static Camera instance;
     public int currentDialogueIndex = 0;
@@ -84,11 +84,11 @@ public partial class Camera : Camera2D
             TextAdvance();
         }
         
-        if (player.mask != null)
+        if (player.mask != null && player.moveEnabled)
         {
             Zoom = new Vector2(defaultZoom * 1.5f, defaultZoom * 1.5f);
         }
-        if (player.mask == null)
+        if (player.mask == null && player.moveEnabled)
         {
             Zoom = new Vector2(defaultZoom, defaultZoom);
         }

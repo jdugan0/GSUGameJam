@@ -93,13 +93,13 @@ public partial class Ui : CanvasLayer
 
     public void NextCreatureDialogue(string dialogue)
     {
-        clickContinueLabel.Visible = false;
         var alphaTween = CreateTween()
             .TweenProperty(creatureDialogueLabel, "modulate:a", 0.0f, dialogueFadeDuration)
             .SetTrans(Tween.TransitionType.Sine)
             .SetEase(Tween.EaseType.InOut);
         alphaTween.Finished += () =>
         {
+            clickContinueLabel.Visible = false;
             ShowCreatureDialogue(dialogue);
         };
     }

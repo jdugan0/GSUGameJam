@@ -242,9 +242,10 @@ shape = SubResource("RectangleShape2D_asoof")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=554953936]
 sprite_frames = SubResource("SpriteFrames_3tf2c")
-animation = &"hurt"
+animation = &"front"
 
 [node name="maskAnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1799387869]
+visible = false
 position = Vector2(4, -52)
 sprite_frames = SubResource("SpriteFrames_mv824")
 animation = &"hurt"
@@ -263,6 +264,7 @@ explosiveness = 0.89
 process_material = SubResource("ParticleProcessMaterial_pf4na")
 
 [node name="stunnedParticles" type="GPUParticles2D" parent="." unique_id=1209849148]
+emitting = false
 amount = 32
 texture = ExtResource("14_yqth3")
 lifetime = 2.0
