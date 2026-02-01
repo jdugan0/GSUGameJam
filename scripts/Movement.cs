@@ -301,6 +301,10 @@ public partial class Movement : CharacterBody2D
         AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
         MusicManager.instance.currentMusic = "music_game_over";
         AudioManager.instance.PlaySFX("music_game_over");
+        if (GameManager.instance.countdown)
+        {
+            AudioManager.instance.CancelSFX("timer_ticking");
+        }
         await SceneSwitcher.instance.SwitchSceneAsyncSlide("LoseScreen");
     }
 

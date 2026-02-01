@@ -60,6 +60,10 @@ public partial class GameManager : Node
 
     public async Task Win()
     {
+        if (countdown)
+        {
+            AudioManager.instance.CancelSFX("timer_ticking");
+        }
         AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
         MusicManager.instance.currentMusic = "music_game_win";
         AudioManager.instance.PlaySFX("music_game_win");
