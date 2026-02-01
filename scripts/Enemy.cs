@@ -9,15 +9,25 @@ public partial class Enemy : CharacterBody2D
     [Export]
     public AnimatedSprite2D enemySprite;
 
+    [Export]
     public Mask mask = null;
 
     [Export]
     public float maxSpeed = 1000;
 
+    uint initalLayerMask;
+    uint initalLayer;
+
     public override void _Ready()
     {
         navigationAgent2D.VelocityComputed += OnVelocityComputed;
         navigationAgent2D.MaxSpeed = maxSpeed;
+        if (mask != null)
+        {
+            GameManager.instance.toProtect = this;
+        }
+        initalLayer = CollisionLayer;
+        initalLayerMask = CollisionMask;
         maskParticles.Emitting = false;
     }
 
@@ -79,6 +89,8 @@ public partial class Enemy : CharacterBody2D
     [Export]
     public GpuParticles2D stunnedParticles;
 
+    bool hidden = false;
+
     public void PlayerEnter(Node2D col)
     {
         if (col is Movement m)
@@ -97,8 +109,16 @@ public partial class Enemy : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (stunned)
+        {
+            Modulate = new Color(Colors.White, 0.5f);
+        }
+        else
+        {
+            Modulate = Colors.White;
+        }
         attackTimer -= (float)delta;
-        if (attackTimer < 0 && enteredPlayer != null)
+        if (attackTimer < 0 && enteredPlayer != null && !stunned)
         {
             enteredPlayer.Hurt(this);
             attackTimer = attackTime;
@@ -144,6 +164,7 @@ public partial class Enemy : CharacterBody2D
                 Vector2 rawTarget = playerPos + dir * desiredDistance;
                 Vector2 safeTarget = NavigationServer2D.MapGetClosestPoint(navMap, rawTarget);
                 updatedPos = safeTarget;
+                hidden = false;
             }
             swapped = true;
         }
@@ -152,6 +173,14 @@ public partial class Enemy : CharacterBody2D
             swapped = false;
             maskSprite.Visible = false;
             maskParticles.Emitting = false;
+        }
+        if (playerDist > 2000)
+        {
+            hidden = true;
+        }
+        if (playerDist > 2000)
+        {
+            hidden = true;
         }
         switch (enemyState)
         {
@@ -165,7 +194,7 @@ public partial class Enemy : CharacterBody2D
                 navigationAgent2D.TargetPosition = GameManager.instance.player.Position;
                 break;
             case EnemyState.HIDING:
-                if (playerDist < 600)
+                if (playerDist < 600 && hidden)
                 {
                     Vector2 playerPos = GameManager.instance.player.Position;
                     Vector2 dir = (GlobalPosition - playerPos).Normalized();
@@ -206,6 +235,8 @@ public partial class Enemy : CharacterBody2D
                 stunnedTimeRemaining -= (float)delta;
                 if (stunnedTimeRemaining <= 0f)
                 {
+                    CollisionLayer = initalLayer;
+                    CollisionMask = initalLayerMask;
                     stunned = false;
                 }
             }
@@ -239,6 +270,7 @@ public partial class Enemy : CharacterBody2D
         stunnedTimeRemaining = stunDuration;
         if (mask != null)
         {
+            GD.Print(health);
             health--;
             if (health == 0)
             {
@@ -261,7 +293,9 @@ public partial class Enemy : CharacterBody2D
     {
         stunImpactParticles.Emitting = true;
         stunned = true;
-        stunnedTimeRemaining = stunDuration / 2;
+        stunnedTimeRemaining = stunDuration;
+        CollisionLayer = 0;
+        CollisionMask = 0;
     }
 
     public void WallImpact(Node2D col)
