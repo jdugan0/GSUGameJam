@@ -41,6 +41,7 @@
 [ext_resource type="AudioStream" uid="uid://cktlta747dow1" path="res://audio/sfx/random spooky sounds/footsteps 2.wav" id="39_oye0s"]
 [ext_resource type="AudioStream" uid="uid://d2yn8l3yhkgn3" path="res://audio/sfx/random spooky sounds/metal impact 2.wav" id="40_uaih3"]
 [ext_resource type="AudioStream" uid="uid://bttieqmyv2mxl" path="res://audio/sfx/temp/testingOw.wav" id="41_4etcg"]
+[ext_resource type="AudioStream" uid="uid://ngdn76of8s7x" path="res://audio/music/Title Screen Maybe.wav" id="42_ajw61"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wmmek"]
 streams_count = 4
@@ -215,6 +216,12 @@ volume = -15.0
 name = "test_ow"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
+[sub_resource type="Resource" id="Resource_uaih3"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("42_ajw61")
+name = "TitleScreen"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
 [node name="Audiomanager" type="Node" unique_id=669033915]
 script = ExtResource("1_ulbmk")
-sounds = Array[Object]([SubResource("Resource_wrila"), SubResource("Resource_sbu2l"), SubResource("Resource_c64us"), SubResource("Resource_4etcg"), SubResource("Resource_ajw61"), SubResource("Resource_ev1im"), SubResource("Resource_uus3r"), SubResource("Resource_oxuu2"), SubResource("Resource_qq4lq"), SubResource("Resource_683wi"), SubResource("Resource_1yug6"), SubResource("Resource_38ysf"), SubResource("Resource_mlqj7"), SubResource("Resource_cq6mo"), SubResource("Resource_0d11e"), SubResource("Resource_w2had"), SubResource("Resource_wsuhf"), SubResource("Resource_dnkil"), SubResource("Resource_aogok"), SubResource("Resource_oye0s"), SubResource("Resource_esynm"), SubResource("Resource_n5oxk")])
+sounds = Array[Object]([SubResource("Resource_wrila"), SubResource("Resource_sbu2l"), SubResource("Resource_c64us"), SubResource("Resource_4etcg"), SubResource("Resource_ajw61"), SubResource("Resource_ev1im"), SubResource("Resource_uus3r"), SubResource("Resource_oxuu2"), SubResource("Resource_qq4lq"), SubResource("Resource_683wi"), SubResource("Resource_1yug6"), SubResource("Resource_38ysf"), SubResource("Resource_mlqj7"), SubResource("Resource_cq6mo"), SubResource("Resource_0d11e"), SubResource("Resource_w2had"), SubResource("Resource_wsuhf"), SubResource("Resource_dnkil"), SubResource("Resource_aogok"), SubResource("Resource_oye0s"), SubResource("Resource_esynm"), SubResource("Resource_n5oxk"), SubResource("Resource_uaih3")])

@@ -27,10 +27,11 @@ metadata/_custom_type_script = "uid://b75h7i7133wue"
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i3um"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Sceneswitcher" type="Node" unique_id=619671277]
+[node name="Sceneswitcher" type="Node" unique_id=619671277 node_paths=PackedStringArray("fadeRect")]
 process_mode = 3
 script = ExtResource("1_388wc")
 scenes = Array[Object]([SubResource("Resource_dare8"), SubResource("Resource_yjr5b"), SubResource("Resource_3l4qv")])
+fadeRect = NodePath("CanvasLayer/Panel")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2138373054]
 layer = 10

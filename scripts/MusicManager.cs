@@ -1,11 +1,12 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class MusicManager : Node
 {
-	public String currentMusic = "";
-	public static MusicManager instance;
-	public override void _Ready()
+    public String currentMusic = "";
+    public static MusicManager instance;
+
+    public override void _Ready()
     {
         if (instance == null)
         {

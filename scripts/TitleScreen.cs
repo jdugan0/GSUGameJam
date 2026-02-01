@@ -24,6 +24,7 @@ public partial class TitleScreen : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        AudioManager.instance.PlaySFX("TitleScreen");
         mainScreen.Visible = true;
         configScreen.Visible = false;
         configButton.Pressed += () =>
@@ -40,9 +41,10 @@ public partial class TitleScreen : Control
         {
             GetTree().Quit();
         };
-        startButton.Pressed += () =>
+        startButton.Pressed += async () =>
         {
-            SceneSwitcher.instance.SwitchScene(2);
+            AudioManager.instance.CancelSFX("TitleScreen");
+            await SceneSwitcher.instance.SwitchSceneAsyncSlide("Level0");
         };
     }
 
