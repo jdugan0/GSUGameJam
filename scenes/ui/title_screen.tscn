@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cpxcsf8kshkee" path="res://resources/sprites/ui/title.png" id="2_aqu7r"]
 [ext_resource type="Texture2D" uid="uid://c3gv77b271ryt" path="res://resources/sprites/ui/begin1.png" id="2_r23qo"]
 [ext_resource type="Texture2D" uid="uid://cwepbfhkaurko" path="res://resources/sprites/ui/config2.png" id="3_cfe2f"]
-[ext_resource type="Texture2D" uid="uid://dg8i8dmum6fff" path="res://resources/sprites/ui/begin2.png" id="4_6ik4u"]
 [ext_resource type="Texture2D" uid="uid://doi6yj4hwhxid" path="res://resources/sprites/ui/config1.png" id="5_aqu7r"]
+[ext_resource type="Texture2D" uid="uid://bx4o44m0ce2pe" path="res://resources/sprites/ui/begin2 (1).png" id="6_aqu7r"]
 [ext_resource type="Texture2D" uid="uid://b5aiuf01rrb75" path="res://resources/sprites/ui/quit1.png" id="7_jsbfx"]
 [ext_resource type="Texture2D" uid="uid://bgkb0xp6g0kqk" path="res://resources/sprites/ui/quit2.png" id="8_7oraf"]
 
@@ -19,8 +19,8 @@ grow_vertical = 2
 script = ExtResource("1_w8uqo")
 mainScreen = NodePath("MainScreen")
 configScreen = NodePath("SettingsScreen")
-startButton = NodePath("MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/StartButton")
-configButton = NodePath("MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ConfigButton")
+startButton = NodePath("MainScreen/MarginContainer/StartButton")
+configButton = NodePath("MainScreen/MarginContainer/ConfigButton")
 exitButton = NodePath("MainScreen/ExitButton")
 configBackButton = NodePath("SettingsScreen/VBoxContainer/OptionsReturnButton")
 
@@ -56,37 +56,26 @@ texture_hover = ExtResource("8_7oraf")
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 400
+theme_override_constants/margin_top = 126
 theme_override_constants/margin_right = 150
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/MarginContainer" unique_id=830017370]
+[node name="StartButton" type="TextureButton" parent="MainScreen/MarginContainer" unique_id=313274917]
 layout_mode = 2
-theme_override_constants/separation = 200
-
-[node name="MarginContainer" type="MarginContainer" parent="MainScreen/MarginContainer/VBoxContainer" unique_id=114780456]
-layout_mode = 2
-theme_override_constants/margin_top = 37
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer" unique_id=1613537832]
-layout_mode = 2
-theme_override_constants/separation = 40
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=826386278]
-layout_mode = 2
-theme_override_constants/separation = 600
-alignment = 1
-
-[node name="StartButton" type="TextureButton" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=313274917]
-layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 texture_normal = ExtResource("2_r23qo")
-texture_pressed = ExtResource("4_6ik4u")
-texture_hover = ExtResource("4_6ik4u")
+texture_pressed = ExtResource("6_aqu7r")
+texture_hover = ExtResource("6_aqu7r")
+stretch_mode = 3
 
-[node name="ConfigButton" type="TextureButton" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1404749187]
+[node name="ConfigButton" type="TextureButton" parent="MainScreen/MarginContainer" unique_id=1404749187]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 texture_normal = ExtResource("5_aqu7r")
 texture_pressed = ExtResource("3_cfe2f")
 texture_hover = ExtResource("3_cfe2f")
+stretch_mode = 3
 
 [node name="SettingsScreen" type="MarginContainer" parent="." unique_id=1401185518]
 visible = false

@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://djpyrxukbrljb" path="res://scripts/Ui.cs" id="1_f5cxw"]
 [ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="1_u7n8c"]
+[ext_resource type="FontFile" uid="uid://bx21ffb0benwo" path="res://resources/Blackcraft.ttf" id="3_0dwhk"]
 [ext_resource type="PackedScene" uid="uid://c5ruedt0xh3dj" path="res://scenes/ui/pause_menu.tscn" id="3_aac20"]
-[ext_resource type="Shader" uid="uid://c4tiw2jpiia2y" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
+[ext_resource type="Shader" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0dwhk"]
 shader = ExtResource("4_g5kmx")
@@ -38,19 +39,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 860
+theme_override_constants/margin_top = 500
 
 [node name="CreatureDialogueLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1519261451]
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_0dwhk")
 bbcode_enabled = true
-text = "[font_size=72][wave]\"Evil Creature is Speaking Now\""
+text = "[font_size=96][shake]\"Evil Creature is Speaking Now\""
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Timer" type="Label" parent="." unique_id=1579778451]
 offset_right = 40.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("3_0dwhk")
+theme_override_font_sizes/font_size = 64
 text = "TIME: 45.0"
 
 [node name="PauseMenu" parent="." unique_id=1814995960 instance=ExtResource("3_aac20")]

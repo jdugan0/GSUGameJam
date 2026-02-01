@@ -24,60 +24,69 @@ public partial class Camera : Camera2D
     [Export]
     float zoomAmount = 0.1f;
 
-    [Signal]
-    public delegate void ZoomStartEventHandler();
-
-    [Signal]
-    public delegate void ZoomFinishEventHandler();
-    public bool zooming;
-
     public static Camera instance;
+    public int currentDialogueIndex = 0;
+
+    public string[] dialogueLines = new string[]
+    {
+        "An intruder. How... intriguing.",
+        "It's forbidden for an outsider to wear the [color=purple]Mask[/color]...",
+        "Yet that is what you seek, is it not?",
+        "Very well then.",
+        "Complete my ritual and bring the [color=purple]Mask[/color] to the [color=green]Altar[/color].",
+        "Or sucumb to the fog of the farthest world.",
+        "Sanguinem occultorum effundere. Little one.",
+        ""
+    };
 
     public override void _Ready()
     {
         instance = this;
+        Zoom = new Vector2(zoomAmount, zoomAmount);
         player = GetTree().GetFirstNodeInGroup("Player") as Movement;
-        UI.dialogueFadeDuration = zoomSpeed;
-        // ZoomStart += () =>
-        // {
-        //     UI.ShowCreatureDialogue("Look around to find the zones!");
-        //     zooming = true;
-        // };
-        // ZoomFinish += () =>
-        // {
-        //     UI.HideCreatureDialogue();
-        //     zooming = false;
-        // };
-        // RoundZoom();
+        player.moveEnabled = false;
+        UI.ShowCreatureDialogue("An intruder. How... intriguing.");
+        //ZoomIn();
+    }
+
+    public void TextAdvance()
+    {
+        if (currentDialogueIndex < dialogueLines.Length - 1)
+        {
+            currentDialogueIndex++;
+            if (dialogueLines[currentDialogueIndex] == "")
+            {
+                UI.FinishDialogue();
+                ZoomIn();
+                return;
+            }
+            UI.NextCreatureDialogue(dialogueLines[currentDialogueIndex]);
+        }
     }
 
     public override void _Process(double delta)
     {
         Vector2 mousePos = GetGlobalMousePosition();
         Position = (playerWeight * player.Position + mousePos) / (1 + playerWeight);
+
+        if (Input.IsActionJustPressed("DASH") || Input.IsActionJustPressed("ATTACK") || Input.IsActionJustPressed("RIGHT"))
+        {
+            TextAdvance();
+        }
     }
 
     // at the beginning of the round, zoom out to show zone locations
-    public void RoundZoom()
+    public void ZoomIn()
     {
-        player.moveEnabled = false;
-        var twen = CreateTween()
-            .TweenProperty(this, "zoom", new Vector2(zoomAmount, zoomAmount), zoomSpeed)
-            .SetTrans(Tween.TransitionType.Sine)
-            .SetEase(Tween.EaseType.InOut);
-        EmitSignal(nameof(ZoomStart));
-        twen.Finished += () =>
+        var twenBack = CreateTween().TweenProperty(this, "zoom", new Vector2(defaultZoom, defaultZoom), zoomSpeed).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+        twenBack.Finished += () =>
         {
-            var timer = GetTree().CreateTimer(zoomDuration);
-            timer.Timeout += () =>
+            player.moveEnabled = true;
+            var enemies = GetTree().GetNodesInGroup("Enemy");
+            foreach (var enemy in enemies)
             {
-                var twenBack = CreateTween()
-                    .TweenProperty(this, "zoom", new Vector2(defaultZoom, defaultZoom), zoomSpeed)
-                    .SetTrans(Tween.TransitionType.Sine)
-                    .SetEase(Tween.EaseType.InOut);
-                EmitSignal(nameof(ZoomFinish));
-                player.moveEnabled = true;
-            };
+                (enemy as Enemy).disable = false;
+            }
         };
     }
 }

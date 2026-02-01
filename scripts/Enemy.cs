@@ -98,6 +98,7 @@ public partial class Enemy : CharacterBody2D
 
     [Export]
     Node2D campPos;
+    public bool disable = true;
 
     public void PlayerEnter(Node2D col)
     {
@@ -117,6 +118,10 @@ public partial class Enemy : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (disable)
+        {
+            return;
+        }
         if (stunned)
         {
             Modulate = new Color(Colors.White, 0.8f);

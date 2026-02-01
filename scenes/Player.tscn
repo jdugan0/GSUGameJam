@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://eo00q03200w3" path="res://scripts/Movement.cs" id="1_p0vlq"]
 [ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="2_6e537"]
-[ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="2_v6fml"]
 [ext_resource type="Texture2D" uid="uid://bjs6hvmtrd2gi" path="res://resources/sprites/player/protagback1.png" id="3_0rnld"]
 [ext_resource type="Texture2D" uid="uid://orxjm2fh0ccq" path="res://resources/sprites/player/protagback2.png" id="4_srp4u"]
+[ext_resource type="Texture2D" uid="uid://ctqmf3dcmg1hq" path="res://resources/sprites/ui/rechargeProgress.png" id="4_viqgg"]
 [ext_resource type="Texture2D" uid="uid://b54pkdkmn5nbf" path="res://resources/sprites/player/protagbackdiag1.png" id="5_jfpux"]
 [ext_resource type="Texture2D" uid="uid://bxcujp2jdkuti" path="res://resources/sprites/player/protagbackdiag2.png" id="6_61ith"]
 [ext_resource type="Texture2D" uid="uid://dwph0t7ajmvls" path="res://resources/sprites/player/protagbackstand.png" id="7_ebwui"]
@@ -200,15 +200,21 @@ maskSprite = NodePath("maskAnimationSprited2D")
 shape = SubResource("CircleShape2D_5q5h1")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=452967886]
-offset_left = -207.0
-offset_top = -180.0
-offset_right = -79.0
-offset_bottom = -52.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -128.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
 max_value = 5.0
 step = 0.1
-value = 5.0
 fill_mode = 4
-texture_progress = ExtResource("2_v6fml")
+texture_progress = ExtResource("4_viqgg")
 
 [node name="RotationNode" type="Node2D" parent="." unique_id=1002270579]
 

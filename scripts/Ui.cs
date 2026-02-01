@@ -10,7 +10,7 @@ public partial class Ui : CanvasLayer
 
     [Export]
     public RichTextLabel creatureDialogueLabel;
-    public float dialogueFadeDuration = 0.5f;
+    public float dialogueFadeDuration = 1.0f;
 
     [Export]
     public Label timer;
@@ -52,14 +52,26 @@ public partial class Ui : CanvasLayer
 
     public void ShowCreatureDialogue(string dialogue)
     {
-        creatureDialogueLabel.Text = "[font_size=72][wave]\"" + dialogue + "\"[/wave][/font_size]";
+        creatureDialogueLabel.Text = "[font_size=72][shake]\"" + dialogue + "\"[/shake][/font_size]";
         var alphaTween = CreateTween()
             .TweenProperty(creatureDialogueLabel, "modulate:a", 1.0f, dialogueFadeDuration)
             .SetTrans(Tween.TransitionType.Sine)
             .SetEase(Tween.EaseType.InOut);
     }
 
-    public void HideCreatureDialogue()
+    public void NextCreatureDialogue(string dialogue)
+    {
+        var alphaTween = CreateTween()
+            .TweenProperty(creatureDialogueLabel, "modulate:a", 0.0f, dialogueFadeDuration)
+            .SetTrans(Tween.TransitionType.Sine)
+            .SetEase(Tween.EaseType.InOut);
+        alphaTween.Finished += () =>
+        {
+            ShowCreatureDialogue(dialogue);
+        };
+    }
+
+    public void FinishDialogue()
     {
         var alphaTween = CreateTween()
             .TweenProperty(creatureDialogueLabel, "modulate:a", 0.0f, dialogueFadeDuration)

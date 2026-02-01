@@ -207,6 +207,7 @@ public partial class Movement : CharacterBody2D
             dashTimeRemaining -= dt;
             if (dashTimeRemaining <= 0)
             {
+                AudioManager.instance.PlaySFX("dash_recharge");
                 dashAvailable = true;
             }
         }
