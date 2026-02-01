@@ -23,6 +23,8 @@ tile_set = ExtResource("8_sop0g")
 
 [node name="Player" parent="." unique_id=897455521 instance=ExtResource("2_3wh16")]
 health = 0
+maskLaunchVelocity = 2000.0
+maskScene = ExtResource("6_y0s4v")
 
 [node name="Safezone" parent="." unique_id=1763886929 instance=ExtResource("3_eu8vo")]
 position = Vector2(0, -1)

@@ -28,6 +28,7 @@ public partial class Enemy : CharacterBody2D
         }
         initalLayer = CollisionLayer;
         initalLayerMask = CollisionMask;
+        maskParticles.Emitting = false;
     }
 
     public enum EnemyState
@@ -79,6 +80,14 @@ public partial class Enemy : CharacterBody2D
     [Export]
     float attackTime;
     float attackTimer = 0;
+    [Export]
+    public AnimatedSprite2D maskSprite;
+    [Export]
+    public GpuParticles2D maskParticles;
+    [Export]
+    public GpuParticles2D stunImpactParticles;
+    [Export]
+    public GpuParticles2D stunnedParticles;
 
     bool hidden = false;
 
@@ -145,6 +154,8 @@ public partial class Enemy : CharacterBody2D
         }
         if (mask != null)
         {
+            maskSprite.Visible = true;
+        maskParticles.Emitting = true;
             GameManager.instance.toProtect = this;
             if (!swapped)
             {
@@ -160,6 +171,12 @@ public partial class Enemy : CharacterBody2D
         else
         {
             swapped = false;
+            maskSprite.Visible = false;
+            maskParticles.Emitting = false;
+        }
+        if (playerDist > 2000)
+        {
+            hidden = true;
         }
         if (playerDist > 2000)
         {
@@ -197,6 +214,7 @@ public partial class Enemy : CharacterBody2D
         }
         if (!navigationAgent2D.IsTargetReached() && !stunned)
         {
+            stunnedParticles.Emitting = false;
             Vector2 next = navigationAgent2D.GetNextPathPosition();
             Vector2 dir = (next - GlobalPosition).Normalized();
             navigationAgent2D.Velocity = dir * maxSpeed;
@@ -204,11 +222,13 @@ public partial class Enemy : CharacterBody2D
         }
         else if (!stunned)
         {
+            stunnedParticles.Emitting = false;
             navigationAgent2D.Velocity = Vector2.Zero;
             Velocity = computedV;
         }
         else if (stunned)
         {
+            stunnedParticles.Emitting = true;
             Velocity = Velocity.MoveToward(Vector2.Zero, stunFriction * (float)delta);
             if (Velocity.Length() < 10f)
             {
@@ -228,10 +248,12 @@ public partial class Enemy : CharacterBody2D
         if (Velocity.X < 0)
         {
             enemySprite.FlipH = true;
+            maskSprite.FlipH = true;
         }
         else
         {
             enemySprite.FlipH = false;
+            maskSprite.FlipH = false;
         }
         UpdateRotation();
         MoveAndSlide();
@@ -269,6 +291,7 @@ public partial class Enemy : CharacterBody2D
 
     public void Stun()
     {
+        stunImpactParticles.Emitting = true;
         stunned = true;
         stunnedTimeRemaining = stunDuration;
         CollisionLayer = 0;
@@ -279,6 +302,7 @@ public partial class Enemy : CharacterBody2D
     {
         if (col is TileMapLayer && stunned)
         {
+            stunImpactParticles.Emitting = true;
             GD.Print(this.Name + " hit wall and is stunned longer!");
             stunnedTimeRemaining = wallStunDuration;
             Velocity = Vector2.Zero;
@@ -291,34 +315,42 @@ public partial class Enemy : CharacterBody2D
         if (globalAngle < pi / 8 && globalAngle > -pi / 8)
         {
             enemySprite.Animation = "side";
+            maskSprite.Animation = "side";
         }
         else if (globalAngle < 3 * pi / 8 && globalAngle > pi / 8)
         {
             enemySprite.Animation = "frontDiag";
+            maskSprite.Animation = "frontDiag";
         }
         else if (globalAngle < 5 * pi / 8 && globalAngle > 3 * pi / 8)
         {
             enemySprite.Animation = "front";
+            maskSprite.Animation = "front";
         }
         else if (globalAngle < 7 * pi / 8 && globalAngle > 5 * pi / 8)
         {
             enemySprite.Animation = "frontDiag";
+            maskSprite.Animation = "frontDiag";
         }
         else if (globalAngle < -7 * pi / 8 && globalAngle > -pi)
         {
             enemySprite.Animation = "side";
+            maskSprite.Animation = "side";
         }
         else if (globalAngle < -5 * pi / 8 && globalAngle > -7 * pi / 8)
         {
             enemySprite.Animation = "backDiag";
+            maskSprite.Animation = "backDiag";
         }
         else if (globalAngle < -3 * pi / 8 && globalAngle > -5 * pi / 8)
         {
             enemySprite.Animation = "back";
+            maskSprite.Animation = "back";
         }
         else if (globalAngle < -pi / 8 && globalAngle > -3 * pi / 8)
         {
             enemySprite.Animation = "backDiag";
+            maskSprite.Animation = "backDiag";
         }
     }
 }
