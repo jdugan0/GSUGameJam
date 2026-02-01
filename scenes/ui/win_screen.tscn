@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://txn5f85upitu" path="res://scripts/WinScreen.cs" id="1_uqtu8"]
 [ext_resource type="FontFile" uid="uid://bx21ffb0benwo" path="res://resources/Blackcraft.ttf" id="2_rc6je"]
 [ext_resource type="Texture2D" uid="uid://etwkgrntf3sa" path="res://resources/sprites/ui/winlossbg (1).png" id="2_viy0t"]
-[ext_resource type="Texture2D" uid="uid://cg74pai8reedb" path="res://resources/sprites/ui/mainmenu1.png" id="3_rc6je"]
-[ext_resource type="Texture2D" uid="uid://dp80f5phvsge0" path="res://resources/sprites/ui/mainmenu2.png" id="4_viy0t"]
+[ext_resource type="Texture2D" uid="uid://br7on3o6wfyli" path="res://resources/nextlevel1.png" id="4_viy0t"]
+[ext_resource type="Texture2D" uid="uid://cafao77lsfte6" path="res://resources/nextlevel2.png" id="5_401aj"]
 
 [node name="WinScreen" type="Control" unique_id=452959523 node_paths=PackedStringArray("mainMenuButton")]
 layout_mode = 3
@@ -72,6 +72,6 @@ alignment = 1
 
 [node name="MainMenuButton" type="TextureButton" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=313274917]
 layout_mode = 2
-texture_normal = ExtResource("3_rc6je")
-texture_pressed = ExtResource("4_viy0t")
-texture_hover = ExtResource("4_viy0t")
+texture_normal = ExtResource("4_viy0t")
+texture_pressed = ExtResource("5_401aj")
+texture_hover = ExtResource("5_401aj")

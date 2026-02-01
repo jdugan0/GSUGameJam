@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Godot;
 
@@ -21,6 +22,11 @@ public partial class GameManager : Node
     public Enemy toProtect = null;
 
     bool playingEndSound = false;
+
+    [Export]
+    public string[] levelOrder;
+
+    public int currentlevel = 0;
 
     public override void _Ready()
     {
