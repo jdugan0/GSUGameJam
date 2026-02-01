@@ -10,7 +10,7 @@ public partial class Ui : CanvasLayer
 
     [Export]
     public RichTextLabel creatureDialogueLabel;
-    public float dialogueFadeDuration = 1.0f;
+    public float dialogueFadeDuration = 0.6f;
 
     [Export]
     public Label timer;
@@ -32,6 +32,7 @@ public partial class Ui : CanvasLayer
 
     [Export]
     HBoxContainer healthContainer;
+    public bool advanceEnabled = false;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -91,10 +92,15 @@ public partial class Ui : CanvasLayer
             .TweenProperty(creatureDialogueLabel, "modulate:a", 1.0f, dialogueFadeDuration)
             .SetTrans(Tween.TransitionType.Sine)
             .SetEase(Tween.EaseType.InOut);
+        alphaTween.Finished += () =>
+        {
+            Ui.instance.advanceEnabled = true;
+        };
     }
 
     public void NextCreatureDialogue(string dialogue)
     {
+        Ui.instance.advanceEnabled = false;
         var alphaTween = CreateTween()
             .TweenProperty(creatureDialogueLabel, "modulate:a", 0.0f, dialogueFadeDuration)
             .SetTrans(Tween.TransitionType.Sine)

@@ -28,7 +28,7 @@ public partial class GameManager : Node
 
     public override async void _PhysicsProcess(double delta)
     {
-        GD.Print(countdown);
+        //GD.Print(countdown);
         if (GetTree().GetFirstNodeInGroup("Mask") == null)
         {
             onGround = null;
