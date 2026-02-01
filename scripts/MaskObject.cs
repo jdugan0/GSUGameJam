@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Godot;
 
 public partial class MaskObject : RigidBody2D
@@ -21,10 +22,6 @@ public partial class MaskObject : RigidBody2D
         pickupTimer += (float)delta;
         foreach (var col in GetCollidingBodies())
         {
-            if (pickupTimer <= pickupCooldown)
-            {
-                break;
-            }
             if (col is Movement m)
             {
                 QueueFree();
@@ -34,6 +31,10 @@ public partial class MaskObject : RigidBody2D
             }
             if (col is Enemy e)
             {
+                if (pickupTimer <= pickupCooldown)
+                {
+                    continue;
+                }
                 e.mask = masktype;
                 QueueFree();
             }
@@ -42,19 +43,23 @@ public partial class MaskObject : RigidBody2D
 
     public void OnCollide(Node2D col)
     {
-        if (pickupTimer <= pickupCooldown)
-        {
-            return;
-        }
         if (col is Movement m)
         {
             QueueFree();
             m.mask = masktype;
             GameManager.instance.countdown = true;
             m.maskHealth = 3;
+            foreach (Enemy en in GetTree().GetNodesInGroup("Enemy").OfType<Enemy>().ToArray())
+            {
+                en.Stun();
+            }
         }
         if (col is Enemy e)
         {
+            if (pickupTimer <= pickupCooldown)
+            {
+                return;
+            }
             e.mask = masktype;
             QueueFree();
         }
