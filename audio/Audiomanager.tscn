@@ -18,10 +18,10 @@
 [ext_resource type="AudioStream" uid="uid://dg2w3edae1ltg" path="res://audio/sfx/woosh_1.wav" id="16_ullj3"]
 [ext_resource type="AudioStream" uid="uid://dm5hnx6llxuyr" path="res://audio/sfx/woosh_2.wav" id="17_dcpl7"]
 [ext_resource type="AudioStream" uid="uid://cewndaa2w5ik7" path="res://audio/music/L1 Intro.wav" id="18_1yug6"]
-[ext_resource type="AudioStream" uid="uid://316epuqexedp" path="res://audio/music/Music Frantic.wav" id="19_phtfg"]
+[ext_resource type="AudioStream" uid="uid://bf601frkxvsco" path="res://audio/music/Music Main Chill.wav" id="19_ev1im"]
 [ext_resource type="AudioStream" uid="uid://b2hvu7iqj1l36" path="res://audio/music/Music Spooky.wav" id="20_18f5x"]
 [ext_resource type="AudioStream" uid="uid://c1hs00wnhssax" path="res://audio/music/About to Lose Mask.wav" id="21_18f5x"]
-[ext_resource type="AudioStream" uid="uid://cxit1c2y2a0ru" path="res://audio/music/About to Die.wav" id="22_eagts"]
+[ext_resource type="AudioStream" uid="uid://b3mmgdf4t3kcr" path="res://audio/music/One Heart Chill.wav" id="22_ev1im"]
 [ext_resource type="AudioStream" uid="uid://d0h61xii554ca" path="res://audio/sfx/Mask Equip and blew your face off.wav" id="23_sacl8"]
 [ext_resource type="AudioStream" uid="uid://cmlmil7hq33a" path="res://audio/sfx/Mask Loss.wav" id="24_jxuaw"]
 [ext_resource type="AudioStream" uid="uid://755d2hm6eikt" path="res://audio/sfx/Scream.wav" id="25_ullj3"]
@@ -40,9 +40,11 @@
 [ext_resource type="AudioStream" uid="uid://bilvouebk2k4" path="res://audio/sfx/random spooky sounds/footsteps 1.wav" id="38_aogok"]
 [ext_resource type="AudioStream" uid="uid://cktlta747dow1" path="res://audio/sfx/random spooky sounds/footsteps 2.wav" id="39_oye0s"]
 [ext_resource type="AudioStream" uid="uid://d2yn8l3yhkgn3" path="res://audio/sfx/random spooky sounds/metal impact 2.wav" id="40_uaih3"]
-[ext_resource type="AudioStream" uid="uid://bttieqmyv2mxl" path="res://audio/sfx/temp/testingOw.wav" id="41_4etcg"]
+[ext_resource type="AudioStream" uid="uid://d01egibvwnnjx" path="res://audio/sfx/Hurt 1.wav" id="41_oxuu2"]
 [ext_resource type="AudioStream" uid="uid://ngdn76of8s7x" path="res://audio/music/Title Screen Maybe.wav" id="42_ajw61"]
+[ext_resource type="AudioStream" uid="uid://co1a4woscjxip" path="res://audio/sfx/Hurt 2.wav" id="42_n5oxk"]
 [ext_resource type="AudioStream" uid="uid://cjewijuof5t4f" path="res://audio/sfx/dashRecharge.wav" id="43_ev1im"]
+[ext_resource type="AudioStream" uid="uid://csy25bahngple" path="res://audio/sfx/Hurt 3.wav" id="43_qq4lq"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wmmek"]
 streams_count = 4
@@ -129,7 +131,7 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 
 [sub_resource type="Resource" id="Resource_1yug6"]
 script = ExtResource("2_wmmek")
-stream = ExtResource("19_phtfg")
+stream = ExtResource("19_ev1im")
 volume = -10.0
 name = "music_main"
 metadata/_custom_type_script = "uid://007myadtw53h"
@@ -148,7 +150,7 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 
 [sub_resource type="Resource" id="Resource_cq6mo"]
 script = ExtResource("2_wmmek")
-stream = ExtResource("22_eagts")
+stream = ExtResource("22_ev1im")
 volume = -10.0
 name = "music_neardeath"
 metadata/_custom_type_script = "uid://007myadtw53h"
@@ -212,10 +214,15 @@ stream = SubResource("AudioStreamRandomizer_dr6et")
 name = "ambience"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dnkil"]
+streams_count = 3
+stream_0/stream = ExtResource("41_oxuu2")
+stream_1/stream = ExtResource("42_n5oxk")
+stream_2/stream = ExtResource("43_qq4lq")
+
 [sub_resource type="Resource" id="Resource_n5oxk"]
 script = ExtResource("2_wmmek")
-stream = ExtResource("41_4etcg")
-volume = -15.0
+stream = SubResource("AudioStreamRandomizer_dnkil")
 name = "test_ow"
 metadata/_custom_type_script = "uid://007myadtw53h"
 

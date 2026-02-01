@@ -27,7 +27,7 @@ public partial class MaskObject : RigidBody2D
                 QueueFree();
                 m.mask = masktype;
                 GameManager.instance.countdown = true;
-                m.maskHealth = 2;
+                m.maskHealth = 3;
             }
             if (col is Enemy e)
             {
@@ -53,7 +53,7 @@ public partial class MaskObject : RigidBody2D
             QueueFree();
             m.mask = masktype;
             GameManager.instance.countdown = true;
-            m.maskHealth = 2;
+            m.maskHealth = 3;
             foreach (Enemy en in GetTree().GetNodesInGroup("Enemy").OfType<Enemy>().ToArray())
             {
                 en.Stun();

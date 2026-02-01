@@ -169,6 +169,7 @@ public partial class Enemy : CharacterBody2D
             attackRotate.Rotation = (enteredPlayer.Position - Position).Angle();
             GD.Print("Enemy attacking!", attackRotate.Rotation);
             attackSprite.Play("attack");
+            Stun();
             await enteredPlayer.Hurt(this);
         }
         if (attackDelayTimer <= 0)
@@ -208,7 +209,7 @@ public partial class Enemy : CharacterBody2D
         else if (GameManager.instance.onGround != null)
         {
             enemyState = EnemyState.GET_MASK;
-            if (playerDist < 300)
+            if (playerDist < 600)
             {
                 enemyState = EnemyState.CHASE_PLAYER;
             }

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bbowfytjjhsg0" path="res://scenes/HealthRect.tscn" id="3_jcn1r"]
 [ext_resource type="Texture2D" uid="uid://b5i4sdakrpf1i" path="res://resources/sprites/ui/rechargeUnder.png" id="4_7vp6q"]
 [ext_resource type="Shader" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
+[ext_resource type="Shader" uid="uid://c4tiw2jpiia2y" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0dwhk"]
 shader = ExtResource("4_g5kmx")
@@ -93,7 +94,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=144945911]
-offset_left = 776.0
-offset_top = 99.0
-offset_right = 1015.0
-offset_bottom = 217.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -239.0
+offset_bottom = 118.0
+grow_horizontal = 0
