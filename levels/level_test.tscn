@@ -2,10 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://n0yiebmeq7py" path="res://scenes/Camera.tscn" id="1_iho50"]
 [ext_resource type="PackedScene" uid="uid://dia5urkl26b2f" path="res://scenes/Player.tscn" id="2_3wh16"]
+[ext_resource type="PackedScene" uid="uid://idkfbf8tuuxo" path="res://scenes/ui/ui.tscn" id="2_tt56a"]
 [ext_resource type="PackedScene" uid="uid://btvu1rt5o03a4" path="res://scenes/safezone.tscn" id="3_eu8vo"]
 [ext_resource type="PackedScene" uid="uid://dsvygw0eidd6u" path="res://scenes/GameManager.tscn" id="5_5yd65"]
+[ext_resource type="PackedScene" uid="uid://dbofuopnrqbih" path="res://scenes/EnemyMain.tscn" id="5_y0s4v"]
+[ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="6_y0s4v"]
 
 [node name="LevelTest" type="Node2D" unique_id=1652148853]
+
+[node name="GameManager" parent="." unique_id=191558631 instance=ExtResource("5_5yd65")]
+
+[node name="GameUI" parent="." unique_id=1920844850 instance=ExtResource("2_tt56a")]
 
 [node name="Camera2D" parent="." unique_id=1045887185 instance=ExtResource("1_iho50")]
 
@@ -14,4 +21,8 @@
 [node name="Safezone" parent="." unique_id=1763886929 instance=ExtResource("3_eu8vo")]
 position = Vector2(0, -1)
 
-[node name="GameManager" parent="." unique_id=191558631 instance=ExtResource("5_5yd65")]
+[node name="EnemyMain" parent="." unique_id=1918356411 instance=ExtResource("5_y0s4v")]
+position = Vector2(875, 140)
+
+[node name="Mask" parent="." unique_id=2035663861 instance=ExtResource("6_y0s4v")]
+position = Vector2(228, -705)
