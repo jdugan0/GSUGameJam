@@ -82,6 +82,7 @@ texture_hover = ExtResource("3_cfe2f")
 stretch_mode = 3
 
 [node name="SettingsScreen" type="MarginContainer" parent="." unique_id=1401185518]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
