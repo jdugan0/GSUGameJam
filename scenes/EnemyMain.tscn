@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://ddsw7enldet7n" path="res://resources/sprites/enemy/enemyfrontdiag.png" id="6_ofmb7"]
 [ext_resource type="Texture2D" uid="uid://drmb5ssstfhxd" path="res://resources/sprites/enemy/enemyside.png" id="7_7ue7x"]
 [ext_resource type="Texture2D" uid="uid://d4epfu3qwrvda" path="res://resources/sprites/mask/maskprotagback.png" id="9_5ysjj"]
-[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="9_mv824"]
 [ext_resource type="Texture2D" uid="uid://dv24jxteokl01" path="res://resources/sprites/mask/maskenemybackdiag.png" id="10_5ysjj"]
 [ext_resource type="Texture2D" uid="uid://medftsmhr7en" path="res://resources/sprites/mask/maskforward.png" id="11_icxj7"]
 [ext_resource type="Texture2D" uid="uid://ca4lkhxrk2yk8" path="res://resources/sprites/mask/maskfrontdiag.png" id="12_ucchj"]
@@ -24,7 +23,7 @@ radius = 90.0
 radius = 105.67
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asoof"]
-size = Vector2(300, 300)
+size = Vector2(200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3tf2c"]
 animations = [{
@@ -179,22 +178,26 @@ scale_max = 0.5
 color = Color(0.9843137, 0.9529412, 0.6039216, 1)
 alpha_curve = SubResource("CurveTexture_kn3bp")
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "wallDetectArea", "maskSprite", "maskParticles", "stunImpactParticles", "stunnedParticles") groups=["Enemy"]]
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "light", "wallDetectArea", "maskSprite", "maskParticles", "stunImpactParticles", "stunnedParticles") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_s2ept")
 navigationAgent2D = NodePath("NavigationAgent2D")
 enemySprite = NodePath("AnimatedSprite2D")
-maxSpeed = 700.0
+maxSpeed = 500.0
+light = NodePath("PointLight2D2")
 desiredDistance = 2000.0
 protectDistance = 400.0
 wallDetectArea = NodePath("WallColiderArea")
 maskLaunchVelocity = 4000.0
 maskScene = ExtResource("2_asoof")
+attackTime = 3.0
 maskSprite = NodePath("maskAnimatedSprite2D")
 maskParticles = NodePath("maskParticles")
 stunImpactParticles = NodePath("stunImpactParticles")
 stunnedParticles = NodePath("stunnedParticles")
+attackDelay = 0.5
+maskColor = Color(0.6687735, 0.0028766787, 0.9235373, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 visible = false
@@ -216,7 +219,6 @@ shape = SubResource("CircleShape2D_s2ept")
 debug_color = Color(0, 0.6, 0.69803923, 0.17254902)
 
 [node name="Attack" type="Area2D" parent="." unique_id=999350324]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" unique_id=1188853712]
 shape = SubResource("RectangleShape2D_asoof")
@@ -250,12 +252,6 @@ texture = ExtResource("14_yqth3")
 lifetime = 2.0
 speed_scale = 4.0
 process_material = SubResource("ParticleProcessMaterial_ti6d3")
-
-[node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("9_mv824")]
-visible = false
-color = Color(0.51734436, 0.07977464, 0.12322696, 1)
-energy = 4.32
-texture_scale = 5.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1896855725]
 energy = 1.5

@@ -1,4 +1,5 @@
 using System;
+using System.Security.Principal;
 using Godot;
 
 public partial class Camera : Camera2D
@@ -33,6 +34,8 @@ public partial class Camera : Camera2D
 
     public static Camera instance;
 
+    Vector2 initalZoom;
+
     public override void _Ready()
     {
         instance = this;
@@ -49,12 +52,21 @@ public partial class Camera : Camera2D
         //     zooming = false;
         // };
         // RoundZoom();
+        initalZoom = Zoom;
     }
 
     public override void _Process(double delta)
     {
         Vector2 mousePos = GetGlobalMousePosition();
         Position = (playerWeight * player.Position + mousePos) / (1 + playerWeight);
+        if (player.mask != null && Zoom == initalZoom)
+        {
+            Zoom *= 1.5f;
+        }
+        if (player.mask == null)
+        {
+            Zoom = initalZoom;
+        }
     }
 
     // at the beginning of the round, zoom out to show zone locations

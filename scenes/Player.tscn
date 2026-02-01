@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dm3lcey6u5vt8" path="res://resources/sprites/mask/maskprotagbackdiag.png" id="18_gv3ic"]
 [ext_resource type="Texture2D" uid="uid://ca4lkhxrk2yk8" path="res://resources/sprites/mask/maskfrontdiag.png" id="18_sfy4j"]
 [ext_resource type="Texture2D" uid="uid://bnu75hta0ka8i" path="res://resources/sprites/mask/maskside.png" id="19_gv3ic"]
+[ext_resource type="Texture2D" uid="uid://bee33hwp5jeub" path="res://resources/directionbar.png" id="24_p07f3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 90.0
@@ -178,9 +179,10 @@ emission_sphere_radius = 94.45
 gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_61ith")
 
-[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles", "maskSprite") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("bar", "playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles", "maskSprite") groups=["Player"]]
 collision_mask = 7
 script = ExtResource("1_p0vlq")
+bar = NodePath("Sprite2D")
 dashCooldown = 0.8
 playerDashCooldownBar = NodePath("TextureProgressBar")
 rotationNode = NodePath("RotationNode")
@@ -249,6 +251,10 @@ process_material = SubResource("ParticleProcessMaterial_ebwui")
 [node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("18_61ith")]
 energy = 4.0
 texture_scale = 3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=942035129]
+texture = ExtResource("24_p07f3")
+offset = Vector2(0, -180)
 
 [connection signal="body_entered" from="RotationNode/MouseDirectionMarker/Hitbox" to="." method="ApplyAttack"]
 [connection signal="body_entered" from="Area2D" to="." method="DashThroughEnemy"]
