@@ -66,6 +66,7 @@ zoomDuration = 0.1
 [node name="GameUI" parent="." unique_id=1920844850 instance=ExtResource("4_2j4y6")]
 
 [node name="PauseMenu" parent="." unique_id=1814995960 instance=ExtResource("5_vi6ws")]
+visible = false
 
 [node name="Mask" parent="." unique_id=2035663861 instance=ExtResource("6_gqfrg")]
 position = Vector2(828, -647)
