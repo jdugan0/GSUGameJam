@@ -184,8 +184,10 @@ public partial class Enemy : CharacterBody2D
                 m.LinearVelocity =
                     (GlobalPosition - GameManager.instance.player.GlobalPosition).Normalized()
                     * maskLaunchVelocity;
-
-                CallDeferred(MethodName.AddChild, m);
+                var world = GetTree().CurrentScene;
+                m.GlobalPosition = GlobalPosition;
+                mask = null;
+                world.CallDeferred(MethodName.AddChild, m);
                 health = 2;
             }
         }
