@@ -52,6 +52,14 @@ public partial class Enemy : CharacterBody2D
     public Area2D wallDetectArea;
     public float stunnedTimeRemaining = 0f;
 
+    [Export]
+    float maskLaunchVelocity;
+
+    [Export]
+    PackedScene maskScene;
+
+    int health = 2;
+
     public override void _PhysicsProcess(double delta)
     {
         Rid navMap = navigationAgent2D.GetNavigationMap();
@@ -167,6 +175,20 @@ public partial class Enemy : CharacterBody2D
     {
         stunned = true;
         stunnedTimeRemaining = stunDuration;
+        if (mask != null)
+        {
+            health--;
+            if (health == 0)
+            {
+                MaskObject m = maskScene.Instantiate<MaskObject>();
+                m.LinearVelocity =
+                    (GlobalPosition - GameManager.instance.player.GlobalPosition).Normalized()
+                    * maskLaunchVelocity;
+
+                CallDeferred(MethodName.AddChild, m);
+                health = 2;
+            }
+        }
         Velocity =
             (GetGlobalMousePosition() - attacker.Position).Normalized() * attacker.attackKnockback;
     }

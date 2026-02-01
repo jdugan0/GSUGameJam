@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dbofuopnrqbih"]
 
 [ext_resource type="Script" uid="uid://7ukpqnq7q76a" path="res://scripts/Enemy.cs" id="1_s2ept"]
+[ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="2_asoof"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
@@ -17,6 +18,8 @@ maxSpeed = 650.0
 desiredDistance = 2000.0
 protectDistance = 400.0
 wallDetectArea = NodePath("WallColiderArea")
+maskLaunchVelocity = 4000.0
+maskScene = ExtResource("2_asoof")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 shape = SubResource("CircleShape2D_3hddw")
