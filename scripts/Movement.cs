@@ -51,6 +51,10 @@ public partial class Movement : CharacterBody2D
     public float attackInertia = 800f;
     public bool attackReady = true;
 
+    [Export]
+    public float attackTime;
+    float attackTimer;
+
     public float speed;
     public float acceleration;
     public float friction;
@@ -152,6 +156,13 @@ public partial class Movement : CharacterBody2D
             if (attackCooldownTimer <= 0)
             {
                 attackReady = true;
+            }
+        }
+        if (attackTimer > 0)
+        {
+            attackTimer -= dt;
+            if (attackTimer <= 0)
+            {
                 attackCollisionShape.Disabled = true;
             }
         }
@@ -292,6 +303,7 @@ public partial class Movement : CharacterBody2D
         attackCooldownTimer = attackCooldown;
         attackCollisionShape.Disabled = false;
         Velocity = (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
+        attackTimer = attackTime;
     }
 
     public void ApplyAttack(Node2D col)
