@@ -214,7 +214,7 @@ public partial class Enemy : CharacterBody2D
         {
             hidden = true;
         }
-        GD.Print(enemyState);
+        // GD.Print(enemyState);
         switch (enemyState)
         {
             case EnemyState.CAMP:

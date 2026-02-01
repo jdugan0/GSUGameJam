@@ -128,7 +128,7 @@ public partial class Movement : CharacterBody2D
         }
         AudioManager.instance.PlaySFX("test_ow");
         protectionTimer = 1.0f;
-        Velocity = -(e.Position - Position).Normalized() * 3000;
+        Velocity = -(e.Position - Position).Normalized() * 1000;
         if (mask != null)
         {
             maskHealth--;

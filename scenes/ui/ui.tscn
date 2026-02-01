@@ -52,8 +52,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Timer" type="Label" parent="." unique_id=1579778451]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 117.0
+offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24
 text = "TIME: 45.0"
 

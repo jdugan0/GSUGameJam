@@ -23,7 +23,7 @@ radius = 90.0
 radius = 105.67
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asoof"]
-size = Vector2(300, 300)
+size = Vector2(200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3tf2c"]
 animations = [{
@@ -217,7 +217,6 @@ shape = SubResource("CircleShape2D_s2ept")
 debug_color = Color(0, 0.6, 0.69803923, 0.17254902)
 
 [node name="Attack" type="Area2D" parent="." unique_id=999350324]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" unique_id=1188853712]
 shape = SubResource("RectangleShape2D_asoof")
