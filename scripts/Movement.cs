@@ -295,7 +295,7 @@ public partial class Movement : CharacterBody2D
     }
 
     public async Task Kill()
-    {
+{
         dead = true;
         Visible = false;
         ProcessMode = ProcessModeEnum.Disabled;

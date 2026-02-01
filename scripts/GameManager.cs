@@ -71,6 +71,10 @@ public partial class GameManager : Node
         {
             AudioManager.instance.CancelSFX("timer_ticking");
         }
+        if (checkTime - currentTime <= 12.0)
+        {
+            AudioManager.instance.CancelSFX("GameEnd");
+        }
         AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
         MusicManager.instance.currentMusic = "music_game_win";
         AudioManager.instance.PlaySFX("music_game_win");
