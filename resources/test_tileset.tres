@@ -1,0 +1,39 @@
+[gd_resource type="TileSet" format=3 uid="uid://cldrg6iwbi2cl"]
+
+[ext_resource type="Texture2D" uid="uid://bgwkcm53p8wgj" path="res://resources/sprites/TEMPTILEMAP.png" id="1_w42bm"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_2j4y6"]
+vertices = PackedVector2Array(90, 90, -90, 90, -90, -90, 90, -90)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-90, -90, 90, -90, 90, 90, -90, 90)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lbu4x"]
+vertices = PackedVector2Array(90, 90, -90, 90, -90, -90, 90, -90)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-90, -90, 90, -90, 90, 90, -90, 90)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vcl05"]
+vertices = PackedVector2Array(90, 90, -90, 90, -90, -90, 90, -90)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-90, -90, 90, -90, 90, 90, -90, 90)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_32mhh"]
+texture = ExtResource("1_w42bm")
+texture_region_size = Vector2i(180, 180)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-90, -90, 90, -90, 90, 90, -90, 90)
+1:0/0 = 0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lbu4x")
+0:1/0 = 0
+0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_2j4y6")
+1:1/0 = 0
+1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_vcl05")
+
+[resource]
+tile_size = Vector2i(180, 180)
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
+sources/1 = SubResource("TileSetAtlasSource_32mhh")

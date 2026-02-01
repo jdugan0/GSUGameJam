@@ -82,6 +82,20 @@ public partial class Movement : CharacterBody2D
 
     private bool dashing => dashTimer <= dashTime;
 
+    [Export]
+    public int health;
+
+    [Export]
+    float maskLaunchVelocity;
+
+    [Export]
+    PackedScene maskScene;
+
+    public int maskHealth;
+
+    [Export]
+    float protectionTimer;
+
     public override void _Ready()
     {
         attackCollisionShape.Disabled = true;
@@ -89,6 +103,40 @@ public partial class Movement : CharacterBody2D
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
         normalLayer = CollisionMask;
         dashTimer = dashTime;
+        maskHealth = 0;
+        protectionTimer = 0.1f;
+    }
+
+    public void Hurt(Enemy e)
+    {
+        if (protectionTimer > 0)
+        {
+            return;
+        }
+        protectionTimer = 0.1f;
+        Velocity = -(e.Position - Position).Normalized() * 3000;
+        if (mask != null)
+        {
+            maskHealth--;
+            if (maskHealth == 0)
+            {
+                MaskObject m = maskScene.Instantiate<MaskObject>();
+                m.LinearVelocity =
+                    (GlobalPosition - e.GlobalPosition).Normalized() * maskLaunchVelocity;
+                var world = GetTree().CurrentScene;
+                m.GlobalPosition = GlobalPosition;
+                mask = null;
+                world.CallDeferred(MethodName.AddChild, m);
+            }
+        }
+        else
+        {
+            health--;
+            if (health == 0)
+            {
+                Kill();
+            }
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -97,7 +145,13 @@ public partial class Movement : CharacterBody2D
 
         dashTimer += dt;
 
+        protectionTimer -= (float)delta;
+
         Vector2 input = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
+        if (protectionTimer > 0)
+        {
+            input = Vector2.Zero;
+        }
         if (input != Vector2.Zero)
         {
             playerSprite.Play();
@@ -281,6 +335,7 @@ public partial class Movement : CharacterBody2D
 
     public void Dash()
     {
+        AudioManager.instance.PlaySFX("dash");
         Vector2 mousePos = GetGlobalMousePosition();
         Vector2 dir = (mousePos - Position).Normalized();
         Velocity = dir * dashAmount;
@@ -299,6 +354,7 @@ public partial class Movement : CharacterBody2D
 
     public void Attack()
     {
+        AudioManager.instance.PlaySFX("woosh");
         attackReady = false;
         attackCooldownTimer = attackCooldown;
         attackCollisionShape.Disabled = false;
@@ -310,6 +366,7 @@ public partial class Movement : CharacterBody2D
     {
         if (col is Enemy enemy)
         {
+            AudioManager.instance.PlaySFX("punch");
             enemy.BeAttacked(this);
             Velocity = (Position - enemy.Position).Normalized() * attackKnockback;
         }
