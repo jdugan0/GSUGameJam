@@ -106,8 +106,8 @@ animation = &"back"
 
 [node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("9_mv824")]
 color = Color(0.51734436, 0.07977464, 0.12322696, 1)
-energy = 7.49
-texture_scale = 7.49
+energy = 4.32
+texture_scale = 5.0
 
 [connection signal="body_entered" from="Attack" to="." method="PlayerEnter"]
 [connection signal="body_exited" from="Attack" to="." method="PlayerExit"]

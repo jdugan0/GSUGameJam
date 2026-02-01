@@ -256,11 +256,8 @@ color = Color(0.14815038, 0.0814768, 0.34293166, 1)
 [node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("10_yrrca")]
 position = Vector2(-2994, 2922)
 color = Color(0.44227684, 0.6863458, 0.098253764, 1)
-energy = 0.89
+energy = 1.88
 texture_scale = 6.02
-
-[node name="PointLight2D4" parent="." unique_id=252666629 instance=ExtResource("10_yrrca")]
-position = Vector2(2428, -24)
 
 [node name="PointLight2D6" parent="." unique_id=1816036376 instance=ExtResource("10_yrrca")]
 position = Vector2(-1680, 1051)
@@ -273,5 +270,20 @@ position = Vector2(-1377, 2594)
 
 [node name="PointLight2D10" parent="." unique_id=187316751 instance=ExtResource("10_yrrca")]
 position = Vector2(-3084, 955)
+
+[node name="PointLight2D2" parent="." unique_id=1776628184 instance=ExtResource("10_yrrca")]
+position = Vector2(1874, 2455)
+
+[node name="PointLight2D3" parent="." unique_id=1977462808 instance=ExtResource("10_yrrca")]
+position = Vector2(261, 2563)
+
+[node name="PointLight2D5" parent="." unique_id=769307654 instance=ExtResource("10_yrrca")]
+position = Vector2(-982, -1783)
+
+[node name="PointLight2D7" parent="." unique_id=157220238 instance=ExtResource("10_yrrca")]
+position = Vector2(-3224, -232)
+
+[node name="PointLight2D11" parent="." unique_id=993242539 instance=ExtResource("10_yrrca")]
+position = Vector2(568, -1860)
 
 [editable path="Safezone"]

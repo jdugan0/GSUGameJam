@@ -13,6 +13,12 @@ public partial class Flicker : PointLight2D
 
     private float t;
 
+    public override void _Ready()
+    {
+        MinEnergy = MinEnergy * Energy;
+        MaxEnergy = MaxEnergy * Energy;
+    }
+
     public override void _Process(double delta)
     {
         t += (float)delta * FlickerSpeed;
