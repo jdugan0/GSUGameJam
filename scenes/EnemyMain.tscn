@@ -196,6 +196,7 @@ maskSprite = NodePath("maskAnimatedSprite2D")
 maskParticles = NodePath("maskParticles")
 stunImpactParticles = NodePath("stunImpactParticles")
 stunnedParticles = NodePath("stunnedParticles")
+attackDelay = 0.5
 maskColor = Color(0.6687735, 0.0028766787, 0.9235373, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]

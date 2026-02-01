@@ -105,7 +105,13 @@ public partial class Enemy : CharacterBody2D
     Color lightColor;
 
     [Export]
+    float attackDelay = 1.0f;
+    float attackDelayTimer = 0.0f;
+
+    [Export]
     Color maskColor;
+
+    bool tryingAttack = false;
 
     public void PlayerEnter(Node2D col)
     {
@@ -142,10 +148,23 @@ public partial class Enemy : CharacterBody2D
             Modulate = Colors.White;
         }
         attackTimer -= (float)delta;
-        if (attackTimer < 0 && enteredPlayer != null && !stunned)
+        attackDelayTimer -= (float)delta;
+        // GD.Print(attackDelayTimer);
+
+        if (attackDelayTimer <= 0 && tryingAttack && enteredPlayer != null)
         {
-            enteredPlayer.Hurt(this);
+            tryingAttack = false;
             attackTimer = attackTime;
+            enteredPlayer.Hurt(this);
+        }
+        if (attackDelayTimer <= 0)
+        {
+            tryingAttack = false;
+        }
+        if (attackTimer < 0 && enteredPlayer != null && !stunned && attackDelayTimer <= 0)
+        {
+            attackDelayTimer = attackDelay;
+            tryingAttack = true;
         }
         Rid navMap = navigationAgent2D.GetNavigationMap();
         float playerDist = GameManager.instance.player.Position.DistanceTo(Position);
