@@ -84,7 +84,7 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 [sub_resource type="Resource" id="Resource_4etcg"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("11_b4g0j")
-volume = -5.0
+volume = -10.0
 name = "timer_ticking"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
