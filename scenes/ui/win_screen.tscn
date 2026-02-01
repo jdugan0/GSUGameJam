@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bkeh8425rvo2x"]
+
+[ext_resource type="Script" uid="uid://txn5f85upitu" path="res://scripts/WinScreen.cs" id="1_uqtu8"]
+[ext_resource type="Texture2D" uid="uid://jlj3jv8st0a6" path="res://resources/sprites/ui/main_menu(placeholder).png" id="2_xl2x5"]
+
+[node name="WinScreen" type="Control" unique_id=452959523]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uqtu8")
+
+[node name="Panel" type="TextureRect" parent="." unique_id=1236114506]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1268771734]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 149.0
+offset_right = 1644.0
+offset_bottom = 441.0
+theme_override_font_sizes/normal_font_size = 180
+text = "YOU WIN"
+
+[node name="MainScreen" type="MarginContainer" parent="." unique_id=27184988]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="MainScreen" unique_id=938970154]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/MarginContainer" unique_id=830017370]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="MarginContainer" type="MarginContainer" parent="MainScreen/MarginContainer/VBoxContainer" unique_id=114780456]
+layout_mode = 2
+theme_override_constants/margin_top = 37
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer" unique_id=1613537832]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=826386278]
+layout_mode = 2
+theme_override_constants/separation = 600
+alignment = 1
+
+[node name="MainMenuButton" type="TextureButton" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=313274917]
+layout_mode = 2
+texture_normal = ExtResource("2_xl2x5")

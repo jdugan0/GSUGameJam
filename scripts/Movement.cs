@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class Movement : CharacterBody2D
@@ -255,11 +256,12 @@ public partial class Movement : CharacterBody2D
         }
     }
 
-    public void Kill()
+    public async Task Kill()
     {
         dead = true;
         Visible = false;
         ProcessMode = ProcessModeEnum.Disabled;
+        await SceneSwitcher.instance.SwitchSceneAsyncSlide("LoseScreen");
     }
 
     public override void _Process(double delta)
