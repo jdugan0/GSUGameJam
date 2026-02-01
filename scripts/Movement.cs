@@ -102,6 +102,7 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     public AnimatedSprite2D maskSprite;
+
     [Export]
     public AnimatedSprite2D punchSprite;
 
