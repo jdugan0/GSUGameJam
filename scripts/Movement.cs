@@ -108,7 +108,8 @@ public partial class Movement : CharacterBody2D
         dashTimer = dashTime;
         maskHealth = 0;
         protectionTimer = 1.0f;
-        //CANCEL MUSIC IF PLAYING
+        AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+        MusicManager.instance.currentMusic = "music_main";
         AudioManager.instance.PlaySFX("music_main");
     }
 
@@ -126,7 +127,8 @@ public partial class Movement : CharacterBody2D
             maskHealth--;
             if (maskHealth == 1)
             {
-                //CANCEL MUSIC IF PLAYING
+                AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+                MusicManager.instance.currentMusic = "music_neardeath_mask";
                 AudioManager.instance.PlaySFX("music_neardeath_mask");
             }
             if (maskHealth == 0)
@@ -147,7 +149,8 @@ public partial class Movement : CharacterBody2D
             health--;
             if (health == 1)
             {
-                //CANCEL MUSIC IF PLAYING
+                AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+                MusicManager.instance.currentMusic = "music_neardeath";
                 AudioManager.instance.PlaySFX("music_neardeath");
             }
             if (health == 0)

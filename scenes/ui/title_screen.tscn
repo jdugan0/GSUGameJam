@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://q5umbrfw6aex"]
 
-[ext_resource type="Texture2D" uid="uid://cpr1crdngb1q0" path="res://resources/sprites/tempBeginButton.png" id="1_aqpy5"]
 [ext_resource type="Script" uid="uid://dfuwfacq2rgii" path="res://scripts/TitleScreen.cs" id="1_w8uqo"]
-[ext_resource type="Texture2D" uid="uid://d340axh4byr7t" path="res://resources/sprites/tempSettingsButton.png" id="2_w8uqo"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqpy5"]
-bg_color = Color(0.04685348, 0.04685348, 0.04685348, 1)
+[ext_resource type="Texture2D" uid="uid://cpxcsf8kshkee" path="res://resources/sprites/ui/title.png" id="2_aqu7r"]
+[ext_resource type="Texture2D" uid="uid://c3gv77b271ryt" path="res://resources/sprites/ui/begin1.png" id="2_r23qo"]
+[ext_resource type="Texture2D" uid="uid://cwepbfhkaurko" path="res://resources/sprites/ui/config2.png" id="3_cfe2f"]
+[ext_resource type="Texture2D" uid="uid://dg8i8dmum6fff" path="res://resources/sprites/ui/begin2.png" id="4_6ik4u"]
+[ext_resource type="Texture2D" uid="uid://doi6yj4hwhxid" path="res://resources/sprites/ui/config1.png" id="5_aqu7r"]
+[ext_resource type="Texture2D" uid="uid://b5aiuf01rrb75" path="res://resources/sprites/ui/quit1.png" id="7_jsbfx"]
+[ext_resource type="Texture2D" uid="uid://bgkb0xp6g0kqk" path="res://resources/sprites/ui/quit2.png" id="8_7oraf"]
 
 [node name="TitleScreen" type="Control" unique_id=452959523 node_paths=PackedStringArray("mainScreen", "configScreen", "startButton", "configButton", "exitButton", "configBackButton")]
 layout_mode = 3
@@ -17,19 +19,19 @@ grow_vertical = 2
 script = ExtResource("1_w8uqo")
 mainScreen = NodePath("MainScreen")
 configScreen = NodePath("SettingsScreen")
-startButton = NodePath("MainScreen/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/StartButton")
-configButton = NodePath("MainScreen/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ConfigButton")
-exitButton = NodePath("MainScreen/VBoxContainer/CenterContainer/ExitButton")
+startButton = NodePath("MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/StartButton")
+configButton = NodePath("MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ConfigButton")
+exitButton = NodePath("MainScreen/ExitButton")
 configBackButton = NodePath("SettingsScreen/VBoxContainer/OptionsReturnButton")
 
-[node name="Panel" type="Panel" parent="." unique_id=388208682]
+[node name="Panel" type="TextureRect" parent="." unique_id=1236114506]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_aqpy5")
+texture = ExtResource("2_aqu7r")
 
 [node name="MainScreen" type="MarginContainer" parent="." unique_id=27184988]
 layout_mode = 1
@@ -38,53 +40,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 400
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 400
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen" unique_id=830017370]
+[node name="ExitButton" type="TextureButton" parent="MainScreen" unique_id=786322564]
 layout_mode = 2
-theme_override_constants/separation = 250
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture_normal = ExtResource("7_jsbfx")
+texture_hover = ExtResource("8_7oraf")
 
-[node name="MarginContainer" type="MarginContainer" parent="MainScreen/VBoxContainer" unique_id=114780456]
+[node name="MarginContainer" type="MarginContainer" parent="MainScreen" unique_id=938970154]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 150
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/VBoxContainer/MarginContainer" unique_id=1613537832]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/MarginContainer" unique_id=830017370]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="MarginContainer" type="MarginContainer" parent="MainScreen/MarginContainer/VBoxContainer" unique_id=114780456]
+layout_mode = 2
+theme_override_constants/margin_top = 37
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer" unique_id=1613537832]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="OccultusLabel" type="RichTextLabel" parent="MainScreen/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1661076013]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=826386278]
 layout_mode = 2
-bbcode_enabled = true
-text = "[wave][font_size=196]OCCULTUS"
-fit_content = true
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MainScreen/VBoxContainer/MarginContainer/VBoxContainer" unique_id=826386278]
-layout_mode = 2
-theme_override_constants/separation = 200
+theme_override_constants/separation = 600
 alignment = 1
 
-[node name="StartButton" type="TextureButton" parent="MainScreen/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=313274917]
+[node name="StartButton" type="TextureButton" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=313274917]
 layout_mode = 2
-texture_normal = ExtResource("1_aqpy5")
+texture_normal = ExtResource("2_r23qo")
+texture_pressed = ExtResource("4_6ik4u")
+texture_hover = ExtResource("4_6ik4u")
 
-[node name="ConfigButton" type="TextureButton" parent="MainScreen/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1404749187]
+[node name="ConfigButton" type="TextureButton" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1404749187]
 layout_mode = 2
-texture_normal = ExtResource("2_w8uqo")
-
-[node name="CenterContainer" type="CenterContainer" parent="MainScreen/VBoxContainer" unique_id=1493037333]
-layout_mode = 2
-
-[node name="ExitButton" type="Button" parent="MainScreen/VBoxContainer/CenterContainer" unique_id=906731100]
-custom_minimum_size = Vector2(320, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.8745098, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "ESCAPE"
-icon_alignment = 1
-expand_icon = true
+texture_normal = ExtResource("5_aqu7r")
+texture_pressed = ExtResource("3_cfe2f")
+texture_hover = ExtResource("3_cfe2f")
 
 [node name="SettingsScreen" type="MarginContainer" parent="." unique_id=1401185518]
 visible = false

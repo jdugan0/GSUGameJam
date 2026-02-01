@@ -16,7 +16,7 @@ public partial class TitleScreen : Control
     public TextureButton configButton;
 
     [Export]
-    public Button exitButton;
+    public TextureButton exitButton;
 
     [Export]
     public Button configBackButton;
