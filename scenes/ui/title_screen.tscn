@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://q5umbrfw6aex"]
 
 [ext_resource type="Script" uid="uid://dfuwfacq2rgii" path="res://scripts/TitleScreen.cs" id="1_w8uqo"]
-[ext_resource type="Texture2D" uid="uid://cpxcsf8kshkee" path="res://resources/sprites/ui/title.png" id="2_aqu7r"]
+[ext_resource type="Texture2D" uid="uid://blkclb7en5827" path="res://resources/sprites/ui/title (1).png" id="2_aqu7r"]
 [ext_resource type="Texture2D" uid="uid://c3gv77b271ryt" path="res://resources/sprites/ui/begin1.png" id="2_r23qo"]
 [ext_resource type="Texture2D" uid="uid://cwepbfhkaurko" path="res://resources/sprites/ui/config2.png" id="3_cfe2f"]
 [ext_resource type="Texture2D" uid="uid://doi6yj4hwhxid" path="res://resources/sprites/ui/config1.png" id="5_aqu7r"]
 [ext_resource type="Texture2D" uid="uid://bx4o44m0ce2pe" path="res://resources/sprites/ui/begin2 (1).png" id="6_aqu7r"]
 [ext_resource type="Texture2D" uid="uid://b5aiuf01rrb75" path="res://resources/sprites/ui/quit1.png" id="7_jsbfx"]
 [ext_resource type="Texture2D" uid="uid://bgkb0xp6g0kqk" path="res://resources/sprites/ui/quit2.png" id="8_7oraf"]
+[ext_resource type="FontFile" uid="uid://bx21ffb0benwo" path="res://resources/Blackcraft.ttf" id="9_jsbfx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7oraf"]
+bg_color = Color(0.177962, 0.21161416, 0.31611848, 0.972549)
 
 [node name="TitleScreen" type="Control" unique_id=452959523 node_paths=PackedStringArray("mainScreen", "configScreen", "startButton", "configButton", "exitButton", "configBackButton")]
 layout_mode = 3
@@ -22,7 +26,7 @@ configScreen = NodePath("SettingsScreen")
 startButton = NodePath("MainScreen/MarginContainer/StartButton")
 configButton = NodePath("MainScreen/MarginContainer/ConfigButton")
 exitButton = NodePath("MainScreen/ExitButton")
-configBackButton = NodePath("SettingsScreen/VBoxContainer/OptionsReturnButton")
+configBackButton = NodePath("SettingsScreen/MarginContainer/VBoxContainer/MarginContainer/OptionsReturnButton")
 
 [node name="Panel" type="TextureRect" parent="." unique_id=1236114506]
 layout_mode = 1
@@ -78,71 +82,89 @@ texture_hover = ExtResource("3_cfe2f")
 stretch_mode = 3
 
 [node name="SettingsScreen" type="MarginContainer" parent="." unique_id=1401185518]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 400
+theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 400
+theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsScreen" unique_id=1018935627]
+[node name="Panel" type="Panel" parent="SettingsScreen" unique_id=1482025809]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_styles/panel = SubResource("StyleBoxFlat_7oraf")
 
-[node name="ConfigLabel" type="RichTextLabel" parent="SettingsScreen/VBoxContainer" unique_id=495192233]
+[node name="MarginContainer" type="MarginContainer" parent="SettingsScreen" unique_id=1692198385]
 layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsScreen/MarginContainer" unique_id=1018935627]
+layout_mode = 2
+theme_override_constants/separation = 65
+
+[node name="ConfigLabel" type="RichTextLabel" parent="SettingsScreen/MarginContainer/VBoxContainer" unique_id=495192233]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_jsbfx")
 bbcode_enabled = true
-text = "[wave][font_size=128]CONFIG."
+text = "[font_size=128]~CONFIGURATION~"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="HBoxMusic" type="HSplitContainer" parent="SettingsScreen/VBoxContainer" unique_id=1483053318]
+[node name="HBoxMusic" type="HSplitContainer" parent="SettingsScreen/MarginContainer/VBoxContainer" unique_id=1483053318]
 layout_mode = 2
 split_offsets = PackedInt32Array(200)
 dragging_enabled = false
 split_offset = 200
 
-[node name="MusicLabel" type="Label" parent="SettingsScreen/VBoxContainer/HBoxMusic" unique_id=1155094493]
+[node name="MusicLabel" type="Label" parent="SettingsScreen/MarginContainer/VBoxContainer/HBoxMusic" unique_id=1155094493]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("9_jsbfx")
+theme_override_font_sizes/font_size = 56
 text = "MUSIC "
 horizontal_alignment = 1
 
-[node name="SFXScrollBar" type="HScrollBar" parent="SettingsScreen/VBoxContainer/HBoxMusic" unique_id=178382211]
+[node name="SFXScrollBar" type="HScrollBar" parent="SettingsScreen/MarginContainer/VBoxContainer/HBoxMusic" unique_id=178382211]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 step = 10.0
 value = 100.0
 
-[node name="HBoxSFX" type="HSplitContainer" parent="SettingsScreen/VBoxContainer" unique_id=106060433]
+[node name="HBoxSFX" type="HSplitContainer" parent="SettingsScreen/MarginContainer/VBoxContainer" unique_id=106060433]
 layout_mode = 2
 split_offsets = PackedInt32Array(200)
 dragging_enabled = false
 split_offset = 200
 
-[node name="SFXLabel" type="Label" parent="SettingsScreen/VBoxContainer/HBoxSFX" unique_id=1788635319]
+[node name="SFXLabel" type="Label" parent="SettingsScreen/MarginContainer/VBoxContainer/HBoxSFX" unique_id=1788635319]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("9_jsbfx")
+theme_override_font_sizes/font_size = 56
 text = "SFX"
 horizontal_alignment = 1
 
-[node name="SFXScrollBar" type="HScrollBar" parent="SettingsScreen/VBoxContainer/HBoxSFX" unique_id=140445234]
+[node name="SFXScrollBar" type="HScrollBar" parent="SettingsScreen/MarginContainer/VBoxContainer/HBoxSFX" unique_id=140445234]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 step = 10.0
 value = 100.0
 
-[node name="OptionsReturnButton" type="Button" parent="SettingsScreen/VBoxContainer" unique_id=1090977026]
+[node name="MarginContainer" type="MarginContainer" parent="SettingsScreen/MarginContainer/VBoxContainer" unique_id=1200220449]
+layout_mode = 2
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_right = 350
+
+[node name="OptionsReturnButton" type="Button" parent="SettingsScreen/MarginContainer/VBoxContainer/MarginContainer" unique_id=1090977026]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("9_jsbfx")
+theme_override_font_sizes/font_size = 48
 text = "RETURN"
 icon_alignment = 1
 expand_icon = true

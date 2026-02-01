@@ -21,6 +21,8 @@ public partial class Ui : CanvasLayer
     [Export]
     public ColorRect vignette;
     public static Ui instance;
+    [Export]
+    public RichTextLabel clickContinueLabel ;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -61,6 +63,7 @@ public partial class Ui : CanvasLayer
 
     public void NextCreatureDialogue(string dialogue)
     {
+        clickContinueLabel.Visible = false;
         var alphaTween = CreateTween()
             .TweenProperty(creatureDialogueLabel, "modulate:a", 0.0f, dialogueFadeDuration)
             .SetTrans(Tween.TransitionType.Sine)

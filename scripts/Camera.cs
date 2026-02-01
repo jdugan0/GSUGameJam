@@ -34,7 +34,7 @@ public partial class Camera : Camera2D
         "Yet that is what you seek, is it not?",
         "Very well then.",
         "Complete my ritual and bring the [color=purple]Mask[/color] to the [color=green]Altar[/color].",
-        "Or sucumb to the fog of the farthest world.",
+        "Or succumb to the fog of the farthest world.",
         "Sanguinem occultorum effundere. Little one.",
         ""
     };
@@ -46,6 +46,7 @@ public partial class Camera : Camera2D
         player = GetTree().GetFirstNodeInGroup("Player") as Movement;
         player.moveEnabled = false;
         UI.ShowCreatureDialogue("An intruder. How... intriguing.");
+        UI.clickContinueLabel.Visible = true;
         //ZoomIn();
     }
 

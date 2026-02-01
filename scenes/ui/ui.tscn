@@ -12,13 +12,14 @@ shader_parameter/alpha = 1.0
 shader_parameter/inner_radius = 0.0
 shader_parameter/outer_radius = 1.0
 
-[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu", "vignette")]
+[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu", "vignette", "clickContinueLabel")]
 script = ExtResource("1_f5cxw")
 dashCooldownBar = NodePath("TextureProgressBar")
 creatureDialogueLabel = NodePath("MarginContainer/CreatureDialogueLabel")
 timer = NodePath("Timer")
 pauseMenu = NodePath("PauseMenu")
 vignette = NodePath("ColorRect")
+clickContinueLabel = NodePath("MarginContainer/CreatureDialogueLabel/clickContinueLabel")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=471527323]
 anchors_preset = 2
@@ -49,7 +50,7 @@ text = "[font_size=96][shake]\"Evil Creature is Speaking Now\""
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CreatureDialogueLabel" unique_id=921617849]
+[node name="clickContinueLabel" type="RichTextLabel" parent="MarginContainer/CreatureDialogueLabel" unique_id=921617849]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
