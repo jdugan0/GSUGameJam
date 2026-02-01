@@ -3,6 +3,9 @@ using Godot;
 
 public partial class Movement : CharacterBody2D
 {
+    [Export]
+    public Sprite2D bar;
+
     [ExportGroup("Non-Mask Movement")]
     [Export]
     public float MaxSpeed = 1200f;
@@ -99,6 +102,9 @@ public partial class Movement : CharacterBody2D
     [Export]
     public AnimatedSprite2D maskSprite;
 
+    [Export]
+    Node2D safePos;
+
     public override void _Ready()
     {
         maskSprite.Visible = false;
@@ -157,6 +163,25 @@ public partial class Movement : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (GameManager.instance.onGround != null)
+        {
+            bar.Rotation = (GameManager.instance.onGround.Value - Position).Angle() + Mathf.Pi / 2;
+            bar.Modulate = Colors.White;
+        }
+        else if (
+            GameManager.instance.toProtect != null
+            && GameManager.instance.toProtect.mask != null
+        )
+        {
+            bar.Rotation =
+                (GameManager.instance.toProtect.Position - Position).Angle() + Mathf.Pi / 2;
+            bar.Modulate = Colors.Purple;
+        }
+        else
+        {
+            bar.Rotation = (safePos.GlobalPosition - Position).Angle() + Mathf.Pi / 2;
+            bar.Modulate = Colors.Green;
+        }
         float dt = (float)delta;
         // GD.Print(health);
         dashTimer += dt;
