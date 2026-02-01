@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cbap8l3xw30v"]
+
+[ext_resource type="Texture2D" uid="uid://2stje8df700x" path="res://resources/2d_lights_and_shadows_neutral_point_light.webp" id="1_pr0ow"]
+[ext_resource type="Script" uid="uid://bgnunqw0k1q18" path="res://scripts/Flicker.cs" id="2_1v823"]
+
+[node name="PointLight2D" type="PointLight2D" unique_id=15953330]
+color = Color(0.959207, 0.40865913, 0.20640227, 1)
+energy = 2.19
+shadow_enabled = true
+texture = ExtResource("1_pr0ow")
+texture_scale = 7.65
+script = ExtResource("2_1v823")
+FlickerSpeed = 1.0

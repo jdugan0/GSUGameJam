@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://dm3lcey6u5vt8" path="res://resources/sprites/mask/maskprotagbackdiag.png" id="18_gv3ic"]
 [ext_resource type="Texture2D" uid="uid://ca4lkhxrk2yk8" path="res://resources/sprites/mask/maskfrontdiag.png" id="18_sfy4j"]
 [ext_resource type="Texture2D" uid="uid://bnu75hta0ka8i" path="res://resources/sprites/mask/maskside.png" id="19_gv3ic"]
+[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="18_61ith"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 90.0
@@ -242,6 +243,10 @@ visible = false
 amount = 50
 texture = ExtResource("16_srp4u")
 process_material = SubResource("ParticleProcessMaterial_ebwui")
+
+[node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("18_61ith")]
+energy = 4.0
+texture_scale = 3.0
 
 [connection signal="body_entered" from="RotationNode/MouseDirectionMarker/Hitbox" to="." method="ApplyAttack"]
 [connection signal="body_entered" from="Area2D" to="." method="DashThroughEnemy"]

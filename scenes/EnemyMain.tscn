@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ca4lkhxrk2yk8" path="res://resources/sprites/mask/maskfrontdiag.png" id="12_ucchj"]
 [ext_resource type="Texture2D" uid="uid://bnu75hta0ka8i" path="res://resources/sprites/mask/maskside.png" id="13_pf4na"]
 [ext_resource type="Texture2D" uid="uid://bqb35aeishb0j" path="res://resources/sprites/player/dashParticle.png" id="14_yqth3"]
+[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="9_mv824"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
@@ -204,7 +205,6 @@ avoidance_enabled = true
 radius = 120.0
 neighbor_distance = 300.0
 max_speed = 800.0
-debug_enabled = true
 
 [node name="WallColiderArea" type="Area2D" parent="." unique_id=1364696613]
 
@@ -246,6 +246,11 @@ texture = ExtResource("14_yqth3")
 lifetime = 2.0
 speed_scale = 4.0
 process_material = SubResource("ParticleProcessMaterial_ti6d3")
+
+[node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("9_mv824")]
+color = Color(0.51734436, 0.07977464, 0.12322696, 1)
+energy = 4.32
+texture_scale = 5.0
 
 [connection signal="body_entered" from="Attack" to="." method="PlayerEnter"]
 [connection signal="body_exited" from="Attack" to="." method="PlayerExit"]
