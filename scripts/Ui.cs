@@ -53,6 +53,7 @@ public partial class Ui : CanvasLayer
         // GD.Print(heaplthContainer.GetChildCount());
         if (player.mask != null)
         {
+            dashCooldownBar.Visible = false;
             for (int i = 0; i < player.maskHealth; i++)
             {
                 healthContainer.AddChild(maskHealth.Instantiate());
@@ -60,6 +61,7 @@ public partial class Ui : CanvasLayer
         }
         else
         {
+            dashCooldownBar.Visible = true;
             for (int i = 0; i < player.health; i++)
             {
                 // GD.Print(i);

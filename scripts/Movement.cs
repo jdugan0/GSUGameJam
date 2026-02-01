@@ -217,6 +217,7 @@ public partial class Movement : CharacterBody2D
         }
         if (mask == null)
         {
+            playerDashCooldownBar.Visible = true;
             speed = MaxSpeed;
             acceleration = Acceleration;
             friction = Friction;
@@ -225,6 +226,7 @@ public partial class Movement : CharacterBody2D
         }
         else
         {
+            playerDashCooldownBar.Visible = false;
             speed = MaskMaxSpeed;
             acceleration = MaskAcceleration;
             friction = MaskFriction;
