@@ -202,7 +202,7 @@ public partial class Enemy : CharacterBody2D
         else if (GameManager.instance.onGround != null)
         {
             enemyState = EnemyState.GET_MASK;
-            if (playerDist < 300)
+            if (playerDist < 600)
             {
                 enemyState = EnemyState.CHASE_PLAYER;
             }
