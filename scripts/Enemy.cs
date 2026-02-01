@@ -15,6 +15,9 @@ public partial class Enemy : CharacterBody2D
     [Export]
     public float maxSpeed = 1000;
 
+    uint initalLayerMask;
+    uint initalLayer;
+
     public override void _Ready()
     {
         navigationAgent2D.VelocityComputed += OnVelocityComputed;
@@ -23,6 +26,8 @@ public partial class Enemy : CharacterBody2D
         {
             GameManager.instance.toProtect = this;
         }
+        initalLayer = CollisionLayer;
+        initalLayerMask = CollisionMask;
     }
 
     public enum EnemyState
@@ -95,6 +100,14 @@ public partial class Enemy : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (stunned)
+        {
+            Modulate = new Color(Colors.White, 0.5f);
+        }
+        else
+        {
+            Modulate = Colors.White;
+        }
         attackTimer -= (float)delta;
         if (attackTimer < 0 && enteredPlayer != null && !stunned)
         {
@@ -202,6 +215,8 @@ public partial class Enemy : CharacterBody2D
                 stunnedTimeRemaining -= (float)delta;
                 if (stunnedTimeRemaining <= 0f)
                 {
+                    CollisionLayer = initalLayer;
+                    CollisionMask = initalLayerMask;
                     stunned = false;
                 }
             }
@@ -255,7 +270,9 @@ public partial class Enemy : CharacterBody2D
     public void Stun()
     {
         stunned = true;
-        stunnedTimeRemaining = stunDuration / 2;
+        stunnedTimeRemaining = stunDuration;
+        CollisionLayer = 0;
+        CollisionMask = 0;
     }
 
     public void WallImpact(Node2D col)
