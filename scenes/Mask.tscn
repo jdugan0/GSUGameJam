@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d128te5i5d34v" path="res://scripts/MaskObject.cs" id="1_eic0r"]
 [ext_resource type="Resource" uid="uid://bql5ruypcdq3m" path="res://masks/PurpleMask.tres" id="2_3d20y"]
+[ext_resource type="Texture2D" uid="uid://medftsmhr7en" path="res://resources/sprites/mask/maskforward.png" id="3_13t0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28yc7"]
 size = Vector2(180, 180)
@@ -30,5 +31,9 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=694752805]
 shape = SubResource("RectangleShape2D_eic0r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1468816664]
+scale = Vector2(2, 2)
+texture = ExtResource("3_13t0l")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnCollide"]

@@ -16,6 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://b37ssu5ad58f2" path="res://resources/sprites/player/protagsidestand.png" id="14_fgkxt"]
 [ext_resource type="Texture2D" uid="uid://dhdp0w67h20cc" path="res://resources/sprites/player/protagside2.png" id="15_xsi7p"]
 [ext_resource type="Texture2D" uid="uid://bqb35aeishb0j" path="res://resources/sprites/player/dashParticle.png" id="16_srp4u"]
+[ext_resource type="Texture2D" uid="uid://d4epfu3qwrvda" path="res://resources/sprites/mask/maskprotagback.png" id="17_ebwui"]
+[ext_resource type="Texture2D" uid="uid://medftsmhr7en" path="res://resources/sprites/mask/maskforward.png" id="18_b8lor"]
+[ext_resource type="Texture2D" uid="uid://dm3lcey6u5vt8" path="res://resources/sprites/mask/maskprotagbackdiag.png" id="18_gv3ic"]
+[ext_resource type="Texture2D" uid="uid://ca4lkhxrk2yk8" path="res://resources/sprites/mask/maskfrontdiag.png" id="18_sfy4j"]
+[ext_resource type="Texture2D" uid="uid://bnu75hta0ka8i" path="res://resources/sprites/mask/maskside.png" id="19_gv3ic"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 90.0
@@ -114,6 +119,49 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_b8lor"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_ebwui")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_gv3ic")
+}],
+"loop": true,
+"name": &"backDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_b8lor")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_sfy4j")
+}],
+"loop": true,
+"name": &"frontDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_gv3ic")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}]
+
 [sub_resource type="Curve" id="Curve_jfpux"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9617834, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -128,7 +176,7 @@ emission_sphere_radius = 94.45
 gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_61ith")
 
-[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles", "maskSprite") groups=["Player"]]
 collision_mask = 7
 script = ExtResource("1_p0vlq")
 dashCooldown = 0.8
@@ -143,6 +191,7 @@ attackCollisionShape = NodePath("RotationNode/MouseDirectionMarker/Hitbox/Collis
 dashParticles = NodePath("DashParticles")
 dashTime = 0.3
 health = 3
+maskSprite = NodePath("maskAnimationSprited2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")
@@ -180,9 +229,16 @@ shape = SubResource("CircleShape2D_v6fml")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=142308481]
 sprite_frames = SubResource("SpriteFrames_v6fml")
 animation = &"side"
-frame_progress = 0.17385416
+
+[node name="maskAnimationSprited2D" type="AnimatedSprite2D" parent="." unique_id=1408887563]
+visible = false
+position = Vector2(0.9999995, -54)
+scale = Vector2(1.4041668, 1.2884614)
+sprite_frames = SubResource("SpriteFrames_b8lor")
+animation = &"side"
 
 [node name="DashParticles" type="GPUParticles2D" parent="." unique_id=1560085997]
+visible = false
 amount = 50
 texture = ExtResource("16_srp4u")
 process_material = SubResource("ParticleProcessMaterial_ebwui")

@@ -95,16 +95,21 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     float protectionTimer;
+    [Export]
+    public AnimatedSprite2D maskSprite;
 
     public override void _Ready()
     {
+        maskSprite.Visible = false;
         attackCollisionShape.Disabled = true;
         playerDashCooldownBar.MaxValue = dashCooldown;
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
         normalLayer = CollisionMask;
         dashTimer = dashTime;
         maskHealth = 0;
-        protectionTimer = 0.1f;
+        protectionTimer = 1.0f;
+        //CANCEL MUSIC IF PLAYING
+        AudioManager.instance.PlaySFX("music_main");
     }
 
     public void Hurt(Enemy e)
@@ -113,13 +118,21 @@ public partial class Movement : CharacterBody2D
         {
             return;
         }
-        protectionTimer = 0.1f;
+        AudioManager.instance.PlaySFX("test_ow");
+        protectionTimer = 1.0f;
         Velocity = -(e.Position - Position).Normalized() * 3000;
         if (mask != null)
         {
             maskHealth--;
+            if (maskHealth == 1)
+            {
+                //CANCEL MUSIC IF PLAYING
+                AudioManager.instance.PlaySFX("music_neardeath_mask");
+            }
             if (maskHealth == 0)
             {
+                
+                AudioManager.instance.PlaySFX("mask_lose");
                 MaskObject m = maskScene.Instantiate<MaskObject>();
                 m.LinearVelocity =
                     (GlobalPosition - e.GlobalPosition).Normalized() * maskLaunchVelocity;
@@ -132,6 +145,11 @@ public partial class Movement : CharacterBody2D
         else
         {
             health--;
+            if (health == 1)
+            {
+                //CANCEL MUSIC IF PLAYING
+                AudioManager.instance.PlaySFX("music_neardeath");
+            }
             if (health == 0)
             {
                 Kill();
@@ -165,12 +183,14 @@ public partial class Movement : CharacterBody2D
             speed = MaxSpeed;
             acceleration = Acceleration;
             friction = Friction;
+            maskSprite.Visible = false;
         }
         else
         {
             speed = MaskMaxSpeed;
             acceleration = MaskAcceleration;
             friction = MaskFriction;
+            maskSprite.Visible = true;
         }
         Vector2 targetVelocity = input * speed;
 
@@ -211,7 +231,7 @@ public partial class Movement : CharacterBody2D
             {
                 attackReady = true;
             }
-        }
+        } 
         if (attackTimer > 0)
         {
             attackTimer -= dt;
@@ -299,34 +319,42 @@ public partial class Movement : CharacterBody2D
             if (angle < pi / 8 && angle > -pi / 8)
             {
                 playerSprite.Animation = "side";
+                maskSprite.Animation = "side";
             }
             else if (angle < 3 * pi / 8 && angle > pi / 8)
             {
                 playerSprite.Animation = "frontDiag";
+                maskSprite.Animation = "frontDiag";
             }
             else if (angle < 5 * pi / 8 && angle > 3 * pi / 8)
             {
                 playerSprite.Animation = "front";
+                maskSprite.Animation = "front";
             }
             else if (angle < 7 * pi / 8 && angle > 5 * pi / 8)
             {
                 playerSprite.Animation = "frontDiag";
+                maskSprite.Animation = "frontDiag";
             }
             else if (angle < -7 * pi / 8 && angle > -pi)
             {
                 playerSprite.Animation = "side";
+                maskSprite.Animation = "side";
             }
             else if (angle < -5 * pi / 8 && angle > -7 * pi / 8)
             {
                 playerSprite.Animation = "backDiag";
+                maskSprite.Animation = "backDiag";
             }
             else if (angle < -3 * pi / 8 && angle > -5 * pi / 8)
             {
                 playerSprite.Animation = "back";
+                maskSprite.Animation = "back";
             }
             else if (angle < -pi / 8 && angle > -3 * pi / 8)
             {
                 playerSprite.Animation = "backDiag";
+                maskSprite.Animation = "backDiag";
             }
         }
         rotationNode.Rotation = angle;
@@ -377,10 +405,12 @@ public partial class Movement : CharacterBody2D
         if (GetGlobalMousePosition().X < Position.X)
         {
             playerSprite.FlipH = true;
+            maskSprite.FlipH = true;
         }
         else
         {
             playerSprite.FlipH = false;
+            maskSprite.FlipH = false;
         }
     }
 }

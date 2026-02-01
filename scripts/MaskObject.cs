@@ -29,6 +29,7 @@ public partial class MaskObject : RigidBody2D
         }
         if (col is Movement m)
         {
+            AudioManager.instance.PlaySFX("mask_get");
             QueueFree();
             m.mask = masktype;
             GameManager.instance.countdown = true;

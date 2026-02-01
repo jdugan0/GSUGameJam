@@ -8,6 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://c6p1a26rifnlj" path="res://resources/sprites/enemy/enemyfront2.png" id="5_og55s"]
 [ext_resource type="Texture2D" uid="uid://ddsw7enldet7n" path="res://resources/sprites/enemy/enemyfrontdiag.png" id="6_ofmb7"]
 [ext_resource type="Texture2D" uid="uid://drmb5ssstfhxd" path="res://resources/sprites/enemy/enemyside.png" id="7_7ue7x"]
+[ext_resource type="Texture2D" uid="uid://d4epfu3qwrvda" path="res://resources/sprites/mask/maskprotagback.png" id="9_5ysjj"]
+[ext_resource type="Texture2D" uid="uid://dv24jxteokl01" path="res://resources/sprites/mask/maskenemybackdiag.png" id="10_5ysjj"]
+[ext_resource type="Texture2D" uid="uid://medftsmhr7en" path="res://resources/sprites/mask/maskforward.png" id="11_icxj7"]
+[ext_resource type="Texture2D" uid="uid://ca4lkhxrk2yk8" path="res://resources/sprites/mask/maskfrontdiag.png" id="12_ucchj"]
+[ext_resource type="Texture2D" uid="uid://bnu75hta0ka8i" path="res://resources/sprites/mask/maskside.png" id="13_pf4na"]
+[ext_resource type="Texture2D" uid="uid://bqb35aeishb0j" path="res://resources/sprites/player/dashParticle.png" id="14_yqth3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
@@ -64,7 +70,114 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "wallDetectArea") groups=["Enemy"]]
+[sub_resource type="SpriteFrames" id="SpriteFrames_mv824"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_5ysjj")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_5ysjj")
+}],
+"loop": true,
+"name": &"backDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_icxj7")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_ucchj")
+}],
+"loop": true,
+"name": &"frontDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_pf4na")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve" id="Curve_yqth3"]
+_data = [Vector2(0.0058996975, 0), 0.0, 0.0, 0, 0, Vector2(0.33923304, 0.61060995), 0.0, 0.0, 0, 0, Vector2(0.71091443, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_icxj7"]
+curve = SubResource("Curve_yqth3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_icxj7"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 150.0
+emission_ring_inner_radius = 150.0
+emission_ring_cone_angle = 90.0
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.61960787, 0, 1, 1)
+alpha_curve = SubResource("CurveTexture_icxj7")
+
+[sub_resource type="Curve" id="Curve_icxj7"]
+_data = [Vector2(0.008849554, 1), 0.0, 0.0, 0, 0, Vector2(0.7345133, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ucchj"]
+curve = SubResource("Curve_icxj7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pf4na"]
+particle_flag_disable_z = true
+angle_min = -119.99999
+angle_max = 174.30002
+direction = Vector3(0, -1, 0)
+spread = 110.0
+initial_velocity_min = 400.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 98, 0)
+alpha_curve = SubResource("CurveTexture_ucchj")
+
+[sub_resource type="Curve" id="Curve_wm8dw"]
+_data = [Vector2(0.020648964, 0), 0.0, 0.0, 0, 0, Vector2(0.15634218, 1), 0.0, 0.0, 0, 0, Vector2(0.9705015, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_kn3bp"]
+curve = SubResource("Curve_wm8dw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ti6d3"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -60, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 60.0
+emission_ring_inner_radius = 60.0
+emission_ring_cone_angle = 90.0
+angle_min = -101.49999
+angle_max = 46.200012
+gravity = Vector3(0, 10, 0)
+scale_min = 0.5
+scale_max = 0.5
+color = Color(0.9843137, 0.9529412, 0.6039216, 1)
+alpha_curve = SubResource("CurveTexture_kn3bp")
+
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "wallDetectArea", "maskSprite", "maskParticles", "stunImpactParticles", "stunnedParticles") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_s2ept")
@@ -76,6 +189,10 @@ protectDistance = 400.0
 wallDetectArea = NodePath("WallColiderArea")
 maskLaunchVelocity = 4000.0
 maskScene = ExtResource("2_asoof")
+maskSprite = NodePath("maskAnimatedSprite2D")
+maskParticles = NodePath("maskParticles")
+stunImpactParticles = NodePath("stunImpactParticles")
+stunnedParticles = NodePath("stunnedParticles")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 shape = SubResource("CircleShape2D_3hddw")
@@ -102,7 +219,33 @@ shape = SubResource("RectangleShape2D_asoof")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=554953936]
 sprite_frames = SubResource("SpriteFrames_3tf2c")
-animation = &"back"
+animation = &"frontDiag"
+
+[node name="maskAnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1799387869]
+visible = false
+position = Vector2(4, -52)
+sprite_frames = SubResource("SpriteFrames_mv824")
+animation = &"frontDiag"
+
+[node name="maskParticles" type="GPUParticles2D" parent="." unique_id=354649831]
+visible = false
+amount = 120
+texture = ExtResource("14_yqth3")
+process_material = SubResource("ParticleProcessMaterial_icxj7")
+
+[node name="stunImpactParticles" type="GPUParticles2D" parent="." unique_id=459532045]
+emitting = false
+texture = ExtResource("14_yqth3")
+one_shot = true
+explosiveness = 0.89
+process_material = SubResource("ParticleProcessMaterial_pf4na")
+
+[node name="stunnedParticles" type="GPUParticles2D" parent="." unique_id=1209849148]
+amount = 32
+texture = ExtResource("14_yqth3")
+lifetime = 2.0
+speed_scale = 4.0
+process_material = SubResource("ParticleProcessMaterial_ti6d3")
 
 [connection signal="body_entered" from="Attack" to="." method="PlayerEnter"]
 [connection signal="body_exited" from="Attack" to="." method="PlayerExit"]
