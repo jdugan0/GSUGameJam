@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1d6iyujxbfbr" path="res://scripts/Safezone.cs" id="1_ii0ag"]
 [ext_resource type="Resource" uid="uid://bql5ruypcdq3m" path="res://masks/PurpleMask.tres" id="2_cgumt"]
+[ext_resource type="Texture2D" uid="uid://b5i4sdakrpf1i" path="res://resources/sprites/ui/rechargeUnder.png" id="3_cgumt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wh16"]
 size = Vector2(180, 180)
@@ -11,8 +12,13 @@ script = ExtResource("1_ii0ag")
 maskType = ExtResource("2_cgumt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1421523590]
-position = Vector2(419, -262)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_3wh16")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2032175180]
+modulate = Color(1, 1, 1, 0.42352942)
+scale = Vector2(5.64, 5.64)
+texture = ExtResource("3_cgumt")
 
 [connection signal="body_entered" from="." to="." method="OnEnter"]
 [connection signal="body_exited" from="." to="." method="OnExit"]
