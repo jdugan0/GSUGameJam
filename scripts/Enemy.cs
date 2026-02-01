@@ -125,6 +125,8 @@ public partial class Enemy : CharacterBody2D
         if (stunned)
         {
             Modulate = new Color(Colors.White, 0.8f);
+            enemySprite.Animation = "hurt";
+            maskSprite.Animation = "hurt";
         }
         else
         {
@@ -279,7 +281,10 @@ public partial class Enemy : CharacterBody2D
             enemySprite.FlipH = false;
             maskSprite.FlipH = false;
         }
-        UpdateRotation();
+        if (!stunned)
+        {
+            UpdateRotation();
+        }
         MoveAndSlide();
     }
 

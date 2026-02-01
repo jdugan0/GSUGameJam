@@ -3,11 +3,17 @@
 [ext_resource type="Script" uid="uid://eo00q03200w3" path="res://scripts/Movement.cs" id="1_p0vlq"]
 [ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="2_6e537"]
 [ext_resource type="Texture2D" uid="uid://bjs6hvmtrd2gi" path="res://resources/sprites/player/protagback1.png" id="3_0rnld"]
+[ext_resource type="Texture2D" uid="uid://pv3f2b8ktgwj" path="res://resources/sprites/punch/punch1.png" id="4_1jpwa"]
+[ext_resource type="Texture2D" uid="uid://kt6r17hiycpp" path="res://resources/sprites/punch/emptyPuncj.png" id="4_pfeki"]
 [ext_resource type="Texture2D" uid="uid://orxjm2fh0ccq" path="res://resources/sprites/player/protagback2.png" id="4_srp4u"]
 [ext_resource type="Texture2D" uid="uid://ctqmf3dcmg1hq" path="res://resources/sprites/ui/rechargeProgress.png" id="4_viqgg"]
 [ext_resource type="Texture2D" uid="uid://b54pkdkmn5nbf" path="res://resources/sprites/player/protagbackdiag1.png" id="5_jfpux"]
+[ext_resource type="Texture2D" uid="uid://r7ic8gmi55pb" path="res://resources/sprites/punch/punch2.png" id="5_pfeki"]
 [ext_resource type="Texture2D" uid="uid://bxcujp2jdkuti" path="res://resources/sprites/player/protagbackdiag2.png" id="6_61ith"]
+[ext_resource type="Texture2D" uid="uid://dddvuvp3ndlwt" path="res://resources/sprites/punch/punch3.png" id="6_axnmu"]
 [ext_resource type="Texture2D" uid="uid://dwph0t7ajmvls" path="res://resources/sprites/player/protagbackstand.png" id="7_ebwui"]
+[ext_resource type="Texture2D" uid="uid://d16dinjpr6snh" path="res://resources/sprites/punch/punch4.png" id="7_fvsjc"]
+[ext_resource type="Texture2D" uid="uid://ccsls8rnb8wnr" path="res://resources/sprites/punch/punch5.png" id="8_hxdpb"]
 [ext_resource type="Texture2D" uid="uid://v1vhu6w4mb8p" path="res://resources/sprites/player/protagforward1.png" id="8_sfy4j"]
 [ext_resource type="Texture2D" uid="uid://dte0tt6wfvdcq" path="res://resources/sprites/player/protagforward2.png" id="9_gv3ic"]
 [ext_resource type="Texture2D" uid="uid://bo75d2kus6383" path="res://resources/sprites/player/protagfrontdiag1.png" id="10_b8lor"]
@@ -29,6 +35,35 @@ radius = 90.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
 size = Vector2(399, 314)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_agngo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_pfeki")
+}, {
+"duration": 0.7,
+"texture": ExtResource("4_1jpwa")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_pfeki")
+}, {
+"duration": 0.7,
+"texture": ExtResource("6_axnmu")
+}, {
+"duration": 2.5,
+"texture": ExtResource("7_fvsjc")
+}, {
+"duration": 3.0,
+"texture": ExtResource("8_hxdpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pfeki")
+}],
+"loop": false,
+"name": &"punch",
+"speed": 20.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v6fml"]
 radius = 90.0
@@ -178,7 +213,7 @@ emission_sphere_radius = 94.45
 gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_61ith")
 
-[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles", "maskSprite") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles", "maskSprite", "punchSprite") groups=["Player"]]
 collision_mask = 7
 script = ExtResource("1_p0vlq")
 dashCooldown = 0.8
@@ -195,6 +230,7 @@ dashTime = 0.3
 health = 3
 maskScene = ExtResource("2_6e537")
 maskSprite = NodePath("maskAnimationSprited2D")
+punchSprite = NodePath("RotationNode/MouseDirectionMarker/Hitbox/punchAnimated")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")
@@ -228,6 +264,14 @@ collision_mask = 7
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_v6fml")
 debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="punchAnimated" type="AnimatedSprite2D" parent="RotationNode/MouseDirectionMarker/Hitbox" unique_id=985499895]
+position = Vector2(26.999992, 0.4999962)
+scale = Vector2(2.3537416, 3.4301076)
+sprite_frames = SubResource("SpriteFrames_agngo")
+animation = &"punch"
+frame = 6
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1252916493]
 collision_mask = 3

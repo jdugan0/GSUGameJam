@@ -51,7 +51,7 @@ public partial class Camera : Camera2D
 
     public void TextAdvance()
     {
-        if (currentDialogueIndex < dialogueLines.Length - 1)
+        if (currentDialogueIndex < dialogueLines.Length - 1 && currentDialogueIndex >= 0)
         {
             currentDialogueIndex++;
             if (dialogueLines[currentDialogueIndex] == "")
@@ -69,6 +69,13 @@ public partial class Camera : Camera2D
         Vector2 mousePos = GetGlobalMousePosition();
         Position = (playerWeight * player.Position + mousePos) / (1 + playerWeight);
 
+        if (Input.IsActionJustPressed("SKIP_DIALOGUE"))
+        {
+            currentDialogueIndex = -1;
+            UI.FinishDialogue();
+            ZoomIn();
+            return;
+        }
         if (Input.IsActionJustPressed("DASH") || Input.IsActionJustPressed("ATTACK") || Input.IsActionJustPressed("RIGHT"))
         {
             TextAdvance();

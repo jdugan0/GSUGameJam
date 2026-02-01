@@ -98,6 +98,8 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     public AnimatedSprite2D maskSprite;
+    [Export]
+    public AnimatedSprite2D punchSprite;
 
     public override void _Ready()
     {
@@ -389,6 +391,7 @@ public partial class Movement : CharacterBody2D
     public void Attack()
     {
         AudioManager.instance.PlaySFX("woosh");
+        punchSprite.Play("punch");
         attackReady = false;
         attackCooldownTimer = attackCooldown;
         attackCollisionShape.Disabled = false;

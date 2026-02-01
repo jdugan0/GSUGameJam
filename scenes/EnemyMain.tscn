@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c6p1a26rifnlj" path="res://resources/sprites/enemy/enemyfront2.png" id="5_og55s"]
 [ext_resource type="Texture2D" uid="uid://ddsw7enldet7n" path="res://resources/sprites/enemy/enemyfrontdiag.png" id="6_ofmb7"]
 [ext_resource type="Texture2D" uid="uid://drmb5ssstfhxd" path="res://resources/sprites/enemy/enemyside.png" id="7_7ue7x"]
+[ext_resource type="Texture2D" uid="uid://cwu2d36kk6fih" path="res://resources/sprites/enemy/enemydamage.png" id="8_pf4na"]
 [ext_resource type="Texture2D" uid="uid://d4epfu3qwrvda" path="res://resources/sprites/mask/maskprotagback.png" id="9_5ysjj"]
 [ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="9_mv824"]
 [ext_resource type="Texture2D" uid="uid://dv24jxteokl01" path="res://resources/sprites/mask/maskenemybackdiag.png" id="10_5ysjj"]
@@ -65,6 +66,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("8_pf4na")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("7_7ue7x")
 }],
 "loop": true,
@@ -104,6 +113,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"frontDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_ucchj")
+}],
+"loop": true,
+"name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -223,13 +240,12 @@ shape = SubResource("RectangleShape2D_asoof")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=554953936]
 sprite_frames = SubResource("SpriteFrames_3tf2c")
-animation = &"frontDiag"
+animation = &"hurt"
 
 [node name="maskAnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1799387869]
-visible = false
 position = Vector2(4, -52)
 sprite_frames = SubResource("SpriteFrames_mv824")
-animation = &"frontDiag"
+animation = &"hurt"
 
 [node name="maskParticles" type="GPUParticles2D" parent="." unique_id=354649831]
 visible = false
