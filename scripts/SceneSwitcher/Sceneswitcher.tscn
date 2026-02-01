@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ot7yukainen0" path="res://levels/Level1_Real.tscn" id="5_yqkd8"]
 [ext_resource type="PackedScene" uid="uid://bkeh8425rvo2x" path="res://scenes/ui/win_screen.tscn" id="6_sg0go"]
 [ext_resource type="PackedScene" uid="uid://cl5r1rongfq08" path="res://scenes/ui/lose_screen.tscn" id="7_rtqo1"]
+[ext_resource type="PackedScene" uid="uid://s3ubjtgss28m" path="res://levels/Level2_Real.tscn" id="8_wp8u4"]
 
 [sub_resource type="Resource" id="Resource_dare8"]
 script = ExtResource("2_dare8")
@@ -38,13 +39,19 @@ sceneName = "LoseScreen"
 scene = ExtResource("7_rtqo1")
 metadata/_custom_type_script = "uid://b75h7i7133wue"
 
+[sub_resource type="Resource" id="Resource_p7jox"]
+script = ExtResource("2_dare8")
+sceneName = "Level2_Real"
+scene = ExtResource("8_wp8u4")
+metadata/_custom_type_script = "uid://b75h7i7133wue"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i3um"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="Sceneswitcher" type="Node" unique_id=619671277 node_paths=PackedStringArray("fadeRect")]
 process_mode = 3
 script = ExtResource("1_388wc")
-scenes = Array[Object]([SubResource("Resource_dare8"), SubResource("Resource_yjr5b"), SubResource("Resource_3l4qv"), SubResource("Resource_rtqo1"), SubResource("Resource_wp8u4")])
+scenes = Array[Object]([SubResource("Resource_dare8"), SubResource("Resource_yjr5b"), SubResource("Resource_3l4qv"), SubResource("Resource_rtqo1"), SubResource("Resource_wp8u4"), SubResource("Resource_p7jox")])
 fadeRect = NodePath("CanvasLayer/Panel")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2138373054]

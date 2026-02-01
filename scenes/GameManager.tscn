@@ -5,4 +5,4 @@
 [node name="GameManager" type="Node" unique_id=191558631]
 script = ExtResource("1_34tde")
 checkTime = 30.0
-levelOrder = PackedStringArray("Level0")
+levelOrder = PackedStringArray("Level0", "Level2_Real")
