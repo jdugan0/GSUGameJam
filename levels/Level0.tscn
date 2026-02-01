@@ -261,7 +261,7 @@ color = Color(0, 0, 0, 1)
 [node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("10_yrrca")]
 position = Vector2(-2994, 2922)
 color = Color(0.44227684, 0.6863458, 0.098253764, 1)
-energy = 1.88
+energy = 6.19
 texture_scale = 6.02
 
 [node name="PointLight2D6" parent="." unique_id=1816036376 instance=ExtResource("10_yrrca")]
