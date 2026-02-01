@@ -9,6 +9,7 @@ public partial class Enemy : CharacterBody2D
     [Export]
     public AnimatedSprite2D enemySprite;
 
+    [Export]
     public Mask mask = null;
 
     [Export]
@@ -18,6 +19,10 @@ public partial class Enemy : CharacterBody2D
     {
         navigationAgent2D.VelocityComputed += OnVelocityComputed;
         navigationAgent2D.MaxSpeed = maxSpeed;
+        if (mask != null)
+        {
+            GameManager.instance.toProtect = this;
+        }
     }
 
     public enum EnemyState
@@ -70,6 +75,8 @@ public partial class Enemy : CharacterBody2D
     float attackTime;
     float attackTimer = 0;
 
+    bool hidden = false;
+
     public void PlayerEnter(Node2D col)
     {
         if (col is Movement m)
@@ -89,7 +96,7 @@ public partial class Enemy : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         attackTimer -= (float)delta;
-        if (attackTimer < 0 && enteredPlayer != null)
+        if (attackTimer < 0 && enteredPlayer != null && !stunned)
         {
             enteredPlayer.Hurt(this);
             attackTimer = attackTime;
@@ -133,12 +140,17 @@ public partial class Enemy : CharacterBody2D
                 Vector2 rawTarget = playerPos + dir * desiredDistance;
                 Vector2 safeTarget = NavigationServer2D.MapGetClosestPoint(navMap, rawTarget);
                 updatedPos = safeTarget;
+                hidden = false;
             }
             swapped = true;
         }
         else
         {
             swapped = false;
+        }
+        if (playerDist > 2000)
+        {
+            hidden = true;
         }
         switch (enemyState)
         {
@@ -152,7 +164,7 @@ public partial class Enemy : CharacterBody2D
                 navigationAgent2D.TargetPosition = GameManager.instance.player.Position;
                 break;
             case EnemyState.HIDING:
-                if (playerDist < 600)
+                if (playerDist < 600 && hidden)
                 {
                     Vector2 playerPos = GameManager.instance.player.Position;
                     Vector2 dir = (GlobalPosition - playerPos).Normalized();
@@ -221,6 +233,7 @@ public partial class Enemy : CharacterBody2D
         stunnedTimeRemaining = stunDuration;
         if (mask != null)
         {
+            GD.Print(health);
             health--;
             if (health == 0)
             {
