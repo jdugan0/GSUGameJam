@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://txn5f85upitu" path="res://scripts/WinScreen.cs" id="1_uqtu8"]
 [ext_resource type="Texture2D" uid="uid://jlj3jv8st0a6" path="res://resources/sprites/ui/main_menu(placeholder).png" id="2_xl2x5"]
 
-[node name="WinScreen" type="Control" unique_id=452959523]
+[node name="WinScreen" type="Control" unique_id=452959523 node_paths=PackedStringArray("mainMenuButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uqtu8")
+mainMenuButton = NodePath("MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/MainMenuButton")
 
 [node name="Panel" type="TextureRect" parent="." unique_id=1236114506]
 layout_mode = 1
