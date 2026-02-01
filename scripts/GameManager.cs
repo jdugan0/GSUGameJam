@@ -20,6 +20,8 @@ public partial class GameManager : Node
 
     public Enemy toProtect = null;
 
+    bool playingEndSound = false;
+
     public override void _Ready()
     {
         instance = this;
@@ -28,6 +30,11 @@ public partial class GameManager : Node
 
     public override async void _PhysicsProcess(double delta)
     {
+        if (!playingEndSound && countdown && checkTime - currentTime <= 12.0)
+        {
+            playingEndSound = true;
+            AudioManager.instance.PlaySFX("GameEnd");
+        }
         //GD.Print(countdown);
         if (GetTree().GetFirstNodeInGroup("Mask") == null)
         {
@@ -46,7 +53,7 @@ public partial class GameManager : Node
         if (currentTime >= checkTime)
         {
             currentTime = 0;
-            countdown = false;
+            // countdown = false;
             if (currentSafeMask == null || player.mask == null || player.mask != currentSafeMask)
             {
                 await player.Kill();
@@ -60,6 +67,10 @@ public partial class GameManager : Node
 
     public async Task Win()
     {
+        if (countdown)
+        {
+            AudioManager.instance.CancelSFX("timer_ticking");
+        }
         AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
         MusicManager.instance.currentMusic = "music_game_win";
         AudioManager.instance.PlaySFX("music_game_win");

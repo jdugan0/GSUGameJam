@@ -45,6 +45,7 @@
 [ext_resource type="AudioStream" uid="uid://co1a4woscjxip" path="res://audio/sfx/Hurt 2.wav" id="42_n5oxk"]
 [ext_resource type="AudioStream" uid="uid://cjewijuof5t4f" path="res://audio/sfx/dashRecharge.wav" id="43_ev1im"]
 [ext_resource type="AudioStream" uid="uid://csy25bahngple" path="res://audio/sfx/Hurt 3.wav" id="43_qq4lq"]
+[ext_resource type="AudioStream" uid="uid://bg60pje0wcmp7" path="res://audio/music/Game Is Ending.wav" id="46_n5oxk"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wmmek"]
 streams_count = 4
@@ -84,6 +85,7 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 [sub_resource type="Resource" id="Resource_4etcg"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("11_b4g0j")
+volume = -10.0
 name = "timer_ticking"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
@@ -238,6 +240,12 @@ stream = ExtResource("43_ev1im")
 name = "dash_recharge"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
+[sub_resource type="Resource" id="Resource_psxpq"]
+script = ExtResource("2_wmmek")
+stream = ExtResource("46_n5oxk")
+name = "GameEnd"
+metadata/_custom_type_script = "uid://007myadtw53h"
+
 [node name="Audiomanager" type="Node" unique_id=669033915]
 script = ExtResource("1_ulbmk")
-sounds = Array[Object]([SubResource("Resource_wrila"), SubResource("Resource_sbu2l"), SubResource("Resource_c64us"), SubResource("Resource_4etcg"), SubResource("Resource_ajw61"), SubResource("Resource_ev1im"), SubResource("Resource_uus3r"), SubResource("Resource_oxuu2"), SubResource("Resource_qq4lq"), SubResource("Resource_683wi"), SubResource("Resource_1yug6"), SubResource("Resource_38ysf"), SubResource("Resource_mlqj7"), SubResource("Resource_cq6mo"), SubResource("Resource_0d11e"), SubResource("Resource_w2had"), SubResource("Resource_wsuhf"), SubResource("Resource_dnkil"), SubResource("Resource_aogok"), SubResource("Resource_oye0s"), SubResource("Resource_esynm"), SubResource("Resource_n5oxk"), SubResource("Resource_uaih3"), SubResource("Resource_dr6et")])
+sounds = Array[Object]([SubResource("Resource_wrila"), SubResource("Resource_sbu2l"), SubResource("Resource_c64us"), SubResource("Resource_4etcg"), SubResource("Resource_ajw61"), SubResource("Resource_ev1im"), SubResource("Resource_uus3r"), SubResource("Resource_oxuu2"), SubResource("Resource_qq4lq"), SubResource("Resource_683wi"), SubResource("Resource_1yug6"), SubResource("Resource_38ysf"), SubResource("Resource_mlqj7"), SubResource("Resource_cq6mo"), SubResource("Resource_0d11e"), SubResource("Resource_w2had"), SubResource("Resource_wsuhf"), SubResource("Resource_dnkil"), SubResource("Resource_aogok"), SubResource("Resource_oye0s"), SubResource("Resource_esynm"), SubResource("Resource_n5oxk"), SubResource("Resource_uaih3"), SubResource("Resource_dr6et"), SubResource("Resource_psxpq")])

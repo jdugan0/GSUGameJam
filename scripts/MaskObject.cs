@@ -52,7 +52,11 @@ public partial class MaskObject : RigidBody2D
             AudioManager.instance.PlaySFX("music_spooky");
             QueueFree();
             m.mask = masktype;
-            GameManager.instance.countdown = true;
+            if (!GameManager.instance.countdown)
+            {
+                GameManager.instance.countdown = true;
+                AudioManager.instance.PlaySFX("timer_ticking");
+            }
             m.maskHealth = 3;
             foreach (Enemy en in GetTree().GetNodesInGroup("Enemy").OfType<Enemy>().ToArray())
             {
