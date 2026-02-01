@@ -21,8 +21,9 @@ public partial class Ui : CanvasLayer
     [Export]
     public ColorRect vignette;
     public static Ui instance;
+
     [Export]
-    public RichTextLabel clickContinueLabel ;
+    public RichTextLabel clickContinueLabel;
 
     [Export]
     PackedScene maskHealth;
@@ -33,6 +34,9 @@ public partial class Ui : CanvasLayer
     [Export]
     HBoxContainer healthContainer;
     public bool advanceEnabled = false;
+
+    [Export]
+    public ColorRect lowHealth;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -50,6 +54,10 @@ public partial class Ui : CanvasLayer
         {
             healthContainer.RemoveChild(x);
             x.QueueFree();
+        }
+        if (player.health == 1)
+        {
+            lowHealth.Visible = true;
         }
         // GD.Print(heaplthContainer.GetChildCount());
         if (player.mask != null)
@@ -87,7 +95,8 @@ public partial class Ui : CanvasLayer
 
     public void ShowCreatureDialogue(string dialogue)
     {
-        creatureDialogueLabel.Text = "[font_size=72][shake]\"" + dialogue + "\"[/shake][/font_size]";
+        creatureDialogueLabel.Text =
+            "[font_size=72][shake]\"" + dialogue + "\"[/shake][/font_size]";
         var alphaTween = CreateTween()
             .TweenProperty(creatureDialogueLabel, "modulate:a", 1.0f, dialogueFadeDuration)
             .SetTrans(Tween.TransitionType.Sine)

@@ -7,12 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://bbowfytjjhsg0" path="res://scenes/HealthRect.tscn" id="3_jcn1r"]
 [ext_resource type="Texture2D" uid="uid://b5i4sdakrpf1i" path="res://resources/sprites/ui/rechargeUnder.png" id="4_7vp6q"]
 [ext_resource type="Shader" uid="uid://c4tiw2jpiia2y" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
+[ext_resource type="Shader" uid="uid://bfnx0tpj2mgr0" path="res://scripts/LowHealth.gdshader" id="8_jcn1r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0dwhk"]
 shader = ExtResource("4_g5kmx")
 shader_parameter/alpha = 1.0
 shader_parameter/inner_radius = 0.0
 shader_parameter/outer_radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uegxj"]
+shader = ExtResource("8_jcn1r")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 0.6
 
 [node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu", "vignette", "clickContinueLabel", "healthContainer")]
 script = ExtResource("1_f5cxw")
@@ -99,11 +106,19 @@ text = "TIME: 45.0"
 visible = false
 material = SubResource("ShaderMaterial_0dwhk")
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Control" unique_id=192397702]
+visible = false
+material = SubResource("ShaderMaterial_uegxj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
