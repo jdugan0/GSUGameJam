@@ -178,13 +178,14 @@ scale_max = 0.5
 color = Color(0.9843137, 0.9529412, 0.6039216, 1)
 alpha_curve = SubResource("CurveTexture_kn3bp")
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "wallDetectArea", "maskSprite", "maskParticles", "stunImpactParticles", "stunnedParticles") groups=["Enemy"]]
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "light", "wallDetectArea", "maskSprite", "maskParticles", "stunImpactParticles", "stunnedParticles") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_s2ept")
 navigationAgent2D = NodePath("NavigationAgent2D")
 enemySprite = NodePath("AnimatedSprite2D")
 maxSpeed = 700.0
+light = NodePath("PointLight2D2")
 desiredDistance = 2000.0
 protectDistance = 400.0
 wallDetectArea = NodePath("WallColiderArea")
@@ -194,6 +195,7 @@ maskSprite = NodePath("maskAnimatedSprite2D")
 maskParticles = NodePath("maskParticles")
 stunImpactParticles = NodePath("stunImpactParticles")
 stunnedParticles = NodePath("stunnedParticles")
+maskColor = Color(0.6687735, 0.0028766787, 0.9235373, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 visible = false

@@ -18,6 +18,9 @@ public partial class Enemy : CharacterBody2D
     uint initalLayerMask;
     uint initalLayer;
 
+    [Export]
+    PointLight2D light;
+
     public override void _Ready()
     {
         navigationAgent2D.VelocityComputed += OnVelocityComputed;
@@ -29,6 +32,7 @@ public partial class Enemy : CharacterBody2D
         initalLayer = CollisionLayer;
         initalLayerMask = CollisionMask;
         maskParticles.Emitting = false;
+        lightColor = light.Color;
     }
 
     public enum EnemyState
@@ -98,6 +102,10 @@ public partial class Enemy : CharacterBody2D
 
     [Export]
     Node2D campPos;
+    Color lightColor;
+
+    [Export]
+    Color maskColor;
 
     public void PlayerEnter(Node2D col)
     {
@@ -117,6 +125,14 @@ public partial class Enemy : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (mask != null)
+        {
+            light.Color = maskColor;
+        }
+        else
+        {
+            light.Color = lightColor;
+        }
         if (stunned)
         {
             Modulate = new Color(Colors.White, 0.8f);
@@ -133,7 +149,7 @@ public partial class Enemy : CharacterBody2D
         }
         Rid navMap = navigationAgent2D.GetNavigationMap();
         float playerDist = GameManager.instance.player.Position.DistanceTo(Position);
-        if (GameManager.instance.player.mask == null)
+        if (GameManager.instance.player.mask != null)
         {
             enemyState = EnemyState.CAMP;
             if (playerDist < 1000)
@@ -198,10 +214,11 @@ public partial class Enemy : CharacterBody2D
         {
             hidden = true;
         }
+        GD.Print(enemyState);
         switch (enemyState)
         {
             case EnemyState.CAMP:
-                navigationAgent2D.TargetPosition = campPos.Position;
+                navigationAgent2D.TargetPosition = campPos.GlobalPosition;
                 break;
             case EnemyState.GET_MASK:
                 if (GameManager.instance.onGround != null)
