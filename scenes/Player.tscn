@@ -142,6 +142,7 @@ playerSprite = NodePath("AnimatedSprite2D")
 attackCollisionShape = NodePath("RotationNode/MouseDirectionMarker/Hitbox/CollisionShape2D")
 dashParticles = NodePath("DashParticles")
 dashTime = 0.3
+health = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")

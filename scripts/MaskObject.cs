@@ -32,6 +32,7 @@ public partial class MaskObject : RigidBody2D
             QueueFree();
             m.mask = masktype;
             GameManager.instance.countdown = true;
+            m.maskHealth = 3;
         }
         if (col is Enemy e)
         {

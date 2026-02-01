@@ -63,8 +63,36 @@ public partial class Enemy : CharacterBody2D
 
     int health = 2;
 
+    Movement enteredPlayer;
+
+    [Export]
+    float attackTime;
+    float attackTimer = 0;
+
+    public void PlayerEnter(Node2D col)
+    {
+        if (col is Movement m)
+        {
+            enteredPlayer = m;
+        }
+    }
+
+    public void PlayerExit(Node2D col)
+    {
+        if (col is Movement m)
+        {
+            enteredPlayer = null;
+        }
+    }
+
     public override void _PhysicsProcess(double delta)
     {
+        attackTimer -= (float)delta;
+        if (attackTimer < 0 && enteredPlayer != null)
+        {
+            enteredPlayer.Hurt(this);
+            attackTimer = attackTime;
+        }
         Rid navMap = navigationAgent2D.GetNavigationMap();
         float playerDist = GameManager.instance.player.Position.DistanceTo(Position);
         if (GameManager.instance.onGround == null && GameManager.instance.player.mask == null)
