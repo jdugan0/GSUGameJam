@@ -18,18 +18,64 @@ radius = 105.67
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asoof"]
 size = Vector2(300, 300)
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "wallDetectArea") groups=["Enemy"]]
+[sub_resource type="SpriteFrames" id="SpriteFrames_3tf2c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rt5mi")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3tf2c")
+}],
+"loop": true,
+"name": &"backDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mv824")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_og55s")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ofmb7")
+}],
+"loop": true,
+"name": &"frontDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7ue7x")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}]
+
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "wallDetectArea") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_s2ept")
 navigationAgent2D = NodePath("NavigationAgent2D")
+enemySprite = NodePath("AnimatedSprite2D")
 maxSpeed = 550.0
 desiredDistance = 2000.0
 protectDistance = 400.0
 wallDetectArea = NodePath("WallColiderArea")
 maskLaunchVelocity = 4000.0
 maskScene = ExtResource("2_asoof")
-attackTime = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 shape = SubResource("CircleShape2D_3hddw")
@@ -53,6 +99,10 @@ debug_color = Color(0, 0.6, 0.69803923, 0.17254902)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" unique_id=1188853712]
 shape = SubResource("RectangleShape2D_asoof")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=554953936]
+sprite_frames = SubResource("SpriteFrames_3tf2c")
+animation = &"back"
 
 [connection signal="body_entered" from="Attack" to="." method="PlayerEnter"]
 [connection signal="body_exited" from="Attack" to="." method="PlayerExit"]
