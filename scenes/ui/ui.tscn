@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://djpyrxukbrljb" path="res://scripts/Ui.cs" id="1_f5cxw"]
 [ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="1_u7n8c"]
+[ext_resource type="PackedScene" uid="uid://c0c4vxf274orr" path="res://scenes/MaskRect.tscn" id="2_7vp6q"]
 [ext_resource type="FontFile" uid="uid://bx21ffb0benwo" path="res://resources/Blackcraft.ttf" id="3_0dwhk"]
 [ext_resource type="PackedScene" uid="uid://c5ruedt0xh3dj" path="res://scenes/ui/pause_menu.tscn" id="3_aac20"]
+[ext_resource type="PackedScene" uid="uid://bbowfytjjhsg0" path="res://scenes/HealthRect.tscn" id="3_jcn1r"]
 [ext_resource type="Shader" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0dwhk"]
@@ -12,7 +14,7 @@ shader_parameter/alpha = 1.0
 shader_parameter/inner_radius = 0.0
 shader_parameter/outer_radius = 1.0
 
-[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu", "vignette", "clickContinueLabel")]
+[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu", "vignette", "clickContinueLabel", "healthContainer")]
 script = ExtResource("1_f5cxw")
 dashCooldownBar = NodePath("TextureProgressBar")
 creatureDialogueLabel = NodePath("MarginContainer/CreatureDialogueLabel")
@@ -20,6 +22,9 @@ timer = NodePath("Timer")
 pauseMenu = NodePath("PauseMenu")
 vignette = NodePath("ColorRect")
 clickContinueLabel = NodePath("MarginContainer/CreatureDialogueLabel/clickContinueLabel")
+maskHealth = ExtResource("2_7vp6q")
+normalHealth = ExtResource("3_jcn1r")
+healthContainer = NodePath("HBoxContainer")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=471527323]
 anchors_preset = 2
@@ -85,3 +90,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=144945911]
+offset_left = 776.0
+offset_top = 99.0
+offset_right = 1015.0
+offset_bottom = 217.0

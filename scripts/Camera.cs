@@ -1,4 +1,5 @@
 using System;
+using System.Security.Principal;
 using Godot;
 
 public partial class Camera : Camera2D
@@ -38,6 +39,8 @@ public partial class Camera : Camera2D
         "Sanguinem occultorum effundere. Little one.",
         ""
     };
+
+    Vector2 initalZoom;
 
     public override void _Ready()
     {
@@ -80,7 +83,15 @@ public partial class Camera : Camera2D
         if (Input.IsActionJustPressed("DASH") || Input.IsActionJustPressed("ATTACK") || Input.IsActionJustPressed("RIGHT"))
         {
             TextAdvance();
+        if (player.mask != null && Zoom == initalZoom)
+        {
+            Zoom *= 1.5f;
         }
+        if (player.mask == null)
+        {
+            Zoom = initalZoom;
+        }
+    }
     }
 
     // at the beginning of the round, zoom out to show zone locations

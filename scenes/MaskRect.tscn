@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c0c4vxf274orr"]
+
+[ext_resource type="Texture2D" uid="uid://medftsmhr7en" path="res://resources/sprites/mask/maskforward.png" id="1_fbt03"]
+
+[node name="TextureRect2" type="TextureRect" unique_id=1110655029]
+offset_right = 75.0
+offset_bottom = 78.0
+texture = ExtResource("1_fbt03")

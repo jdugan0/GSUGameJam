@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class GameManager : Node
@@ -25,8 +26,9 @@ public partial class GameManager : Node
         player = GetTree().GetFirstNodeInGroup("Player") as Movement;
     }
 
-    public override void _PhysicsProcess(double delta)
+    public override async void _PhysicsProcess(double delta)
     {
+        GD.Print(countdown);
         if (GetTree().GetFirstNodeInGroup("Mask") == null)
         {
             onGround = null;
@@ -47,8 +49,20 @@ public partial class GameManager : Node
             countdown = false;
             if (currentSafeMask == null || player.mask == null || player.mask != currentSafeMask)
             {
-                player.Kill();
+                await player.Kill();
+            }
+            else
+            {
+                await Win();
             }
         }
+    }
+
+    public async Task Win()
+    {
+        AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+        MusicManager.instance.currentMusic = "music_game_win";
+        AudioManager.instance.PlaySFX("music_game_win");
+        await SceneSwitcher.instance.SwitchSceneAsyncSlide("WinScreen");
     }
 }

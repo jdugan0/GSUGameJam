@@ -1,8 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class Movement : CharacterBody2D
 {
+    [Export]
+    public Sprite2D bar;
+
     [ExportGroup("Non-Mask Movement")]
     [Export]
     public float MaxSpeed = 1200f;
@@ -101,6 +105,9 @@ public partial class Movement : CharacterBody2D
     [Export]
     public AnimatedSprite2D punchSprite;
 
+    [Export]
+    Node2D safePos;
+
     public override void _Ready()
     {
         maskSprite.Visible = false;
@@ -116,7 +123,7 @@ public partial class Movement : CharacterBody2D
         AudioManager.instance.PlaySFX("music_main");
     }
 
-    public void Hurt(Enemy e)
+    public async Task Hurt(Enemy e)
     {
         if (protectionTimer > 0)
         {
@@ -124,7 +131,7 @@ public partial class Movement : CharacterBody2D
         }
         AudioManager.instance.PlaySFX("test_ow");
         protectionTimer = 1.0f;
-        Velocity = -(e.Position - Position).Normalized() * 3000;
+        Velocity = -(e.Position - Position).Normalized() * 2000;
         if (mask != null)
         {
             maskHealth--;
@@ -136,14 +143,20 @@ public partial class Movement : CharacterBody2D
             }
             if (maskHealth == 0)
             {
-                AudioManager.instance.PlaySFX("mask_lose");
-                MaskObject m = maskScene.Instantiate<MaskObject>();
-                m.LinearVelocity =
-                    (GlobalPosition - e.GlobalPosition).Normalized() * maskLaunchVelocity;
-                var world = GetTree().CurrentScene;
-                m.GlobalPosition = GlobalPosition;
+                AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+                if (health == 1)
+                {
+                    MusicManager.instance.currentMusic = "music_neardeath";
+                    AudioManager.instance.PlaySFX("music_neardeath");
+                }
+                else
+                {
+                    MusicManager.instance.currentMusic = "music_main";
+                    AudioManager.instance.PlaySFX("music_main");
+                }
+                protectionTimer = 3;
+                e.mask = mask;
                 mask = null;
-                world.CallDeferred(MethodName.AddChild, m);
             }
         }
         else
@@ -157,15 +170,34 @@ public partial class Movement : CharacterBody2D
             }
             if (health == 0)
             {
-                Kill();
+                await Kill();
             }
         }
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        if (GameManager.instance.onGround != null)
+        {
+            bar.Rotation = (GameManager.instance.onGround.Value - Position).Angle() + Mathf.Pi / 2;
+            bar.Modulate = Colors.White;
+        }
+        else if (
+            GameManager.instance.toProtect != null
+            && GameManager.instance.toProtect.mask != null
+        )
+        {
+            bar.Rotation =
+                (GameManager.instance.toProtect.Position - Position).Angle() + Mathf.Pi / 2;
+            bar.Modulate = Colors.Purple;
+        }
+        else
+        {
+            bar.Rotation = (safePos.GlobalPosition - Position).Angle() + Mathf.Pi / 2;
+            bar.Modulate = Colors.Green;
+        }
         float dt = (float)delta;
-
+        // GD.Print(health);
         dashTimer += dt;
 
         protectionTimer -= (float)delta;
@@ -258,11 +290,15 @@ public partial class Movement : CharacterBody2D
         }
     }
 
-    public void Kill()
+    public async Task Kill()
     {
         dead = true;
         Visible = false;
         ProcessMode = ProcessModeEnum.Disabled;
+        AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+        MusicManager.instance.currentMusic = "music_game_over";
+        AudioManager.instance.PlaySFX("music_game_over");
+        await SceneSwitcher.instance.SwitchSceneAsyncSlide("LoseScreen");
     }
 
     public override void _Process(double delta)
