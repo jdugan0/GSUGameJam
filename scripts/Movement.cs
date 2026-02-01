@@ -187,6 +187,7 @@ public partial class Movement : CharacterBody2D
             acceleration = Acceleration;
             friction = Friction;
             maskSprite.Visible = false;
+            Ui.instance.vignette.Visible = false;
         }
         else
         {
@@ -194,6 +195,7 @@ public partial class Movement : CharacterBody2D
             acceleration = MaskAcceleration;
             friction = MaskFriction;
             maskSprite.Visible = true;
+            Ui.instance.vignette.Visible = true;
         }
         Vector2 targetVelocity = input * speed;
 
