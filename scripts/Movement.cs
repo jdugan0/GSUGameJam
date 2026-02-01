@@ -45,6 +45,7 @@ public partial class Movement : CharacterBody2D
     public float attackCooldown = 0.3f;
     public float attackCooldownTimer = 0f;
     public float attackDuration = 0.1f;
+
     [Export]
     public float attackKnockback = 2000f;
     public float attackInertia = 800f;
@@ -60,14 +61,22 @@ public partial class Movement : CharacterBody2D
     public uint dashLayer;
 
     public uint normalLayer;
+
     [Export]
     public AnimatedSprite2D playerSprite;
+
     [Export]
     public CollisionShape2D attackCollisionShape;
+
     [Export]
     public GpuParticles2D dashParticles;
 
-    private bool dashing => Velocity.Length() > MaxSpeed * 1.1;
+    [Export]
+    float dashTime;
+
+    float dashTimer;
+
+    private bool dashing => dashTimer <= dashTime;
 
     public override void _Ready()
     {
@@ -75,11 +84,14 @@ public partial class Movement : CharacterBody2D
         playerDashCooldownBar.MaxValue = dashCooldown;
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
         normalLayer = CollisionMask;
+        dashTimer = dashTime;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         float dt = (float)delta;
+
+        dashTimer += dt;
 
         Vector2 input = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
         if (input != Vector2.Zero)
@@ -263,6 +275,7 @@ public partial class Movement : CharacterBody2D
         Velocity = dir * dashAmount;
         CollisionLayer = 0;
         CollisionMask = dashLayer;
+        dashTimer = 0;
     }
 
     public void DashThroughEnemy(Node2D col)
@@ -275,11 +288,7 @@ public partial class Movement : CharacterBody2D
         attackReady = false;
         attackCooldownTimer = attackCooldown;
         attackCollisionShape.Disabled = false;
-        Velocity += (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
-        if (Velocity.Length() > MaxSpeed)
-        {
-            Velocity = Velocity.Normalized() * MaxSpeed;
-        }
+        Velocity = (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
     }
 
     public void ApplyAttack(Node2D col)
@@ -287,8 +296,7 @@ public partial class Movement : CharacterBody2D
         if (col is Enemy enemy)
         {
             enemy.BeAttacked(this);
-            Velocity -= (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
-            Velocity += (Position - enemy.Position).Normalized() * attackKnockback;
+            Velocity = (Position - enemy.Position).Normalized() * attackKnockback;
         }
     }
 
