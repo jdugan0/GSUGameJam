@@ -68,8 +68,15 @@ public partial class Camera : Camera2D
         Zoom = new Vector2(zoomAmount, zoomAmount);
         player = GetTree().GetFirstNodeInGroup("Player") as Movement;
         player.moveEnabled = false;
-        UI.ShowCreatureDialogue("An intruder. How... intriguing.");
-        UI.clickContinueLabel.Visible = true;
+        if (!meow)
+        {
+            UI.ShowCreatureDialogue("An intruder. How... intriguing.");
+            UI.clickContinueLabel.Visible = true; 
+        }
+        else
+        {
+            ZoomIn();  
+        }
     }
 
     public void TextAdvance()
@@ -113,7 +120,10 @@ public partial class Camera : Camera2D
             ) && Ui.instance.advanceEnabled
         )
         {
-            TextAdvance();
+            if(!meow)
+            {
+                TextAdvance();
+            }
         }
 
         if (player.mask != null && player.moveEnabled)
