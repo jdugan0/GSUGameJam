@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://c5ruedt0xh3dj"]
 
+[ext_resource type="Script" uid="uid://bjj6ljkvyt1mx" path="res://scripts/PauseMenu.cs" id="1_6tw0m"]
+
 [node name="PauseMenu" type="CanvasLayer" unique_id=1814995960]
+process_mode = 3
+visible = false
+script = ExtResource("1_6tw0m")
 
 [node name="CenterContainer" type="MarginContainer" parent="." unique_id=575928242]
 anchors_preset = 15
