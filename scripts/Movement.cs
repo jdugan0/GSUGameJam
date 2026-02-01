@@ -165,12 +165,14 @@ public partial class Movement : CharacterBody2D
             speed = MaxSpeed;
             acceleration = Acceleration;
             friction = Friction;
+            Ui.instance.vignette.Visible = false;
         }
         else
         {
             speed = MaskMaxSpeed;
             acceleration = MaskAcceleration;
             friction = MaskFriction;
+            Ui.instance.vignette.Visible = true;
         }
         Vector2 targetVelocity = input * speed;
 

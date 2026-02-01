@@ -18,12 +18,17 @@ public partial class Ui : CanvasLayer
     [Export]
     CanvasLayer pauseMenu;
 
+    [Export]
+    public ColorRect vignette;
+    public static Ui instance;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         player = GetTree().GetFirstNodeInGroup("Player") as Movement;
         creatureDialogueLabel.Modulate = new Color(1, 1, 1, 0);
         dashCooldownBar.MaxValue = player.dashCooldown;
+        instance = this;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

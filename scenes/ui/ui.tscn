@@ -3,13 +3,21 @@
 [ext_resource type="Script" uid="uid://djpyrxukbrljb" path="res://scripts/Ui.cs" id="1_f5cxw"]
 [ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="1_u7n8c"]
 [ext_resource type="PackedScene" uid="uid://c5ruedt0xh3dj" path="res://scenes/ui/pause_menu.tscn" id="3_aac20"]
+[ext_resource type="Shader" uid="uid://c4tiw2jpiia2y" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
 
-[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0dwhk"]
+shader = ExtResource("4_g5kmx")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 1.0
+
+[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu", "vignette")]
 script = ExtResource("1_f5cxw")
 dashCooldownBar = NodePath("TextureProgressBar")
 creatureDialogueLabel = NodePath("MarginContainer/CreatureDialogueLabel")
 timer = NodePath("Timer")
 pauseMenu = NodePath("PauseMenu")
+vignette = NodePath("ColorRect")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=471527323]
 anchors_preset = 2
@@ -46,3 +54,12 @@ theme_override_font_sizes/font_size = 24
 text = "TIME: 45.0"
 
 [node name="PauseMenu" parent="." unique_id=1814995960 instance=ExtResource("3_aac20")]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1186779292]
+visible = false
+material = SubResource("ShaderMaterial_0dwhk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
