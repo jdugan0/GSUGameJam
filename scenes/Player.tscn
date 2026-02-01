@@ -2,6 +2,20 @@
 
 [ext_resource type="Script" uid="uid://eo00q03200w3" path="res://scripts/Movement.cs" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="2_v6fml"]
+[ext_resource type="Texture2D" uid="uid://bjs6hvmtrd2gi" path="res://resources/sprites/player/protagback1.png" id="3_0rnld"]
+[ext_resource type="Texture2D" uid="uid://orxjm2fh0ccq" path="res://resources/sprites/player/protagback2.png" id="4_srp4u"]
+[ext_resource type="Texture2D" uid="uid://b54pkdkmn5nbf" path="res://resources/sprites/player/protagbackdiag1.png" id="5_jfpux"]
+[ext_resource type="Texture2D" uid="uid://bxcujp2jdkuti" path="res://resources/sprites/player/protagbackdiag2.png" id="6_61ith"]
+[ext_resource type="Texture2D" uid="uid://dwph0t7ajmvls" path="res://resources/sprites/player/protagbackstand.png" id="7_ebwui"]
+[ext_resource type="Texture2D" uid="uid://v1vhu6w4mb8p" path="res://resources/sprites/player/protagforward1.png" id="8_sfy4j"]
+[ext_resource type="Texture2D" uid="uid://dte0tt6wfvdcq" path="res://resources/sprites/player/protagforward2.png" id="9_gv3ic"]
+[ext_resource type="Texture2D" uid="uid://bo75d2kus6383" path="res://resources/sprites/player/protagfrontdiag1.png" id="10_b8lor"]
+[ext_resource type="Texture2D" uid="uid://55huu02ydw1f" path="res://resources/sprites/player/protagfrontdiag2.png" id="11_6e537"]
+[ext_resource type="Texture2D" uid="uid://d1k56dw52384s" path="res://resources/sprites/player/protagforwardstand.png" id="12_p07f3"]
+[ext_resource type="Texture2D" uid="uid://cy28mclu6k2vv" path="res://resources/sprites/player/protagside1.png" id="13_viqgg"]
+[ext_resource type="Texture2D" uid="uid://b37ssu5ad58f2" path="res://resources/sprites/player/protagsidestand.png" id="14_fgkxt"]
+[ext_resource type="Texture2D" uid="uid://dhdp0w67h20cc" path="res://resources/sprites/player/protagside2.png" id="15_xsi7p"]
+[ext_resource type="Texture2D" uid="uid://bqb35aeishb0j" path="res://resources/sprites/player/dashParticle.png" id="16_srp4u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 90.0
@@ -12,14 +26,119 @@ size = Vector2(399, 314)
 [sub_resource type="CircleShape2D" id="CircleShape2D_v6fml"]
 radius = 90.0
 
-[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea") groups=["Player"]]
+[sub_resource type="SpriteFrames" id="SpriteFrames_v6fml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0rnld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_srp4u")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jfpux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_61ith")
+}],
+"loop": true,
+"name": &"backDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ebwui")
+}],
+"loop": true,
+"name": &"backStand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_sfy4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gv3ic")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_b8lor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6e537")
+}],
+"loop": true,
+"name": &"frontDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_p07f3")
+}],
+"loop": true,
+"name": &"frontStand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_viqgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_fgkxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_xsi7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_fgkxt")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_fgkxt")
+}],
+"loop": true,
+"name": &"sideStand",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve" id="Curve_jfpux"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9617834, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_61ith"]
+curve = SubResource("Curve_jfpux")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ebwui"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 94.45
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_61ith")
+
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles") groups=["Player"]]
 collision_mask = 7
 script = ExtResource("1_p0vlq")
 dashCooldown = 0.8
 playerDashCooldownBar = NodePath("TextureProgressBar")
 rotationNode = NodePath("RotationNode")
-attackArea = NodePath("RotationNode/MouseDirectionMarker/Area2D")
+attackArea = NodePath("RotationNode/MouseDirectionMarker/Hitbox")
 dashLayer = 1
+playerSprite = NodePath("AnimatedSprite2D")
+attackCollisionShape = NodePath("RotationNode/MouseDirectionMarker/Hitbox/CollisionShape2D")
+dashParticles = NodePath("DashParticles")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")
@@ -40,9 +159,10 @@ texture_progress = ExtResource("2_v6fml")
 [node name="MouseDirectionMarker" type="Marker2D" parent="RotationNode" unique_id=95576238]
 position = Vector2(200, 0)
 
-[node name="Area2D" type="Area2D" parent="RotationNode/MouseDirectionMarker" unique_id=2136707696]
+[node name="Hitbox" type="Area2D" parent="RotationNode/MouseDirectionMarker" unique_id=2136707696]
+collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationNode/MouseDirectionMarker/Area2D" unique_id=1132444857]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationNode/MouseDirectionMarker/Hitbox" unique_id=1132444857]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_v6fml")
 debug_color = Color(1, 0, 0, 0.41960785)
@@ -53,4 +173,15 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1045574049]
 shape = SubResource("CircleShape2D_v6fml")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=142308481]
+sprite_frames = SubResource("SpriteFrames_v6fml")
+animation = &"side"
+frame_progress = 0.17385416
+
+[node name="DashParticles" type="GPUParticles2D" parent="." unique_id=1560085997]
+amount = 50
+texture = ExtResource("16_srp4u")
+process_material = SubResource("ParticleProcessMaterial_ebwui")
+
+[connection signal="body_entered" from="RotationNode/MouseDirectionMarker/Hitbox" to="." method="ApplyAttack"]
 [connection signal="body_entered" from="Area2D" to="." method="DashThroughEnemy"]
