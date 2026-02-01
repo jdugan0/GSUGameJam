@@ -53,13 +53,16 @@ public partial class GameManager : Node
             }
             else
             {
-                Win();
+                await Win();
             }
         }
     }
 
-    public void Win()
+    public async Task Win()
     {
-        SceneSwitcher.instance.SwitchScene("WinScreen");
+        AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+        MusicManager.instance.currentMusic = "music_game_win";
+        AudioManager.instance.PlaySFX("music_game_win");
+        await SceneSwitcher.instance.SwitchSceneAsyncSlide("WinScreen");
     }
 }

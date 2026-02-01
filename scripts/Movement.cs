@@ -129,7 +129,7 @@ public partial class Movement : CharacterBody2D
         }
         AudioManager.instance.PlaySFX("test_ow");
         protectionTimer = 1.0f;
-        Velocity = -(e.Position - Position).Normalized() * 1000;
+        Velocity = -(e.Position - Position).Normalized() * 2000;
         if (mask != null)
         {
             maskHealth--;
@@ -292,6 +292,9 @@ public partial class Movement : CharacterBody2D
         dead = true;
         Visible = false;
         ProcessMode = ProcessModeEnum.Disabled;
+        AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+        MusicManager.instance.currentMusic = "music_game_over";
+        AudioManager.instance.PlaySFX("music_game_over");
         await SceneSwitcher.instance.SwitchSceneAsyncSlide("LoseScreen");
     }
 
