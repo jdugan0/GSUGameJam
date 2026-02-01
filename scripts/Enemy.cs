@@ -163,6 +163,7 @@ public partial class Enemy : CharacterBody2D
         {
             tryingAttack = false;
             attackTimer = attackTime;
+            Stun();
             await enteredPlayer.Hurt(this);
         }
         if (attackDelayTimer <= 0)
