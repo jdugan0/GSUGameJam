@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg8i8dmum6fff"
-path="res://.godot/imported/begin2.png-a5b4db6c0efb17164e9cbac39ed0f109.ctex"
+uid="uid://ctqmf3dcmg1hq"
+path="res://.godot/imported/rechargeProgress.png-77bfc6b3d7f108f5657a9375f33c7a94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/ui/begin2.png"
-dest_files=["res://.godot/imported/begin2.png-a5b4db6c0efb17164e9cbac39ed0f109.ctex"]
+source_file="res://resources/sprites/ui/rechargeProgress.png"
+dest_files=["res://.godot/imported/rechargeProgress.png-77bfc6b3d7f108f5657a9375f33c7a94.ctex"]
 
 [params]
 

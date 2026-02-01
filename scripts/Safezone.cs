@@ -12,6 +12,8 @@ public partial class Safezone : Area2D
     {
         if (body is Movement m)
         {
+            
+            Ui.instance.ShowCreatureDialogue("Complete my ritual, interloper.");
             GameManager.instance.currentSafeMask = maskType;
         }
     }

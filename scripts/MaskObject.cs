@@ -46,6 +46,7 @@ public partial class MaskObject : RigidBody2D
         if (col is Movement m)
         {
             AudioManager.instance.PlaySFX("mask_get");
+            Ui.instance.ShowCreatureDialogue("Reach my [color=green]Altar[/color], or FALL.");
             AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
             MusicManager.instance.currentMusic = "music_spooky";
             AudioManager.instance.PlaySFX("music_spooky");

@@ -26,8 +26,6 @@ health = 0
 zoom = Vector2(0.5, 0.5)
 playerWeight = 15
 UI = NodePath("../GameUI")
-zoomSpeed = 0.1
-zoomDuration = 0.1
 
 [node name="GameUI" parent="." unique_id=1920844850 instance=ExtResource("4_2j4y6")]
 

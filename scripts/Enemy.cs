@@ -103,6 +103,7 @@ public partial class Enemy : CharacterBody2D
 
     [Export]
     Node2D campPos;
+    public bool disable = true;
     Color lightColor;
 
     [Export]
@@ -132,6 +133,10 @@ public partial class Enemy : CharacterBody2D
 
     public override async void _PhysicsProcess(double delta)
     {
+        if (disable)
+        {
+            return;
+        }
         if (mask != null)
         {
             light.Color = maskColor;
@@ -143,6 +148,8 @@ public partial class Enemy : CharacterBody2D
         if (stunned)
         {
             Modulate = new Color(Colors.White, 0.8f);
+            enemySprite.Animation = "hurt";
+            maskSprite.Animation = "hurt";
         }
         else
         {
@@ -311,7 +318,10 @@ public partial class Enemy : CharacterBody2D
             enemySprite.FlipH = false;
             maskSprite.FlipH = false;
         }
-        UpdateRotation();
+        if (!stunned)
+        {
+            UpdateRotation();
+        }
         MoveAndSlide();
     }
 

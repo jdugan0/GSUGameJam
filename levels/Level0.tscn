@@ -229,6 +229,7 @@ playerWeight = 15
 UI = NodePath("../GameUI")
 zoomSpeed = 0.1
 zoomDuration = 0.1
+zoomAmount = 0.2
 
 [node name="GameUI" parent="." unique_id=1920844850 instance=ExtResource("5_p1d1a")]
 

@@ -102,6 +102,8 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     public AnimatedSprite2D maskSprite;
+    [Export]
+    public AnimatedSprite2D punchSprite;
 
     [Export]
     Node2D safePos;
@@ -239,6 +241,7 @@ public partial class Movement : CharacterBody2D
             dashTimeRemaining -= dt;
             if (dashTimeRemaining <= 0)
             {
+                AudioManager.instance.PlaySFX("dash_recharge");
                 dashAvailable = true;
             }
         }
@@ -424,6 +427,7 @@ public partial class Movement : CharacterBody2D
     public void Attack()
     {
         AudioManager.instance.PlaySFX("woosh");
+        punchSprite.Play("punch");
         attackReady = false;
         attackCooldownTimer = attackCooldown;
         attackCollisionShape.Disabled = false;
