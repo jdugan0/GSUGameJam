@@ -46,6 +46,9 @@ public partial class Camera : Camera2D
 
     public static Camera instance;
     public int currentDialogueIndex = 0;
+
+    [Export]
+    bool meow = false;
     public string[] dialogueLines = new string[]
     {
         "An intruder. How... intriguing.",
@@ -91,7 +94,10 @@ public partial class Camera : Camera2D
         Vector2 mousePos = GetGlobalMousePosition();
         Position = (playerWeight * player.Position + mousePos) / (1 + playerWeight);
 
-        if (Input.IsActionJustPressed("SKIP_DIALOGUE") && Ui.instance.creatureDialogueLabel.Modulate.A > 0.2f)
+        if (
+            Input.IsActionJustPressed("SKIP_DIALOGUE")
+            && Ui.instance.creatureDialogueLabel.Modulate.A > 0.2f
+        )
         {
             UI.clickContinueLabel.Visible = false;
             currentDialogueIndex = -1;

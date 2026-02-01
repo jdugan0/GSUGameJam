@@ -5,6 +5,7 @@
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1814995960 node_paths=PackedStringArray("resumeButton", "quitButton")]
 process_mode = 3
+visible = false
 script = ExtResource("1_6tw0m")
 resumeButton = NodePath("")
 quitButton = NodePath("CenterContainer/VBoxContainer/QuitButton")
