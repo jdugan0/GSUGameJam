@@ -10,12 +10,16 @@ size = Vector2(180, 180)
 size = Vector2(200, 200)
 
 [node name="Mask" type="RigidBody2D" unique_id=2035663861 groups=["Mask"]]
+collision_layer = 8
+collision_mask = 3
 gravity_scale = 0.0
 can_sleep = false
 contact_monitor = true
 max_contacts_reported = 10
+linear_damp = 2.0
 script = ExtResource("1_eic0r")
 masktype = ExtResource("2_3d20y")
+pickupCooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=437146178]
 shape = SubResource("RectangleShape2D_28yc7")

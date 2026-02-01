@@ -135,10 +135,13 @@ dashCooldown = 0.8
 playerDashCooldownBar = NodePath("TextureProgressBar")
 rotationNode = NodePath("RotationNode")
 attackArea = NodePath("RotationNode/MouseDirectionMarker/Hitbox")
-dashLayer = 1
+attackCooldown = 0.6
+attackTime = 0.05
+dashLayer = 9
 playerSprite = NodePath("AnimatedSprite2D")
 attackCollisionShape = NodePath("RotationNode/MouseDirectionMarker/Hitbox/CollisionShape2D")
 dashParticles = NodePath("DashParticles")
+dashTime = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")

@@ -39,18 +39,29 @@ public partial class Enemy : CharacterBody2D
 
     private bool swapped;
     Vector2 updatedPos;
-    
+
     [Export]
     public float stunFriction = 3000f;
     public bool stunned = false;
+
     [Export]
     public float stunDuration = 1.0f;
+
     [Export]
     public float wallStunDuration = 2.0f;
+
     [Export]
     public Area2D wallDetectArea;
     public float stunnedTimeRemaining = 0f;
     public float globalAngle = 0f;
+
+    [Export]
+    float maskLaunchVelocity;
+
+    [Export]
+    PackedScene maskScene;
+
+    int health = 2;
 
     public override void _PhysicsProcess(double delta)
     {
@@ -177,7 +188,30 @@ public partial class Enemy : CharacterBody2D
     {
         stunned = true;
         stunnedTimeRemaining = stunDuration;
-        Velocity = (GetGlobalMousePosition() - attacker.Position).Normalized() * attacker.attackKnockback;
+        if (mask != null)
+        {
+            health--;
+            if (health == 0)
+            {
+                MaskObject m = maskScene.Instantiate<MaskObject>();
+                m.LinearVelocity =
+                    (GlobalPosition - GameManager.instance.player.GlobalPosition).Normalized()
+                    * maskLaunchVelocity;
+                var world = GetTree().CurrentScene;
+                m.GlobalPosition = GlobalPosition;
+                mask = null;
+                world.CallDeferred(MethodName.AddChild, m);
+                health = 2;
+            }
+        }
+        Velocity =
+            (GetGlobalMousePosition() - attacker.Position).Normalized() * attacker.attackKnockback;
+    }
+
+    public void Stun()
+    {
+        stunned = true;
+        stunnedTimeRemaining = stunDuration / 2;
     }
 
     public void WallImpact(Node2D col)

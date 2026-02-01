@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6p1a26rifnlj" path="res://resources/sprites/enemy/enemyfront2.png" id="5_og55s"]
 [ext_resource type="Texture2D" uid="uid://ddsw7enldet7n" path="res://resources/sprites/enemy/enemyfrontdiag.png" id="6_ofmb7"]
 [ext_resource type="Texture2D" uid="uid://drmb5ssstfhxd" path="res://resources/sprites/enemy/enemyside.png" id="7_7ue7x"]
+[ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="2_asoof"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
@@ -66,10 +67,12 @@ collision_mask = 3
 script = ExtResource("1_s2ept")
 navigationAgent2D = NodePath("NavigationAgent2D")
 enemySprite = NodePath("AnimatedSprite2D")
-maxSpeed = 800.0
+maxSpeed = 650.0
 desiredDistance = 2000.0
 protectDistance = 400.0
 wallDetectArea = NodePath("WallColiderArea")
+maskLaunchVelocity = 4000.0
+maskScene = ExtResource("2_asoof")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 shape = SubResource("CircleShape2D_3hddw")
