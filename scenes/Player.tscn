@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b37ssu5ad58f2" path="res://resources/sprites/player/protagsidestand.png" id="14_fgkxt"]
 [ext_resource type="Texture2D" uid="uid://dhdp0w67h20cc" path="res://resources/sprites/player/protagside2.png" id="15_xsi7p"]
 [ext_resource type="Texture2D" uid="uid://bqb35aeishb0j" path="res://resources/sprites/player/dashParticle.png" id="16_srp4u"]
+[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="18_61ith"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 90.0
@@ -189,6 +190,9 @@ frame_progress = 0.17385416
 amount = 50
 texture = ExtResource("16_srp4u")
 process_material = SubResource("ParticleProcessMaterial_ebwui")
+
+[node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("18_61ith")]
+energy = 0.5
 
 [connection signal="body_entered" from="RotationNode/MouseDirectionMarker/Hitbox" to="." method="ApplyAttack"]
 [connection signal="body_entered" from="Area2D" to="." method="DashThroughEnemy"]

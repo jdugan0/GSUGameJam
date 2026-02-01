@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c6p1a26rifnlj" path="res://resources/sprites/enemy/enemyfront2.png" id="5_og55s"]
 [ext_resource type="Texture2D" uid="uid://ddsw7enldet7n" path="res://resources/sprites/enemy/enemyfrontdiag.png" id="6_ofmb7"]
 [ext_resource type="Texture2D" uid="uid://drmb5ssstfhxd" path="res://resources/sprites/enemy/enemyside.png" id="7_7ue7x"]
+[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="9_mv824"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
@@ -87,7 +88,6 @@ avoidance_enabled = true
 radius = 120.0
 neighbor_distance = 300.0
 max_speed = 800.0
-debug_enabled = true
 
 [node name="WallColiderArea" type="Area2D" parent="." unique_id=1364696613]
 
@@ -103,6 +103,10 @@ shape = SubResource("RectangleShape2D_asoof")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=554953936]
 sprite_frames = SubResource("SpriteFrames_3tf2c")
 animation = &"back"
+
+[node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("9_mv824")]
+color = Color(0.51734436, 0.07977464, 0.12322696, 1)
+energy = 2.87
 
 [connection signal="body_entered" from="Attack" to="." method="PlayerEnter"]
 [connection signal="body_exited" from="Attack" to="." method="PlayerExit"]

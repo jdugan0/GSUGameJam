@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="7_gnwoi"]
 [ext_resource type="PackedScene" uid="uid://dbofuopnrqbih" path="res://scenes/EnemyMain.tscn" id="8_ohbpv"]
 [ext_resource type="PackedScene" uid="uid://btvu1rt5o03a4" path="res://scenes/safezone.tscn" id="9_skuna"]
+[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="10_yrrca"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5h8y2"]
 vertices = PackedVector2Array(-12.859375, 30.007813, -11.1484375, 90, -90, 90, -90, -90, 90, -90, 90, 30.007813)
@@ -212,5 +213,47 @@ position = Vector2(-3004, 4177)
 
 [node name="Mask" parent="." unique_id=2035663861 instance=ExtResource("7_gnwoi")]
 position = Vector2(-1841, -1349)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1160110690]
+color = Color(0.14815038, 0.0814768, 0.34293166, 1)
+
+[node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("10_yrrca")]
+position = Vector2(-2994, 2922)
+color = Color(0.44227684, 0.6863458, 0.098253764, 1)
+energy = 0.89
+texture_scale = 6.02
+
+[node name="PointLight2D2" parent="." unique_id=806402477 instance=ExtResource("10_yrrca")]
+position = Vector2(3911, -1914)
+
+[node name="PointLight2D3" parent="." unique_id=2067753953 instance=ExtResource("10_yrrca")]
+position = Vector2(3763, 2490)
+
+[node name="PointLight2D4" parent="." unique_id=252666629 instance=ExtResource("10_yrrca")]
+position = Vector2(2428, -24)
+
+[node name="PointLight2D5" parent="." unique_id=1832284101 instance=ExtResource("10_yrrca")]
+position = Vector2(530, 1918)
+
+[node name="PointLight2D6" parent="." unique_id=1816036376 instance=ExtResource("10_yrrca")]
+position = Vector2(-1680, 1051)
+
+[node name="PointLight2D7" parent="." unique_id=736923300 instance=ExtResource("10_yrrca")]
+position = Vector2(530, -1151)
+
+[node name="PointLight2D8" parent="." unique_id=238624714 instance=ExtResource("10_yrrca")]
+position = Vector2(-2868, -1775)
+
+[node name="PointLight2D9" parent="." unique_id=992620406 instance=ExtResource("10_yrrca")]
+position = Vector2(-1377, 2594)
+
+[node name="PointLight2D10" parent="." unique_id=187316751 instance=ExtResource("10_yrrca")]
+position = Vector2(-3084, 955)
+
+[node name="PointLight2D11" parent="." unique_id=2092791928 instance=ExtResource("10_yrrca")]
+position = Vector2(4075, 349)
+
+[node name="PointLight2D12" parent="." unique_id=1050101907 instance=ExtResource("10_yrrca")]
+position = Vector2(2142, -1714)
 
 [editable path="Safezone"]
