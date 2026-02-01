@@ -129,6 +129,7 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 [sub_resource type="Resource" id="Resource_1yug6"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("19_phtfg")
+volume = -10.0
 name = "music_main"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
@@ -147,6 +148,7 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 [sub_resource type="Resource" id="Resource_cq6mo"]
 script = ExtResource("2_wmmek")
 stream = ExtResource("22_eagts")
+volume = -10.0
 name = "music_neardeath"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
