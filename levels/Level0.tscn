@@ -232,14 +232,17 @@ UI = NodePath("../GameUI")
 
 [node name="PauseMenu" parent="." unique_id=1814995960 instance=ExtResource("6_yye3l")]
 
-[node name="EnemyMain" parent="." unique_id=1918356411 instance=ExtResource("8_ohbpv")]
+[node name="EnemyMain" parent="." unique_id=1918356411 node_paths=PackedStringArray("campPos") instance=ExtResource("8_ohbpv")]
 position = Vector2(-283, -1585)
+campPos = NodePath("../Safezone")
 
-[node name="EnemyMain2" parent="." unique_id=933793734 instance=ExtResource("8_ohbpv")]
+[node name="EnemyMain2" parent="." unique_id=933793734 node_paths=PackedStringArray("campPos") instance=ExtResource("8_ohbpv")]
 position = Vector2(948, 499)
+campPos = NodePath("../Safezone")
 
-[node name="EnemyMain3" parent="." unique_id=386378330 instance=ExtResource("8_ohbpv")]
+[node name="EnemyMain3" parent="." unique_id=386378330 node_paths=PackedStringArray("campPos") instance=ExtResource("8_ohbpv")]
 position = Vector2(-1542, 442)
+campPos = NodePath("../Safezone")
 
 [node name="Safezone" parent="." unique_id=1763886929 instance=ExtResource("9_skuna")]
 position = Vector2(-2982, 2933)
