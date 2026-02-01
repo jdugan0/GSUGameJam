@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bgnunqw0k1q18" path="res://scripts/Flicker.cs" id="2_1v823"]
 
 [node name="PointLight2D" type="PointLight2D" unique_id=15953330]
-color = Color(0.959207, 0.40865913, 0.20640227, 1)
+color = Color(0.96715206, 0.3869127, 0.3509221, 1)
 energy = 2.19
 shadow_enabled = true
 texture = ExtResource("1_pr0ow")

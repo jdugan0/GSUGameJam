@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ca4lkhxrk2yk8" path="res://resources/sprites/mask/maskfrontdiag.png" id="12_ucchj"]
 [ext_resource type="Texture2D" uid="uid://bnu75hta0ka8i" path="res://resources/sprites/mask/maskside.png" id="13_pf4na"]
 [ext_resource type="Texture2D" uid="uid://bqb35aeishb0j" path="res://resources/sprites/player/dashParticle.png" id="14_yqth3"]
+[ext_resource type="Texture2D" uid="uid://2stje8df700x" path="res://resources/2d_lights_and_shadows_neutral_point_light.webp" id="16_ucchj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
@@ -196,6 +197,7 @@ stunImpactParticles = NodePath("stunImpactParticles")
 stunnedParticles = NodePath("stunnedParticles")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
+visible = false
 shape = SubResource("CircleShape2D_3hddw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1369785930]
@@ -207,12 +209,14 @@ neighbor_distance = 300.0
 max_speed = 800.0
 
 [node name="WallColiderArea" type="Area2D" parent="." unique_id=1364696613]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallColiderArea" unique_id=1501708975]
 shape = SubResource("CircleShape2D_s2ept")
 debug_color = Color(0, 0.6, 0.69803923, 0.17254902)
 
 [node name="Attack" type="Area2D" parent="." unique_id=999350324]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" unique_id=1188853712]
 shape = SubResource("RectangleShape2D_asoof")
@@ -252,6 +256,11 @@ visible = false
 color = Color(0.51734436, 0.07977464, 0.12322696, 1)
 energy = 4.32
 texture_scale = 5.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1896855725]
+energy = 1.5
+texture = ExtResource("16_ucchj")
+texture_scale = 1.2
 
 [connection signal="body_entered" from="Attack" to="." method="PlayerEnter"]
 [connection signal="body_exited" from="Attack" to="." method="PlayerExit"]

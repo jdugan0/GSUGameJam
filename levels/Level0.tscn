@@ -233,7 +233,7 @@ zoomDuration = 0.1
 [node name="PauseMenu" parent="." unique_id=1814995960 instance=ExtResource("6_yye3l")]
 
 [node name="EnemyMain" parent="." unique_id=1918356411 node_paths=PackedStringArray("campPos") instance=ExtResource("8_ohbpv")]
-position = Vector2(840, -1008)
+position = Vector2(-283, -1585)
 campPos = NodePath("../Safezone")
 
 [node name="EnemyMain2" parent="." unique_id=933793734 node_paths=PackedStringArray("campPos") instance=ExtResource("8_ohbpv")]
@@ -254,7 +254,8 @@ position = Vector2(-3004, 4177)
 position = Vector2(-2498, -1683)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1160110690]
-color = Color(0.14815038, 0.0814768, 0.34293166, 1)
+position = Vector2(-200, -6)
+color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("10_yrrca")]
 position = Vector2(-2994, 2922)
