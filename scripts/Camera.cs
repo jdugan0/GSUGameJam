@@ -1,4 +1,5 @@
 using System;
+using System.Security.Principal;
 using Godot;
 
 public partial class Camera : Camera2D
@@ -24,15 +25,24 @@ public partial class Camera : Camera2D
     [Export]
     float zoomAmount = 2.5f;
 
-    [ExportGroup("Shake Settings")]
+    [ExportGroup("Screen Shake")]
     [Export]
-    float shakeMaxOffset = 24f;
+    float shakeSampleRate = 40f;
 
     [Export]
-    float shakeFrequency = 35f;
+    float shakeSmoothing = 25f;
 
     [Export]
-    float shakeSmoothing = 18f;
+    float shakeFadePower = 2.0f;
+
+    private readonly RandomNumberGenerator rng = new();
+    private float shakeTimeLeft;
+    private float shakeDurationTotal;
+    private float shakeAmplitude;
+    private float shakeSampleTimer;
+    private Vector2 shakeTarget;
+    private Vector2 shakeCurrent;
+    private Vector2 lastAppliedShake;
 
     public static Camera instance;
     public int currentDialogueIndex = 0;
@@ -48,23 +58,15 @@ public partial class Camera : Camera2D
         "",
     };
 
-    float shakeTimeLeft = 0f;
-    float shakeDuration = 0f;
-    float shakeIntensity = 0f;
-    float shakePhase = 0f;
-    Vector2 shakeTargetOffset = Vector2.Zero;
-    Vector2 shakeCurrentOffset = Vector2.Zero;
-    readonly RandomNumberGenerator rng = new RandomNumberGenerator();
-
     public override void _Ready()
     {
         instance = this;
+        rng.Randomize();
         Zoom = new Vector2(zoomAmount, zoomAmount);
         player = GetTree().GetFirstNodeInGroup("Player") as Movement;
         player.moveEnabled = false;
         UI.ShowCreatureDialogue("An intruder. How... intriguing.");
         UI.clickContinueLabel.Visible = true;
-        rng.Randomize();
     }
 
     public void TextAdvance()
@@ -86,8 +88,6 @@ public partial class Camera : Camera2D
 
     public override void _Process(double delta)
     {
-        float dt = (float)delta;
-
         Vector2 mousePos = GetGlobalMousePosition();
         Position = (playerWeight * player.Position + mousePos) / (1 + playerWeight);
 
@@ -118,57 +118,7 @@ public partial class Camera : Camera2D
             Zoom = new Vector2(defaultZoom, defaultZoom);
         }
 
-        UpdateShake(dt);
-    }
-
-    void UpdateShake(float dt)
-    {
-        if (shakeTimeLeft <= 0f)
-        {
-            shakeTargetOffset = Vector2.Zero;
-        }
-        else
-        {
-            shakeTimeLeft = Mathf.Max(0f, shakeTimeLeft - dt);
-            shakePhase += dt * shakeFrequency;
-
-            float t = shakeDuration <= 0f ? 0f : 1f - (shakeTimeLeft / shakeDuration);
-            float amp = shakeIntensity * (1f - t);
-
-            if (shakePhase >= 1f)
-            {
-                shakePhase -= 1f;
-                float ox = rng.RandfRange(-1f, 1f);
-                float oy = rng.RandfRange(-1f, 1f);
-                Vector2 v = new Vector2(ox, oy);
-                if (v.LengthSquared() > 0f)
-                    v = v.Normalized();
-                shakeTargetOffset = v * (amp * shakeMaxOffset);
-            }
-        }
-
-        shakeCurrentOffset = shakeCurrentOffset.Lerp(
-            shakeTargetOffset,
-            1f - Mathf.Exp(-shakeSmoothing * dt)
-        );
-        Offset = shakeCurrentOffset;
-    }
-
-    public void ScreenShake(float intensity, float duration)
-    {
-        intensity = Mathf.Clamp(intensity, 0f, 1f);
-        duration = Mathf.Max(0f, duration);
-
-        if (duration <= 0f || intensity <= 0f)
-            return;
-
-        if (shakeTimeLeft > 0f)
-            shakeIntensity = Mathf.Max(shakeIntensity, intensity);
-        else
-            shakeIntensity = intensity;
-
-        shakeDuration = Mathf.Max(shakeDuration, duration);
-        shakeTimeLeft = Mathf.Max(shakeTimeLeft, duration);
+        ApplyShake((float)delta);
     }
 
     public void ZoomIn()
@@ -186,5 +136,63 @@ public partial class Camera : Camera2D
                 (enemy as Enemy).disable = false;
             }
         };
+    }
+
+    public void ScreenShake(float amplitude, float duration)
+    {
+        if (duration <= 0f || amplitude <= 0f)
+            return;
+
+        shakeDurationTotal = Math.Max(shakeDurationTotal, duration);
+        shakeTimeLeft = Math.Max(shakeTimeLeft, duration);
+        shakeAmplitude = Math.Max(shakeAmplitude, amplitude);
+
+        if (shakeSampleTimer <= 0f)
+            shakeSampleTimer = 1f / Math.Max(1f, shakeSampleRate);
+    }
+
+    private void ApplyShake(float delta)
+    {
+        Vector2 rawOffset = Offset - lastAppliedShake;
+
+        if (shakeTimeLeft <= 0f)
+        {
+            shakeCurrent = Vector2.Zero;
+            shakeTarget = Vector2.Zero;
+            lastAppliedShake = Vector2.Zero;
+            Offset = rawOffset;
+            shakeDurationTotal = 0f;
+            shakeAmplitude = 0f;
+            shakeSampleTimer = 0f;
+            return;
+        }
+
+        shakeTimeLeft = Math.Max(0f, shakeTimeLeft - delta);
+
+        float interval = 1f / Math.Max(1f, shakeSampleRate);
+        shakeSampleTimer -= delta;
+
+        while (shakeSampleTimer <= 0f)
+        {
+            shakeSampleTimer += interval;
+            shakeTarget = RandomInUnitCircle();
+        }
+
+        float t = shakeDurationTotal > 0f ? (shakeTimeLeft / shakeDurationTotal) : 0f;
+        float fade = Mathf.Pow(Mathf.Clamp(t, 0f, 1f), shakeFadePower);
+        Vector2 target = shakeTarget * (shakeAmplitude * fade);
+
+        float lerpT = 1f - Mathf.Exp(-Mathf.Max(0.01f, shakeSmoothing) * delta);
+        shakeCurrent = shakeCurrent.Lerp(target, lerpT);
+
+        lastAppliedShake = shakeCurrent;
+        Offset = rawOffset + shakeCurrent;
+    }
+
+    private Vector2 RandomInUnitCircle()
+    {
+        float angle = rng.RandfRange(0f, Mathf.Tau);
+        float radius = Mathf.Sqrt(rng.Randf());
+        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
     }
 }
