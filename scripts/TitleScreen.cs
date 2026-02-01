@@ -42,7 +42,7 @@ public partial class TitleScreen : Control
         };
         startButton.Pressed += () =>
         {
-            SceneSwitcher.instance.SwitchScene(1);
+            SceneSwitcher.instance.SwitchScene(2);
         };
     }
 

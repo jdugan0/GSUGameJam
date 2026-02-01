@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b75h7i7133wue" path="res://scripts/sceneswitcher/SceneResource.cs" id="2_dare8"]
 [ext_resource type="PackedScene" uid="uid://q5umbrfw6aex" path="res://scenes/ui/title_screen.tscn" id="2_yjr5b"]
 [ext_resource type="PackedScene" uid="uid://b6afgr2mytsjr" path="res://levels/Level1.tscn" id="4_80c7e"]
+[ext_resource type="PackedScene" uid="uid://bnddhd427qm3g" path="res://levels/Level0.tscn" id="5_mu64o"]
 
 [sub_resource type="Resource" id="Resource_dare8"]
 script = ExtResource("2_dare8")
@@ -17,13 +18,19 @@ sceneName = "Level1"
 scene = ExtResource("4_80c7e")
 metadata/_custom_type_script = "uid://b75h7i7133wue"
 
+[sub_resource type="Resource" id="Resource_3l4qv"]
+script = ExtResource("2_dare8")
+sceneName = "Level0"
+scene = ExtResource("5_mu64o")
+metadata/_custom_type_script = "uid://b75h7i7133wue"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i3um"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="Sceneswitcher" type="Node" unique_id=619671277]
 process_mode = 3
 script = ExtResource("1_388wc")
-scenes = Array[Object]([SubResource("Resource_dare8"), SubResource("Resource_yjr5b")])
+scenes = Array[Object]([SubResource("Resource_dare8"), SubResource("Resource_yjr5b"), SubResource("Resource_3l4qv")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2138373054]
 layer = 10
