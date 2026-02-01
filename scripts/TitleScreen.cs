@@ -50,4 +50,9 @@ public partial class TitleScreen : Control
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta) { }
+
+    public void onValueChanged(float value)
+    {
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Master"), Mathf.LinearToDb(value));
+    }
 }
