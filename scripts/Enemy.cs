@@ -119,7 +119,7 @@ public partial class Enemy : CharacterBody2D
     {
         if (stunned)
         {
-            Modulate = new Color(Colors.White, 0.5f);
+            Modulate = new Color(Colors.White, 0.8f);
         }
         else
         {
