@@ -33,6 +33,8 @@ public partial class Ui : CanvasLayer
     [Export]
     HBoxContainer healthContainer;
     public bool advanceEnabled = false;
+    [Export]
+    public TextureProgressBar candle;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -41,6 +43,7 @@ public partial class Ui : CanvasLayer
         creatureDialogueLabel.Modulate = new Color(1, 1, 1, 0);
         dashCooldownBar.MaxValue = player.dashCooldown;
         instance = this;
+        candle.Visible = false;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -72,12 +75,17 @@ public partial class Ui : CanvasLayer
         dashCooldownBar.Value = (player.dashCooldown - player.dashTimeRemaining);
         if (GameManager.instance.countdown)
         {
+            
+            candle.Visible = true;
             timer.Visible = true;
             timer.Text =
                 "TIMER: "
                 + Math.Round(
                     (GameManager.instance.checkTime - GameManager.instance.currentTime) * 10
                 ) / 10;
+            Vector2 n = new Vector2(candle.Size.X, 240 - (240* GameManager.instance.currentTime / GameManager.instance.checkTime));
+            candle.CustomMinimumSize = n;
+            Math.Round(GameManager.instance.currentTime);
         }
         else
         {

@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c5ruedt0xh3dj" path="res://scenes/ui/pause_menu.tscn" id="3_aac20"]
 [ext_resource type="PackedScene" uid="uid://bbowfytjjhsg0" path="res://scenes/HealthRect.tscn" id="3_jcn1r"]
 [ext_resource type="Texture2D" uid="uid://b5i4sdakrpf1i" path="res://resources/sprites/ui/rechargeUnder.png" id="4_7vp6q"]
-[ext_resource type="Shader" uid="uid://c4tiw2jpiia2y" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
+[ext_resource type="Shader" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
+[ext_resource type="Texture2D" uid="uid://dlgkvq7d246eb" path="res://resources/sprites/ui/candlebody.png" id="8_uegxj"]
+[ext_resource type="Texture2D" uid="uid://cjgk4w3k5xpxd" path="res://resources/sprites/ui/candletop.png" id="9_y220t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0dwhk"]
 shader = ExtResource("4_g5kmx")
@@ -14,7 +16,7 @@ shader_parameter/alpha = 1.0
 shader_parameter/inner_radius = 0.0
 shader_parameter/outer_radius = 1.0
 
-[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu", "vignette", "clickContinueLabel", "healthContainer")]
+[node name="GameUI" type="CanvasLayer" unique_id=1920844850 node_paths=PackedStringArray("dashCooldownBar", "creatureDialogueLabel", "timer", "pauseMenu", "vignette", "clickContinueLabel", "healthContainer", "candle")]
 script = ExtResource("1_f5cxw")
 dashCooldownBar = NodePath("Control/TextureProgressBar")
 creatureDialogueLabel = NodePath("Control/MarginContainer/CreatureDialogueLabel")
@@ -25,6 +27,7 @@ clickContinueLabel = NodePath("Control/MarginContainer/CreatureDialogueLabel/cli
 maskHealth = ExtResource("2_7vp6q")
 normalHealth = ExtResource("3_jcn1r")
 healthContainer = NodePath("Control/HBoxContainer")
+candle = NodePath("MarginContainer/cnald")
 
 [node name="Control" type="Control" parent="." unique_id=1007917646]
 layout_mode = 3
@@ -115,3 +118,24 @@ anchor_right = 1.0
 offset_left = -239.0
 offset_bottom = 118.0
 grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1418948823]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 33
+theme_override_constants/margin_top = 88
+theme_override_constants/margin_right = 1699
+theme_override_constants/margin_bottom = 731
+
+[node name="cnald" type="TextureProgressBar" parent="MarginContainer" unique_id=713250579]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_vertical = 8
+value = 76.0
+fill_mode = 2
+nine_patch_stretch = true
+texture_under = ExtResource("8_uegxj")
+texture_over = ExtResource("9_y220t")
