@@ -40,7 +40,6 @@ public partial class Camera : Camera2D
         ""
     };
 
-    Vector2 initalZoom;
 
     public override void _Ready()
     {
@@ -83,13 +82,13 @@ public partial class Camera : Camera2D
         if (Input.IsActionJustPressed("DASH") || Input.IsActionJustPressed("ATTACK") || Input.IsActionJustPressed("RIGHT"))
         {
             TextAdvance();
-        if (player.mask != null && Zoom == initalZoom)
+        if (player.mask != null)
         {
             Zoom *= 1.5f;
         }
         if (player.mask == null)
         {
-            Zoom = initalZoom;
+            Zoom = new Vector2(defaultZoom, defaultZoom);
         }
     }
     }
