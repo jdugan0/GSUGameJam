@@ -82,6 +82,20 @@ public partial class Movement : CharacterBody2D
 
     private bool dashing => dashTimer <= dashTime;
 
+    [Export]
+    public int health;
+
+    [Export]
+    float maskLaunchVelocity;
+
+    [Export]
+    PackedScene maskScene;
+
+    public int maskHealth;
+
+    [Export]
+    float protectionTimer;
+
     public override void _Ready()
     {
         attackCollisionShape.Disabled = true;
@@ -89,6 +103,40 @@ public partial class Movement : CharacterBody2D
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
         normalLayer = CollisionMask;
         dashTimer = dashTime;
+        maskHealth = 0;
+        protectionTimer = 0.1f;
+    }
+
+    public void Hurt(Enemy e)
+    {
+        if (protectionTimer > 0)
+        {
+            return;
+        }
+        protectionTimer = 0.1f;
+        Velocity = -(e.Position - Position).Normalized() * 3000;
+        if (mask != null)
+        {
+            maskHealth--;
+            if (maskHealth == 0)
+            {
+                MaskObject m = maskScene.Instantiate<MaskObject>();
+                m.LinearVelocity =
+                    (GlobalPosition - e.GlobalPosition).Normalized() * maskLaunchVelocity;
+                var world = GetTree().CurrentScene;
+                m.GlobalPosition = GlobalPosition;
+                mask = null;
+                world.CallDeferred(MethodName.AddChild, m);
+            }
+        }
+        else
+        {
+            health--;
+            if (health == 0)
+            {
+                Kill();
+            }
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -97,7 +145,13 @@ public partial class Movement : CharacterBody2D
 
         dashTimer += dt;
 
+        protectionTimer -= (float)delta;
+
         Vector2 input = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
+        if (protectionTimer > 0)
+        {
+            input = Vector2.Zero;
+        }
         if (input != Vector2.Zero)
         {
             playerSprite.Play();
