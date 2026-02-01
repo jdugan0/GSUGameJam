@@ -230,7 +230,7 @@ public partial class Movement : CharacterBody2D
         {
             playerDashCooldownBar.Visible = false;
             speed = MaskMaxSpeed;
-            acceleration = MaskAcceleration;
+            acceleration = MaskAcceleration;    
             friction = MaskFriction;
             maskSprite.Visible = true;
             Ui.instance.vignette.Visible = true;

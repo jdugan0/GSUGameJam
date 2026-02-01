@@ -134,6 +134,7 @@ public partial class Ui : CanvasLayer
 
     public void FinishDialogue()
     {
+        clickContinueLabel.Visible = false;
         var alphaTween = CreateTween()
             .TweenProperty(creatureDialogueLabel, "modulate:a", 0.0f, dialogueFadeDuration)
             .SetTrans(Tween.TransitionType.Sine)

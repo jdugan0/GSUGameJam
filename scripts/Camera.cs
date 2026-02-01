@@ -91,8 +91,9 @@ public partial class Camera : Camera2D
         Vector2 mousePos = GetGlobalMousePosition();
         Position = (playerWeight * player.Position + mousePos) / (1 + playerWeight);
 
-        if (Input.IsActionJustPressed("SKIP_DIALOGUE"))
+        if (Input.IsActionJustPressed("SKIP_DIALOGUE") && Ui.instance.creatureDialogueLabel.Modulate.A > 0.2f)
         {
+            UI.clickContinueLabel.Visible = false;
             currentDialogueIndex = -1;
             UI.FinishDialogue();
             ZoomIn();

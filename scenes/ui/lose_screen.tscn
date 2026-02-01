@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://cl5r1rongfq08"]
 
 [ext_resource type="Script" uid="uid://txn5f85upitu" path="res://scripts/WinScreen.cs" id="1_kmlj8"]
-[ext_resource type="Texture2D" uid="uid://jlj3jv8st0a6" path="res://resources/sprites/ui/main_menu(placeholder).png" id="2_im7qs"]
+[ext_resource type="Texture2D" uid="uid://etwkgrntf3sa" path="res://resources/sprites/ui/winlossbg (1).png" id="2_ed3k8"]
+[ext_resource type="FontFile" uid="uid://bx21ffb0benwo" path="res://resources/Blackcraft.ttf" id="3_ipjrc"]
+[ext_resource type="Texture2D" uid="uid://cg74pai8reedb" path="res://resources/sprites/ui/mainmenu1.png" id="4_ki61e"]
+[ext_resource type="Texture2D" uid="uid://dp80f5phvsge0" path="res://resources/sprites/ui/mainmenu2.png" id="5_5vopv"]
 
 [node name="LoseScreen" type="Control" unique_id=452959523 node_paths=PackedStringArray("mainMenuButton")]
 layout_mode = 3
@@ -20,15 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1268771734]
-layout_mode = 0
-offset_left = 222.0
-offset_top = 149.0
-offset_right = 1644.0
-offset_bottom = 441.0
-theme_override_font_sizes/normal_font_size = 180
-text = "YOU LOSE"
+texture = ExtResource("2_ed3k8")
 
 [node name="MainScreen" type="MarginContainer" parent="." unique_id=27184988]
 layout_mode = 1
@@ -46,7 +41,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 400
+theme_override_constants/margin_top = 164
 theme_override_constants/margin_right = 150
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainScreen/MarginContainer" unique_id=830017370]
@@ -61,6 +56,15 @@ theme_override_constants/margin_top = 37
 layout_mode = 2
 theme_override_constants/separation = 40
 
+[node name="RichTextLabel" type="RichTextLabel" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1268771734]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_ipjrc")
+theme_override_font_sizes/normal_font_size = 252
+bbcode_enabled = true
+text = "[shake]YOU LOSE"
+fit_content = true
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=826386278]
 layout_mode = 2
 theme_override_constants/separation = 600
@@ -68,4 +72,5 @@ alignment = 1
 
 [node name="MainMenuButton" type="TextureButton" parent="MainScreen/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=313274917]
 layout_mode = 2
-texture_normal = ExtResource("2_im7qs")
+texture_normal = ExtResource("4_ki61e")
+texture_pressed = ExtResource("5_5vopv")
