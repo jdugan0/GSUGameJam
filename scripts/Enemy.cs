@@ -175,20 +175,11 @@ public partial class Enemy : CharacterBody2D
             Vector2 dir = (next - GlobalPosition).Normalized();
             navigationAgent2D.Velocity = dir * maxSpeed;
             Velocity = computedV;
-            if (Velocity.Length() <= 10f)
-            {
-                globalAngle = computedV.Angle();
-            }
         }
         else if (!stunned)
         {
             navigationAgent2D.Velocity = Vector2.Zero;
             Velocity = computedV;
-            
-            if (Velocity.Length() <= 10f)
-            {
-                globalAngle = computedV.Angle();
-            }
         }
         else if (stunned)
         {
@@ -202,7 +193,18 @@ public partial class Enemy : CharacterBody2D
                 }
             }
         }
-        //GD.Print(computedV.Angle());
+        if (Velocity.Length() >= 10f)
+        {
+            globalAngle = computedV.Angle();
+        }
+        if (Velocity.X < 0)
+        {
+            enemySprite.FlipH = true;
+        }
+        else
+        {
+            enemySprite.FlipH = false;
+        }
         UpdateRotation();
         MoveAndSlide();
     }

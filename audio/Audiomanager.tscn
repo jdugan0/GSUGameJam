@@ -114,6 +114,7 @@ stream_1/stream = ExtResource("17_dcpl7")
 [sub_resource type="Resource" id="Resource_qq4lq"]
 script = ExtResource("2_wmmek")
 stream = SubResource("AudioStreamRandomizer_wsuhf")
+volume = 5.0
 name = "woosh"
 metadata/_custom_type_script = "uid://007myadtw53h"
 
