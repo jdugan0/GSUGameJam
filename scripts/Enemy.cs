@@ -177,7 +177,6 @@ public partial class Enemy : CharacterBody2D
         {
             enemySprite.FlipH = false;
         }
-        GD.Print(globalAngle);
         UpdateRotation();
         MoveAndSlide();
     }

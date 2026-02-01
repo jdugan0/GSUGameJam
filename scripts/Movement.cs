@@ -281,6 +281,7 @@ public partial class Movement : CharacterBody2D
 
     public void Dash()
     {
+        AudioManager.instance.PlaySFX("dash");
         Vector2 mousePos = GetGlobalMousePosition();
         Vector2 dir = (mousePos - Position).Normalized();
         Velocity = dir * dashAmount;
@@ -299,6 +300,7 @@ public partial class Movement : CharacterBody2D
 
     public void Attack()
     {
+        AudioManager.instance.PlaySFX("woosh");
         attackReady = false;
         attackCooldownTimer = attackCooldown;
         attackCollisionShape.Disabled = false;
@@ -310,6 +312,7 @@ public partial class Movement : CharacterBody2D
     {
         if (col is Enemy enemy)
         {
+            AudioManager.instance.PlaySFX("punch");
             enemy.BeAttacked(this);
             Velocity = (Position - enemy.Position).Normalized() * attackKnockback;
         }
