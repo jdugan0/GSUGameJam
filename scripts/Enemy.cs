@@ -37,6 +37,7 @@ public partial class Enemy : CharacterBody2D
         CHASE_PLAYER,
         PROTECT,
         GET_MASK,
+        CAMP,
     }
 
     public EnemyState enemyState = EnemyState.GET_MASK;
@@ -95,6 +96,9 @@ public partial class Enemy : CharacterBody2D
 
     bool hidden = false;
 
+    [Export]
+    Node2D campPos;
+
     public void PlayerEnter(Node2D col)
     {
         if (col is Movement m)
@@ -129,7 +133,15 @@ public partial class Enemy : CharacterBody2D
         }
         Rid navMap = navigationAgent2D.GetNavigationMap();
         float playerDist = GameManager.instance.player.Position.DistanceTo(Position);
-        if (GameManager.instance.onGround == null && GameManager.instance.player.mask == null)
+        if (GameManager.instance.player.mask == null)
+        {
+            enemyState = EnemyState.CAMP;
+            if (playerDist < 1000)
+            {
+                enemyState = EnemyState.CHASE_PLAYER;
+            }
+        }
+        else if (GameManager.instance.onGround == null && GameManager.instance.player.mask == null)
         {
             if (mask == null)
             {
@@ -188,6 +200,9 @@ public partial class Enemy : CharacterBody2D
         }
         switch (enemyState)
         {
+            case EnemyState.CAMP:
+                navigationAgent2D.TargetPosition = campPos.Position;
+                break;
             case EnemyState.GET_MASK:
                 if (GameManager.instance.onGround != null)
                 {

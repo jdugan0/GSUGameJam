@@ -9,12 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://ddsw7enldet7n" path="res://resources/sprites/enemy/enemyfrontdiag.png" id="6_ofmb7"]
 [ext_resource type="Texture2D" uid="uid://drmb5ssstfhxd" path="res://resources/sprites/enemy/enemyside.png" id="7_7ue7x"]
 [ext_resource type="Texture2D" uid="uid://d4epfu3qwrvda" path="res://resources/sprites/mask/maskprotagback.png" id="9_5ysjj"]
+[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="9_mv824"]
 [ext_resource type="Texture2D" uid="uid://dv24jxteokl01" path="res://resources/sprites/mask/maskenemybackdiag.png" id="10_5ysjj"]
 [ext_resource type="Texture2D" uid="uid://medftsmhr7en" path="res://resources/sprites/mask/maskforward.png" id="11_icxj7"]
 [ext_resource type="Texture2D" uid="uid://ca4lkhxrk2yk8" path="res://resources/sprites/mask/maskfrontdiag.png" id="12_ucchj"]
 [ext_resource type="Texture2D" uid="uid://bnu75hta0ka8i" path="res://resources/sprites/mask/maskside.png" id="13_pf4na"]
 [ext_resource type="Texture2D" uid="uid://bqb35aeishb0j" path="res://resources/sprites/player/dashParticle.png" id="14_yqth3"]
-[ext_resource type="PackedScene" uid="uid://cbap8l3xw30v" path="res://scenes/point_light_2d.tscn" id="9_mv824"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
@@ -248,6 +248,7 @@ speed_scale = 4.0
 process_material = SubResource("ParticleProcessMaterial_ti6d3")
 
 [node name="PointLight2D" parent="." unique_id=15953330 instance=ExtResource("9_mv824")]
+visible = false
 color = Color(0.51734436, 0.07977464, 0.12322696, 1)
 energy = 4.32
 texture_scale = 5.0

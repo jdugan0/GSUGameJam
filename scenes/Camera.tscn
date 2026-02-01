@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c3yylmgtl7h7q" path="res://scripts/Camera.cs" id="1_a3ute"]
 
 [node name="Camera2D" type="Camera2D" unique_id=1045887185]
-zoom = Vector2(0.25, 0.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("1_a3ute")

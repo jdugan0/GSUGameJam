@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public partial class Safezone : Node
+public partial class Safezone : Area2D
 {
     [Export]
     public Mask maskType = null;
