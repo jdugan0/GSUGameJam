@@ -5,12 +5,12 @@
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1814995960 node_paths=PackedStringArray("resumeButton", "quitButton")]
 process_mode = 3
-visible = false
 script = ExtResource("1_6tw0m")
-resumeButton = NodePath("CenterContainer/VBoxContainer/ResumeButton")
+resumeButton = NodePath("")
 quitButton = NodePath("CenterContainer/VBoxContainer/QuitButton")
 
 [node name="CenterContainer" type="MarginContainer" parent="." unique_id=575928242]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,10 +21,13 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 500
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=961229932]
+process_mode = 3
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 32
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer" unique_id=311464040]
+process_mode = 3
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_0lmf7")
 bbcode_enabled = true
@@ -32,16 +35,11 @@ text = "[font_size=120]PAUSED"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1790284788]
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_0lmf7")
-theme_override_font_sizes/font_size = 64
-text = "RESUME"
-
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1287109626]
+process_mode = 3
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("2_0lmf7")
 theme_override_font_sizes/font_size = 64
 text = "QUIT"

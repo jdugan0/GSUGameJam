@@ -60,7 +60,7 @@ public partial class GameManager : Node
             }
             else
             {
-            await Win();
+                await Win();
             }
         }
     }
