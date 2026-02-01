@@ -27,7 +27,6 @@ public partial class Camera : Camera2D
 
     public static Camera instance;
     public int currentDialogueIndex = 0;
-
     public string[] dialogueLines = new string[]
     {
         "An intruder. How... intriguing.",
@@ -54,8 +53,10 @@ public partial class Camera : Camera2D
 
     public void TextAdvance()
     {
+        Ui.instance.advanceEnabled = false;
         if (currentDialogueIndex < dialogueLines.Length - 1 && currentDialogueIndex >= 0)
         {
+            GD.Print("Advancing dialogue", currentDialogueIndex);
             currentDialogueIndex++;
             if (dialogueLines[currentDialogueIndex] == "")
             {
@@ -79,7 +80,7 @@ public partial class Camera : Camera2D
             ZoomIn();
             return;
         }
-        if (Input.IsActionJustPressed("DASH") || Input.IsActionJustPressed("ATTACK") || Input.IsActionJustPressed("RIGHT"))
+        if ((Input.IsActionJustPressed("DASH") || Input.IsActionJustPressed("ATTACK") || Input.IsActionJustPressed("RIGHT")) && Ui.instance.advanceEnabled)
         {
             TextAdvance();
         }
