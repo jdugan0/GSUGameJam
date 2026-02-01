@@ -289,7 +289,6 @@ public partial class Enemy : CharacterBody2D
         stunnedTimeRemaining = stunDuration;
         if (mask != null)
         {
-            GD.Print(health);
             health--;
             if (health == 0)
             {

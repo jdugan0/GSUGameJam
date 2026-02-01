@@ -22,6 +22,15 @@ public partial class Ui : CanvasLayer
     public ColorRect vignette;
     public static Ui instance;
 
+    [Export]
+    PackedScene maskHealth;
+
+    [Export]
+    PackedScene normalHealth;
+
+    [Export]
+    HBoxContainer healthContainer;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -34,6 +43,27 @@ public partial class Ui : CanvasLayer
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        foreach (var x in healthContainer.GetChildren())
+        {
+            healthContainer.RemoveChild(x);
+            x.QueueFree();
+        }
+        // GD.Print(heaplthContainer.GetChildCount());
+        if (player.mask != null)
+        {
+            for (int i = 0; i < player.maskHealth; i++)
+            {
+                healthContainer.AddChild(maskHealth.Instantiate());
+            }
+        }
+        else
+        {
+            for (int i = 0; i < player.health; i++)
+            {
+                // GD.Print(i);
+                healthContainer.AddChild(normalHealth.Instantiate());
+            }
+        }
         dashCooldownBar.Value = (player.dashCooldown - player.dashTimeRemaining);
         if (GameManager.instance.countdown)
         {

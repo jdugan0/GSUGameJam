@@ -134,14 +134,9 @@ public partial class Movement : CharacterBody2D
             }
             if (maskHealth == 0)
             {
-                AudioManager.instance.PlaySFX("mask_lose");
-                MaskObject m = maskScene.Instantiate<MaskObject>();
-                m.LinearVelocity =
-                    (GlobalPosition - e.GlobalPosition).Normalized() * maskLaunchVelocity;
-                var world = GetTree().CurrentScene;
-                m.GlobalPosition = GlobalPosition;
+                protectionTimer = 3;
+                e.mask = mask;
                 mask = null;
-                world.CallDeferred(MethodName.AddChild, m);
             }
         }
         else
@@ -163,7 +158,7 @@ public partial class Movement : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         float dt = (float)delta;
-
+        // GD.Print(health);
         dashTimer += dt;
 
         protectionTimer -= (float)delta;
