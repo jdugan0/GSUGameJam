@@ -37,14 +37,17 @@ public partial class Enemy : CharacterBody2D
 
     private bool swapped;
     Vector2 updatedPos;
-    
+
     [Export]
     public float stunFriction = 3000f;
     public bool stunned = false;
+
     [Export]
     public float stunDuration = 1.0f;
+
     [Export]
     public float wallStunDuration = 2.0f;
+
     [Export]
     public Area2D wallDetectArea;
     public float stunnedTimeRemaining = 0f;
@@ -164,7 +167,14 @@ public partial class Enemy : CharacterBody2D
     {
         stunned = true;
         stunnedTimeRemaining = stunDuration;
-        Velocity = (GetGlobalMousePosition() - attacker.Position).Normalized() * attacker.attackKnockback;
+        Velocity =
+            (GetGlobalMousePosition() - attacker.Position).Normalized() * attacker.attackKnockback;
+    }
+
+    public void Stun()
+    {
+        stunned = true;
+        stunnedTimeRemaining = stunDuration / 2;
     }
 
     public void WallImpact(Node2D col)

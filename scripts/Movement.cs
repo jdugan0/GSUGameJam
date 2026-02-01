@@ -280,7 +280,10 @@ public partial class Movement : CharacterBody2D
 
     public void DashThroughEnemy(Node2D col)
     {
-        if (col is Enemy e) { }
+        if (col is Enemy e)
+        {
+            e.Stun();
+        }
     }
 
     public void Attack()
