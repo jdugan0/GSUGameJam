@@ -43,7 +43,11 @@ public partial class Movement : CharacterBody2D
 
     [Export]
     public float attackCooldown = 0.3f;
+    public float attackCooldownTimer = 0f;
     public float attackDuration = 0.1f;
+    [Export]
+    public float attackKnockback = 2000f;
+    public float attackInertia = 800f;
     public bool attackReady = true;
 
     public float speed;
@@ -56,14 +60,18 @@ public partial class Movement : CharacterBody2D
     public uint dashLayer;
 
     public uint normalLayer;
+    [Export]
+    public AnimatedSprite2D playerSprite;
+    [Export]
+    public CollisionShape2D attackCollisionShape;
+    [Export]
+    public GpuParticles2D dashParticles;
 
     private bool dashing => Velocity.Length() > MaxSpeed * 1.1;
 
     public override void _Ready()
     {
-        attackArea.Monitorable = false;
-        attackArea.Monitoring = false;
-        attackArea.GetChild<CollisionShape2D>(0).Disabled = true;
+        attackCollisionShape.Disabled = true;
         playerDashCooldownBar.MaxValue = dashCooldown;
         playerDashCooldownBar.Value = playerDashCooldownBar.MaxValue;
         normalLayer = CollisionMask;
@@ -74,7 +82,14 @@ public partial class Movement : CharacterBody2D
         float dt = (float)delta;
 
         Vector2 input = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
-
+        if (input != Vector2.Zero)
+        {
+            playerSprite.Play();
+        }
+        else
+        {
+            playerSprite.Stop();
+        }
         if (mask == null)
         {
             speed = MaxSpeed;
@@ -119,6 +134,23 @@ public partial class Movement : CharacterBody2D
             MoveAndSlide();
             UpdateRotation();
         }
+        if (attackCooldownTimer > 0f)
+        {
+            attackCooldownTimer -= dt;
+            if (attackCooldownTimer <= 0)
+            {
+                attackReady = true;
+                attackCollisionShape.Disabled = true;
+            }
+        }
+        if (dashing)
+        {
+            dashParticles.Emitting = true;
+        }
+        else
+        {
+            dashParticles.Emitting = false;
+        }
     }
 
     public void Kill()
@@ -149,6 +181,79 @@ public partial class Movement : CharacterBody2D
         Vector2 dir = (mousePos - Position).Normalized();
         float angle = dir.Angle();
         rotationNode.Rotation = angle;
+        const float pi = (float)Math.PI;
+        if (Velocity.Length() < 10f)
+        {
+            if (angle < pi / 8 && angle > -pi / 8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < 3 * pi / 8 && angle > pi / 8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < 5 * pi / 8 && angle > 3 * pi / 8)
+            {
+                playerSprite.Animation = "frontStand";
+            }
+            else if (angle < 7 * pi / 8 && angle > 5 * pi / 8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < -7 * pi / 8 && angle > -pi)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < -5 * pi / 8 && angle > -7 * pi / 8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+            else if (angle < -3 * pi / 8 && angle > -5 * pi / 8)
+            {
+                playerSprite.Animation = "backStand";
+            }
+            else if (angle < -pi / 8 && angle > -3 * pi / 8)
+            {
+                playerSprite.Animation = "sideStand";
+            }
+        }
+        else
+        {
+            if (angle < pi / 8 && angle > -pi / 8)
+            {
+                playerSprite.Animation = "side";
+            }
+            else if (angle < 3 * pi / 8 && angle > pi / 8)
+            {
+                playerSprite.Animation = "frontDiag";
+            }
+            else if (angle < 5 * pi / 8 && angle > 3 * pi / 8)
+            {
+                playerSprite.Animation = "front";
+            }
+            else if (angle < 7 * pi / 8 && angle > 5 * pi / 8)
+            {
+                playerSprite.Animation = "frontDiag";
+            }
+            else if (angle < -7 * pi / 8 && angle > -pi)
+            {
+                playerSprite.Animation = "side";
+            }
+            else if (angle < -5 * pi / 8 && angle > -7 * pi / 8)
+            {
+                playerSprite.Animation = "backDiag";
+            }
+            else if (angle < -3 * pi / 8 && angle > -5 * pi / 8)
+            {
+                playerSprite.Animation = "back";
+            }
+            else if (angle < -pi / 8 && angle > -3 * pi / 8)
+            {
+                playerSprite.Animation = "backDiag";
+            }
+        }
+        rotationNode.Rotation = angle;
+        UpdateSpriteDirection();
     }
 
     public void Dash()
@@ -168,28 +273,34 @@ public partial class Movement : CharacterBody2D
     public void Attack()
     {
         attackReady = false;
-        attackArea.Monitorable = true;
-        attackArea.Monitoring = true;
-        attackArea.GetChild<CollisionShape2D>(0).Disabled = false;
-        //actual attack
-        var bodies = attackArea.GetOverlappingBodies();
-        GD.Print(bodies);
-        foreach (var body in bodies)
+        attackCooldownTimer = attackCooldown;
+        attackCollisionShape.Disabled = false;
+        Velocity += (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
+        if (Velocity.Length() > MaxSpeed)
         {
-            //
+            Velocity = Velocity.Normalized() * MaxSpeed;
         }
+    }
 
-        //spawn animation
-        GetTree().CreateTimer(attackDuration).Timeout += () =>
+    public void ApplyAttack(Node2D col)
+    {
+        if (col is Enemy enemy)
         {
-            attackArea.Monitorable = false;
-            attackArea.Monitoring = false;
-            attackArea.GetChild<CollisionShape2D>(0).Disabled = true;
+            enemy.BeAttacked(this);
+            Velocity -= (attackArea.GlobalPosition - Position).Normalized() * attackInertia;
+            Velocity += (Position - enemy.Position).Normalized() * attackKnockback;
+        }
+    }
 
-            GetTree().CreateTimer(attackCooldown).Timeout += () =>
-            {
-                attackReady = true;
-            };
-        };
+    public void UpdateSpriteDirection()
+    {
+        if (GetGlobalMousePosition().X < Position.X)
+        {
+            playerSprite.FlipH = true;
+        }
+        else
+        {
+            playerSprite.FlipH = false;
+        }
     }
 }
