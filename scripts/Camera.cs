@@ -82,15 +82,16 @@ public partial class Camera : Camera2D
         if (Input.IsActionJustPressed("DASH") || Input.IsActionJustPressed("ATTACK") || Input.IsActionJustPressed("RIGHT"))
         {
             TextAdvance();
+        }
+        
         if (player.mask != null)
         {
-            Zoom *= 1.5f;
+            Zoom = new Vector2(defaultZoom * 1.5f, defaultZoom * 1.5f);
         }
         if (player.mask == null)
         {
             Zoom = new Vector2(defaultZoom, defaultZoom);
         }
-    }
     }
 
     // at the beginning of the round, zoom out to show zone locations
