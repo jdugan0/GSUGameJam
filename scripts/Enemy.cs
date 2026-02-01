@@ -5,6 +5,7 @@ public partial class Enemy : CharacterBody2D
 {
     [Export]
     NavigationAgent2D navigationAgent2D;
+
     [Export]
     public AnimatedSprite2D enemySprite;
 
@@ -100,7 +101,7 @@ public partial class Enemy : CharacterBody2D
             if (mask == null)
             {
                 enemyState = EnemyState.PROTECT;
-                if (playerDist < 600)
+                if (playerDist < 1000)
                 {
                     enemyState = EnemyState.CHASE_PLAYER;
                 }
@@ -253,41 +254,41 @@ public partial class Enemy : CharacterBody2D
             Velocity = Vector2.Zero;
         }
     }
+
     public void UpdateRotation()
     {
         const float pi = (float)Math.PI;
         if (globalAngle < pi / 8 && globalAngle > -pi / 8)
-            {
-                enemySprite.Animation = "side";
-            }
-            else if (globalAngle < 3 * pi / 8 && globalAngle > pi / 8)
-            {
-                enemySprite.Animation = "frontDiag";
-            }
-            else if (globalAngle < 5 * pi / 8 && globalAngle > 3 * pi / 8)
-            {
-                enemySprite.Animation = "front";
-            }
-            else if (globalAngle < 7 * pi / 8 && globalAngle > 5 * pi / 8)
-            {
-                enemySprite.Animation = "frontDiag";
-            }
-            else if (globalAngle < -7 * pi / 8 && globalAngle > -pi)
-            {
-                enemySprite.Animation = "side";
-            }
-            else if (globalAngle < -5 * pi / 8 && globalAngle > -7 * pi / 8)
-            {
-                enemySprite.Animation = "backDiag";
-            }
-            else if (globalAngle < -3 * pi / 8 && globalAngle > -5 * pi / 8)
-            {
-                enemySprite.Animation = "back";
-            }
-            else if (globalAngle < -pi / 8 && globalAngle > -3 * pi / 8)
-            {
-                enemySprite.Animation = "backDiag";
-            }
+        {
+            enemySprite.Animation = "side";
+        }
+        else if (globalAngle < 3 * pi / 8 && globalAngle > pi / 8)
+        {
+            enemySprite.Animation = "frontDiag";
+        }
+        else if (globalAngle < 5 * pi / 8 && globalAngle > 3 * pi / 8)
+        {
+            enemySprite.Animation = "front";
+        }
+        else if (globalAngle < 7 * pi / 8 && globalAngle > 5 * pi / 8)
+        {
+            enemySprite.Animation = "frontDiag";
+        }
+        else if (globalAngle < -7 * pi / 8 && globalAngle > -pi)
+        {
+            enemySprite.Animation = "side";
+        }
+        else if (globalAngle < -5 * pi / 8 && globalAngle > -7 * pi / 8)
+        {
+            enemySprite.Animation = "backDiag";
+        }
+        else if (globalAngle < -3 * pi / 8 && globalAngle > -5 * pi / 8)
+        {
+            enemySprite.Animation = "back";
+        }
+        else if (globalAngle < -pi / 8 && globalAngle > -3 * pi / 8)
+        {
+            enemySprite.Animation = "backDiag";
+        }
     }
 }
-
