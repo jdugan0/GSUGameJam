@@ -18,10 +18,10 @@
 [ext_resource type="AudioStream" uid="uid://dg2w3edae1ltg" path="res://audio/sfx/woosh_1.wav" id="16_ullj3"]
 [ext_resource type="AudioStream" uid="uid://dm5hnx6llxuyr" path="res://audio/sfx/woosh_2.wav" id="17_dcpl7"]
 [ext_resource type="AudioStream" uid="uid://cewndaa2w5ik7" path="res://audio/music/L1 Intro.wav" id="18_1yug6"]
-[ext_resource type="AudioStream" uid="uid://316epuqexedp" path="res://audio/music/Music Frantic.wav" id="19_phtfg"]
+[ext_resource type="AudioStream" uid="uid://bf601frkxvsco" path="res://audio/music/Music Main Chill.wav" id="19_ev1im"]
 [ext_resource type="AudioStream" uid="uid://b2hvu7iqj1l36" path="res://audio/music/Music Spooky.wav" id="20_18f5x"]
 [ext_resource type="AudioStream" uid="uid://c1hs00wnhssax" path="res://audio/music/About to Lose Mask.wav" id="21_18f5x"]
-[ext_resource type="AudioStream" uid="uid://cxit1c2y2a0ru" path="res://audio/music/About to Die.wav" id="22_eagts"]
+[ext_resource type="AudioStream" uid="uid://b3mmgdf4t3kcr" path="res://audio/music/One Heart Chill.wav" id="22_ev1im"]
 [ext_resource type="AudioStream" uid="uid://d0h61xii554ca" path="res://audio/sfx/Mask Equip and blew your face off.wav" id="23_sacl8"]
 [ext_resource type="AudioStream" uid="uid://cmlmil7hq33a" path="res://audio/sfx/Mask Loss.wav" id="24_jxuaw"]
 [ext_resource type="AudioStream" uid="uid://755d2hm6eikt" path="res://audio/sfx/Scream.wav" id="25_ullj3"]
@@ -129,7 +129,7 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 
 [sub_resource type="Resource" id="Resource_1yug6"]
 script = ExtResource("2_wmmek")
-stream = ExtResource("19_phtfg")
+stream = ExtResource("19_ev1im")
 volume = -10.0
 name = "music_main"
 metadata/_custom_type_script = "uid://007myadtw53h"
@@ -148,7 +148,7 @@ metadata/_custom_type_script = "uid://007myadtw53h"
 
 [sub_resource type="Resource" id="Resource_cq6mo"]
 script = ExtResource("2_wmmek")
-stream = ExtResource("22_eagts")
+stream = ExtResource("22_ev1im")
 volume = -10.0
 name = "music_neardeath"
 metadata/_custom_type_script = "uid://007myadtw53h"

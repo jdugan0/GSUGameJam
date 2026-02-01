@@ -214,7 +214,7 @@ emission_sphere_radius = 94.45
 gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_61ith")
 
-[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("bar", "playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles", "maskSprite") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=897455521 node_paths=PackedStringArray("bar", "playerDashCooldownBar", "rotationNode", "attackArea", "playerSprite", "attackCollisionShape", "dashParticles", "maskSprite", "punchSprite") groups=["Player"]]
 collision_mask = 7
 script = ExtResource("1_p0vlq")
 bar = NodePath("Sprite2D")
@@ -232,6 +232,7 @@ dashTime = 0.3
 health = 3
 maskScene = ExtResource("2_6e537")
 maskSprite = NodePath("maskAnimationSprited2D")
+punchSprite = NodePath("RotationNode/MouseDirectionMarker/Hitbox/punchAnimated")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1182065299]
 shape = SubResource("CircleShape2D_5q5h1")
@@ -282,7 +283,7 @@ shape = SubResource("CircleShape2D_v6fml")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=142308481]
 sprite_frames = SubResource("SpriteFrames_v6fml")
-animation = &"frontStand"
+animation = &"side"
 
 [node name="maskAnimationSprited2D" type="AnimatedSprite2D" parent="." unique_id=1408887563]
 visible = false
