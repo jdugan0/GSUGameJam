@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://djpyrxukbrljb" path="res://scripts/Ui.cs" id="1_f5cxw"]
 [ext_resource type="Texture2D" uid="uid://dpbghjmrai2ys" path="res://icon.svg" id="1_u7n8c"]
 [ext_resource type="PackedScene" uid="uid://c5ruedt0xh3dj" path="res://scenes/ui/pause_menu.tscn" id="3_aac20"]
+[ext_resource type="PackedScene" uid="uid://bbowfytjjhsg0" path="res://scenes/HealthRect.tscn" id="3_pfayw"]
 [ext_resource type="Shader" uid="uid://c4tiw2jpiia2y" path="res://scripts/Vignette.gdshader" id="4_g5kmx"]
 [ext_resource type="PackedScene" uid="uid://c0c4vxf274orr" path="res://scenes/MaskRect.tscn" id="5_0dwhk"]
 
@@ -20,7 +21,7 @@ timer = NodePath("Timer")
 pauseMenu = NodePath("PauseMenu")
 vignette = NodePath("ColorRect")
 maskHealth = ExtResource("5_0dwhk")
-normalHealth = ExtResource("5_0dwhk")
+normalHealth = ExtResource("3_pfayw")
 healthContainer = NodePath("HBoxContainer")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=471527323]

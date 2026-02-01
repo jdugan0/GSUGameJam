@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bbowfytjjhsg0"]
+
+[ext_resource type="Texture2D" uid="uid://dype5w0c2a2y5" path="res://resources/heart.png" id="1_giycm"]
+
+[node name="TextureRect2" type="TextureRect" unique_id=1110655029]
+custom_minimum_size = Vector2(90, 90)
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("1_giycm")
+expand_mode = 1
