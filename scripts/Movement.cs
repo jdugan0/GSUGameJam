@@ -140,6 +140,17 @@ public partial class Movement : CharacterBody2D
             }
             if (maskHealth == 0)
             {
+                AudioManager.instance.CancelSFX(MusicManager.instance.currentMusic);
+                if (health == 1)
+                {
+                    MusicManager.instance.currentMusic = "music_neardeath";
+                    AudioManager.instance.PlaySFX("music_neardeath");
+                }
+                else
+                {
+                    MusicManager.instance.currentMusic = "music_main";
+                    AudioManager.instance.PlaySFX("music_main");
+                }
                 protectionTimer = 3;
                 e.mask = mask;
                 mask = null;
