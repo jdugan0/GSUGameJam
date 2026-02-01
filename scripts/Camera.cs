@@ -27,7 +27,6 @@ public partial class Camera : Camera2D
 
     public static Camera instance;
     public int currentDialogueIndex = 0;
-
     public string[] dialogueLines = new string[]
     {
         "An intruder. How... intriguing.",

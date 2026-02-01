@@ -114,7 +114,10 @@ public partial class Enemy : CharacterBody2D
     Color maskColor;
 
     bool tryingAttack = false;
-
+    [Export]
+    public Node2D attackRotate;
+    [Export]
+    public AnimatedSprite2D attackSprite;
     public void PlayerEnter(Node2D col)
     {
         if (col is Movement m)
@@ -163,6 +166,9 @@ public partial class Enemy : CharacterBody2D
         {
             tryingAttack = false;
             attackTimer = attackTime;
+            attackRotate.Rotation = (enteredPlayer.Position - Position).Angle();
+            GD.Print("Enemy attacking!", attackRotate.Rotation);
+            attackSprite.Play("attack");
             await enteredPlayer.Hurt(this);
         }
         if (attackDelayTimer <= 0)

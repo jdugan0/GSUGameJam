@@ -16,6 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://bnu75hta0ka8i" path="res://resources/sprites/mask/maskside.png" id="13_pf4na"]
 [ext_resource type="Texture2D" uid="uid://bqb35aeishb0j" path="res://resources/sprites/player/dashParticle.png" id="14_yqth3"]
 [ext_resource type="Texture2D" uid="uid://2stje8df700x" path="res://resources/2d_lights_and_shadows_neutral_point_light.webp" id="16_ucchj"]
+[ext_resource type="Texture2D" uid="uid://cpehfk3cn1soa" path="res://resources/sprites/enemyattack/enemyattack1.png" id="17_ea4rb"]
+[ext_resource type="Texture2D" uid="uid://kt6r17hiycpp" path="res://resources/sprites/punch/emptyPuncj.png" id="17_htnou"]
+[ext_resource type="Texture2D" uid="uid://co1iqo0mfd0d8" path="res://resources/sprites/enemyattack/enemyattack2.png" id="18_htnou"]
+[ext_resource type="Texture2D" uid="uid://rhfy14gxtdi3" path="res://resources/sprites/enemyattack/enemyattack3.png" id="19_ds164"]
+[ext_resource type="Texture2D" uid="uid://dwk30by5kv2fr" path="res://resources/sprites/enemyattack/enemyattack4.png" id="20_sf42v"]
+[ext_resource type="Texture2D" uid="uid://4bnmrgtuyq01" path="res://resources/sprites/enemyattack/enemyattack5.png" id="21_edhhm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
 radius = 90.0
@@ -195,7 +201,36 @@ scale_max = 0.5
 color = Color(0.9843137, 0.9529412, 0.6039216, 1)
 alpha_curve = SubResource("CurveTexture_kn3bp")
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "light", "wallDetectArea", "maskSprite", "maskParticles", "stunImpactParticles", "stunnedParticles") groups=["Enemy"]]
+[sub_resource type="SpriteFrames" id="SpriteFrames_2fv65"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_htnou")
+}, {
+"duration": 0.5,
+"texture": ExtResource("17_ea4rb")
+}, {
+"duration": 0.7,
+"texture": ExtResource("18_htnou")
+}, {
+"duration": 0.7,
+"texture": ExtResource("19_ds164")
+}, {
+"duration": 2.13,
+"texture": ExtResource("20_sf42v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_edhhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_htnou")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 15.0
+}]
+
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "light", "wallDetectArea", "maskSprite", "maskParticles", "stunImpactParticles", "stunnedParticles", "attackRotate", "attackSprite") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_s2ept")
@@ -215,6 +250,8 @@ stunImpactParticles = NodePath("stunImpactParticles")
 stunnedParticles = NodePath("stunnedParticles")
 attackDelay = 0.3
 maskColor = Color(0.6687735, 0.0028766787, 0.9235373, 1)
+attackRotate = NodePath("attackRotate")
+attackSprite = NodePath("attackRotate/AnimatedSprite2D2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1779755004]
 visible = false
@@ -275,6 +312,18 @@ process_material = SubResource("ParticleProcessMaterial_ti6d3")
 energy = 1.5
 texture = ExtResource("16_ucchj")
 texture_scale = 1.2
+
+[node name="attackRotate" type="Node2D" parent="." unique_id=71133327]
+rotation = -4.5116763
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="attackRotate" unique_id=256629057]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(205.88568, -11.273283)
+scale = Vector2(5.472, 7.629)
+sprite_frames = SubResource("SpriteFrames_2fv65")
+animation = &"attack"
+frame = 6
+frame_progress = 1.0
 
 [connection signal="body_entered" from="Attack" to="." method="PlayerEnter"]
 [connection signal="body_exited" from="Attack" to="." method="PlayerExit"]
