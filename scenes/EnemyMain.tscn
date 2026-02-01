@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://dbofuopnrqbih"]
 
 [ext_resource type="Script" uid="uid://7ukpqnq7q76a" path="res://scripts/Enemy.cs" id="1_s2ept"]
+[ext_resource type="Texture2D" uid="uid://bnkcvftpce7o" path="res://resources/sprites/enemy/enemyback.png" id="2_rt5mi"]
+[ext_resource type="Texture2D" uid="uid://dkgu6fcugwod2" path="res://resources/sprites/enemy/enemybackdiag.png" id="3_3tf2c"]
+[ext_resource type="Texture2D" uid="uid://0dvqqoxapdre" path="res://resources/sprites/enemy/enemyfront1.png" id="4_mv824"]
+[ext_resource type="Texture2D" uid="uid://c6p1a26rifnlj" path="res://resources/sprites/enemy/enemyfront2.png" id="5_og55s"]
+[ext_resource type="Texture2D" uid="uid://ddsw7enldet7n" path="res://resources/sprites/enemy/enemyfrontdiag.png" id="6_ofmb7"]
+[ext_resource type="Texture2D" uid="uid://drmb5ssstfhxd" path="res://resources/sprites/enemy/enemyside.png" id="7_7ue7x"]
 [ext_resource type="PackedScene" uid="uid://b0lwnmk5xg4hs" path="res://scenes/Mask.tscn" id="2_asoof"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hddw"]
@@ -9,11 +15,58 @@ radius = 90.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_s2ept"]
 radius = 105.67
 
-[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "wallDetectArea") groups=["Enemy"]]
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ysjj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rt5mi")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3tf2c")
+}],
+"loop": true,
+"name": &"backDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mv824")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_og55s")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ofmb7")
+}],
+"loop": true,
+"name": &"frontDiag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7ue7x")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}]
+
+[node name="EnemyMain" type="CharacterBody2D" unique_id=1918356411 node_paths=PackedStringArray("navigationAgent2D", "enemySprite", "wallDetectArea") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_s2ept")
 navigationAgent2D = NodePath("NavigationAgent2D")
+enemySprite = NodePath("AnimatedSprite2D")
 maxSpeed = 650.0
 desiredDistance = 2000.0
 protectDistance = 400.0
@@ -38,3 +91,7 @@ debug_enabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallColiderArea" unique_id=1501708975]
 shape = SubResource("CircleShape2D_s2ept")
 debug_color = Color(0, 0.6, 0.69803923, 0.17254902)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=772521705]
+sprite_frames = SubResource("SpriteFrames_5ysjj")
+animation = &"side"
