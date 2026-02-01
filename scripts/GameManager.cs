@@ -50,6 +50,15 @@ public partial class GameManager : Node
             {
                 player.Kill();
             }
+            else
+            {
+                Win();
+            }
         }
+    }
+    
+    public void Win()
+    {
+        SceneSwitcher.instance.SwitchScene("WinScreen");
     }
 }
