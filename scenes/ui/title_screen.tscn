@@ -125,35 +125,16 @@ split_offset = 200
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_jsbfx")
 theme_override_font_sizes/font_size = 56
-text = "MUSIC "
+text = "SOUND"
 horizontal_alignment = 1
 
 [node name="SFXScrollBar" type="HScrollBar" parent="SettingsScreen/MarginContainer/VBoxContainer/HBoxMusic" unique_id=178382211]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-step = 10.0
-value = 100.0
-
-[node name="HBoxSFX" type="HSplitContainer" parent="SettingsScreen/MarginContainer/VBoxContainer" unique_id=106060433]
-layout_mode = 2
-split_offsets = PackedInt32Array(200)
-dragging_enabled = false
-split_offset = 200
-
-[node name="SFXLabel" type="Label" parent="SettingsScreen/MarginContainer/VBoxContainer/HBoxSFX" unique_id=1788635319]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_jsbfx")
-theme_override_font_sizes/font_size = 56
-text = "SFX"
-horizontal_alignment = 1
-
-[node name="SFXScrollBar" type="HScrollBar" parent="SettingsScreen/MarginContainer/VBoxContainer/HBoxSFX" unique_id=140445234]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-step = 10.0
-value = 100.0
+max_value = 1.0
+step = 0.1
+value = 1.0
 
 [node name="MarginContainer" type="MarginContainer" parent="SettingsScreen/MarginContainer/VBoxContainer" unique_id=1200220449]
 layout_mode = 2
@@ -168,3 +149,5 @@ theme_override_font_sizes/font_size = 48
 text = "RETURN"
 icon_alignment = 1
 expand_icon = true
+
+[connection signal="value_changed" from="SettingsScreen/MarginContainer/VBoxContainer/HBoxMusic/SFXScrollBar" to="." method="onValueChanged"]
