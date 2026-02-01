@@ -121,7 +121,7 @@ public partial class Movement : CharacterBody2D
         AudioManager.instance.PlaySFX("music_main");
     }
 
-    public void Hurt(Enemy e)
+    public async Task Hurt(Enemy e)
     {
         if (protectionTimer > 0)
         {
@@ -168,7 +168,7 @@ public partial class Movement : CharacterBody2D
             }
             if (health == 0)
             {
-                Kill();
+                await Kill();
             }
         }
     }

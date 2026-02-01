@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class Enemy : CharacterBody2D
@@ -129,7 +130,7 @@ public partial class Enemy : CharacterBody2D
         }
     }
 
-    public override void _PhysicsProcess(double delta)
+    public override async void _PhysicsProcess(double delta)
     {
         if (mask != null)
         {
@@ -155,7 +156,7 @@ public partial class Enemy : CharacterBody2D
         {
             tryingAttack = false;
             attackTimer = attackTime;
-            enteredPlayer.Hurt(this);
+            await enteredPlayer.Hurt(this);
         }
         if (attackDelayTimer <= 0)
         {
